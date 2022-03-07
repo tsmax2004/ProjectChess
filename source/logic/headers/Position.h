@@ -28,10 +28,10 @@ class Position {
   void define_position_type();
 
  private:
-  bool if_check();
-  bool if_checkmate();
-  bool if_draw();
-  bool if_stalemate();
+  bool if_check() const;
+  bool if_checkmate() const;
+  bool if_draw() const;
+  bool if_stalemate() const;
 };
 
 #endif
