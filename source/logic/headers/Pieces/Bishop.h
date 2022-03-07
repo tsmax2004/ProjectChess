@@ -6,23 +6,23 @@
 
 // Singleton + Bridge patterns
 class Bishop : Piece {
-protected:
-    Bishop(COLOR color);
+ protected:
+  Bishop(COLOR color);
 
-    static Bishop *white_bishop_;
-    static Bishop *black_bishop_;
+  static Bishop *white_bishop_;
+  static Bishop *black_bishop_;
 
-public:
-    Bishop(const Bishop &) = delete;
+ public:
+  Bishop(const Bishop &) = delete;
 
-    void operator=(const Bishop &) = delete;
+  void operator=(const Bishop &) = delete;
 
-    static Bishop *get_piece(COLOR color);
+  static Bishop *get_piece(COLOR color);
 
-    const Move *define_move(int from_row, int from_col, int to_row, int to_col, Position &position) const override;
+  const Move *define_move(int from_row, int from_col, int to_row, int to_col, Position &position) const override;
 
-    COLOR color_;
-    PIECE_NAME piece_name_ = BISHOP;
+  COLOR color_;
+  PIECE_NAME piece_name_ = BISHOP;
 };
 
 Bishop *Bishop::white_bishop_ = nullptr;

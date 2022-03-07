@@ -6,21 +6,21 @@
 
 // Singleton + Bridge patterns
 class Empty : Piece {
-protected:
-    Empty();
+ protected:
+  Empty();
 
-    static Empty *empty_;
+  static Empty *empty_;
 
-public:
-    Empty(const Empty &) = delete;
+ public:
+  Empty(const Empty &) = delete;
 
-    void operator=(const Empty &) = delete;
+  void operator=(const Empty &) = delete;
 
-    static Empty *get_piece();
+  static Empty *get_piece();
 
-    const Move *define_move(int from_row, int from_col, int to_row, int to_col, Position &position) const override;
+  const Move *define_move(int from_row, int from_col, int to_row, int to_col, Position &position) const override;
 
-    PIECE_NAME piece_name_ = EMPTY;
+  PIECE_NAME piece_name_ = EMPTY;
 };
 
 Empty *Empty::empty_ = nullptr;
