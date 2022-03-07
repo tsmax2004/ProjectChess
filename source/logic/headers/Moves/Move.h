@@ -2,6 +2,7 @@
 #ifndef MOVE_H_
 #define MOVE_H_
 
+#include "../Enums.h"
 class Position;
 
 class Move {

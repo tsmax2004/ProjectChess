@@ -13,6 +13,11 @@
 #include "Pieces/Queen.h"
 #include "Pieces/King.h"
 
-
+#include "Moves/Move.h"
+#include "Moves/Castle.h"
+#include "Moves/SimpleMove.h"
+#include "Moves/InPassing.h"
+#include "Moves/Promotion.h"
+#include "Moves/InvalidMove.h"
 
 #endif

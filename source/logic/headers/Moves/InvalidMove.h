@@ -1,8 +1,24 @@
-//
-// Created by Max on 07.03.2022.
-//
 
-#ifndef CHESSPROJECT_SOURCE_LOGIC_HEADERS_MOVES_INVALIDMOVE_H_
-#define CHESSPROJECT_SOURCE_LOGIC_HEADERS_MOVES_INVALIDMOVE_H_
+#ifndef InvalidMove_H_
+#define InvalidMove_H_
 
-#endif //CHESSPROJECT_SOURCE_LOGIC_HEADERS_MOVES_INVALIDMOVE_H_
+#include "Move.h"
+
+class InvalidMove: Move {
+ protected:
+  InvalidMove();
+  static InvalidMove* invalid_move_;
+
+ public:
+  InvalidMove(const InvalidMove&) = delete;
+  void operator=(const InvalidMove&) = delete;
+
+  static InvalidMove* get_move();
+  void make_move(int from_row, int from_col, int to_row, int to_col, Position& position) const override;
+
+  bool is_valid = false;
+};
+
+InvalidMove* InvalidMove::invalid_move_ = nullptr;
+
+#endif

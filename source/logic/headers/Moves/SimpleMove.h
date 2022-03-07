@@ -5,7 +5,7 @@
 #include "Move.h"
 
 class SimpleMove: Move {
- private:
+ protected:
   SimpleMove();
   static SimpleMove* simple_move_;
 
