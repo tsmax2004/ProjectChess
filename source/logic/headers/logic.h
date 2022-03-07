@@ -20,4 +20,7 @@
 #include "Moves/Promotion.h"
 #include "Moves/InvalidMove.h"
 
+#include "Position.h"
+#include "Game.h"
+
 #endif

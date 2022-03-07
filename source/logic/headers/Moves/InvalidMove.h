@@ -8,20 +8,19 @@ class InvalidMove : Move {
  protected:
   InvalidMove();
 
-  static InvalidMove *invalid_move_;
+  static InvalidMove* invalid_move_;
 
  public:
-  InvalidMove(const InvalidMove &) = delete;
+  InvalidMove(const InvalidMove&) = delete;
+  void operator=(const InvalidMove&) = delete;
 
-  void operator=(const InvalidMove &) = delete;
+  static InvalidMove* get_move();
 
-  static InvalidMove *get_move();
-
-  void make_move(int from_row, int from_col, int to_row, int to_col, Position &position) const override;
+  void make_move(int from_row, int from_col, int to_row, int to_col, Position& position) const override;
 
   bool is_valid = false;
 };
 
-InvalidMove *InvalidMove::invalid_move_ = nullptr;
+InvalidMove* InvalidMove::invalid_move_ = nullptr;
 
 #endif

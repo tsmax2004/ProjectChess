@@ -8,20 +8,19 @@ class Promotion : Move {
  protected:
   Promotion();
 
-  static Promotion *promotion_move_;
+  static Promotion* promotion_move_;
 
  public:
-  Promotion(const Promotion &) = delete;
+  Promotion(const Promotion&) = delete;
+  void operator=(const Promotion&) = delete;
 
-  void operator=(const Promotion &) = delete;
+  static Promotion* get_move();
 
-  static Promotion *get_move();
-
-  void make_move(int from_row, int from_col, int to_row, int to_col, Position &position) const override;
+  void make_move(int from_row, int from_col, int to_row, int to_col, Position& position) const override;
 
   bool is_valid = true;
 };
 
-Promotion *Promotion::promotion_move_ = nullptr;
+Promotion* Promotion::promotion_move_ = nullptr;
 
 #endif

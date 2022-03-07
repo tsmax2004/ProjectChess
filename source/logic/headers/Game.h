@@ -1,29 +1,22 @@
-//
-// Created by Max on 07.03.2022.
-//
 
-#ifndef PROJECTCHESS_SOURCE_LOGIC_HEADERS_GAME_H_
-#define PROJECTCHESS_SOURCE_LOGIC_HEADERS_GAME_H_
+#ifndef GAME_H_
+#define GAME_H_
 
 #include "Position.h"
 #include <vector>
 
 class Game {
  protected:
-  Position *position_;
-  std::vector<Position *> position_history_;
+  Position* position_;
+  std::vector<Position*> position_history_;
+
  public:
   Game();
+  void start_new_game();
 
-  void create_game();
-
-  void move(int from_row_, int from_col_, int to_row_, int to_col_);
-
-  Position *create_new_position(const Move &);
+  void game_cycle();
 
   bool check_for_repeating();
-
-  ~Game();
 };
 
-#endif //PROJECTCHESS_SOURCE_LOGIC_HEADERS_GAME_H_
+#endif
