@@ -2,7 +2,7 @@
 #ifndef MOVE_H_
 #define MOVE_H_
 
-#include "../Position.h"
+class Position;
 
 class Move {
  public:

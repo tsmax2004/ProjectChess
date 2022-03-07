@@ -2,6 +2,33 @@
 #ifndef POSITION_H_
 #define POSITION_H_
 
-class Position {};
+#include <vector>
+#include "Pieces/Piece.h"
+#include "Enums.h"
+
+class Position {
+ public:
+  Position();
+  Position(const Position&);
+  void start_position();
+
+  Piece* at(int row, int col);
+
+  std::vector<Piece*> board_;
+  COLOR move_color_;
+  POSITION_TYPE position_type_ = NOT_DEFINE;
+
+  std::vector<bool> info_for_castle_;
+  // info about figures movement in order: WhiteKing, WhiteRookA, WhiteRookH, BlackKing, BlackRookA, BlackRookH
+  std::vector<int> last_move;
+  // for in passing, in order from_row, from_col, to_row, to_col
+
+ private:
+  void define_position();
+
+  bool if_check();
+  bool if_checkmate();
+  bool if_draw();
+};
 
 #endif

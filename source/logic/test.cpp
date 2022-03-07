@@ -1,2 +1,5 @@
-#include "headers/Moves/SimpleMove.h"
-#include "headers/Pieces/Pawn.h"
+#include "headers/logic.h"
+
+int main() {
+
+}

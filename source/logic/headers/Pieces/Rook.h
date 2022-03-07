@@ -1,8 +1,29 @@
-//
-// Created by Max on 07.03.2022.
-//
 
-#ifndef PROJECTCHESS_SOURCE_LOGIC_HEADERS_ROOK_H_
-#define PROJECTCHESS_SOURCE_LOGIC_HEADERS_ROOK_H_
+#ifndef ROOK_H_
+#define ROOK_H_
 
-#endif //PROJECTCHESS_SOURCE_LOGIC_HEADERS_ROOK_H_
+#include "Piece.h"
+
+// Singleton + Bridge patterns
+class Rook: Piece {
+ protected:
+  Rook(COLOR color);
+
+  static Rook* white_rook_;
+  static Rook* black_rook_;
+
+ public:
+  Rook(const Rook&) = delete;
+  void operator=(const Rook&) = delete;
+
+  static Rook* get_piece(COLOR color);
+  Move* define_move(int from_row, int from_col, int to_row, int to_col, Position& position) override;
+
+  COLOR color_;
+  PIECE_NAME piece_name_ = ROOK;
+};
+
+Rook* Rook::white_rook_ = nullptr;
+Rook* Rook::black_rook_ = nullptr;
+
+#endif

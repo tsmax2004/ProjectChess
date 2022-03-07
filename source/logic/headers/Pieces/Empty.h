@@ -1,8 +1,25 @@
-//
-// Created by Max on 07.03.2022.
-//
 
-#ifndef PROJECTCHESS_SOURCE_LOGIC_HEADERS_EMPTY_H_
-#define PROJECTCHESS_SOURCE_LOGIC_HEADERS_EMPTY_H_
+#ifndef EMPTY_H_
+#define EMPTY_H_
 
-#endif //PROJECTCHESS_SOURCE_LOGIC_HEADERS_EMPTY_H_
+#include "Piece.h"
+
+// Singleton + Bridge patterns
+class Empty: Piece {
+ protected:
+  Empty();
+  static Empty* empty_;
+
+ public:
+  Empty(const Empty&) = delete;
+  void operator=(const Empty&) = delete;
+
+  static Empty* get_piece();
+  Move* define_move(int from_row, int from_col, int to_row, int to_col, Position& position) override;
+
+  PIECE_NAME piece_name_ = EMPTY;
+};
+
+Empty* Empty::empty_ = nullptr;
+
+#endif

@@ -6,7 +6,7 @@
 
 // Singleton + Bridge patterns
 class Pawn: Piece {
- private:
+ protected:
   Pawn(COLOR color);
 
   static Pawn* white_pawn_;
@@ -17,9 +17,10 @@ class Pawn: Piece {
   void operator=(const Pawn&) = delete;
 
   static Pawn* get_piece(COLOR color);
-  const Move* define_move(int from_row, int from_col, int to_row, int to_col, const Position& position) override;
+  Move* define_move(int from_row, int from_col, int to_row, int to_col, Position& position) override;
 
   COLOR color_;
+  PIECE_NAME piece_name_ = PAWN;
 };
 
 Pawn* Pawn::white_pawn_ = nullptr;
