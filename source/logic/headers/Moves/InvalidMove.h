@@ -4,21 +4,24 @@
 
 #include "Move.h"
 
-class InvalidMove: Move {
- protected:
-  InvalidMove();
-  static InvalidMove* invalid_move_;
+class InvalidMove : Move {
+protected:
+    InvalidMove();
 
- public:
-  InvalidMove(const InvalidMove&) = delete;
-  void operator=(const InvalidMove&) = delete;
+    static InvalidMove *invalid_move_;
 
-  static InvalidMove* get_move();
-  void make_move(int from_row, int from_col, int to_row, int to_col, Position& position) const override;
+public:
+    InvalidMove(const InvalidMove &) = delete;
 
-  bool is_valid = false;
+    void operator=(const InvalidMove &) = delete;
+
+    static InvalidMove *get_move();
+
+    void make_move(int from_row, int from_col, int to_row, int to_col, Position &position) const override;
+
+    bool is_valid = false;
 };
 
-InvalidMove* InvalidMove::invalid_move_ = nullptr;
+InvalidMove *InvalidMove::invalid_move_ = nullptr;
 
 #endif

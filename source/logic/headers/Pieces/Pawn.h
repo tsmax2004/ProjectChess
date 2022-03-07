@@ -5,25 +5,27 @@
 #include "Piece.h"
 
 // Singleton + Bridge patterns
-class Pawn: Piece {
- protected:
-  Pawn(COLOR color);
+class Pawn : Piece {
+protected:
+    Pawn(COLOR color);
 
-  static Pawn* white_pawn_;
-  static Pawn* black_pawn_;
+    static Pawn *white_pawn_;
+    static Pawn *black_pawn_;
 
- public:
-  Pawn(const Pawn&) = delete;
-  void operator=(const Pawn&) = delete;
+public:
+    Pawn(const Pawn &) = delete;
 
-  static Pawn* get_piece(COLOR color);
-  Move* define_move(int from_row, int from_col, int to_row, int to_col, Position& position) override;
+    void operator=(const Pawn &) = delete;
 
-  COLOR color_;
-  PIECE_NAME piece_name_ = PAWN;
+    static Pawn *get_piece(COLOR color);
+
+    const Move *define_move(int from_row, int from_col, int to_row, int to_col, Position &position) const override;
+
+    COLOR color_;
+    PIECE_NAME piece_name_ = PAWN;
 };
 
-Pawn* Pawn::white_pawn_ = nullptr;
-Pawn* Pawn::black_pawn_ = nullptr;
+Pawn *Pawn::white_pawn_ = nullptr;
+Pawn *Pawn::black_pawn_ = nullptr;
 
 #endif
