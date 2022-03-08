@@ -3,6 +3,7 @@
 #define GAME_H_
 
 #include "Position.h"
+#include "moves.h"
 #include <vector>
 
 class Game {
@@ -16,7 +17,9 @@ class Game {
 
   void game_cycle();
 
-  bool check_for_repeating();
+  bool check_for_repeating() const;
+
+  void print_board() const;
 };
 
 #endif
