@@ -4,7 +4,7 @@
 
 #include "Move.h"
 
-class SimpleMove : Move {
+class SimpleMove : public Move {
  protected:
   SimpleMove();
 

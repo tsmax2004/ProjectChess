@@ -5,7 +5,7 @@
 #include "Piece.h"
 
 // Singleton + Bridge patterns
-class Pawn : Piece {
+class Pawn : public Piece {
  protected:
   Pawn(COLOR color);
 
