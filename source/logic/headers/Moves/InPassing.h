@@ -4,7 +4,7 @@
 
 #include "Move.h"
 
-class InPassing : Move {
+class InPassing : public Move {
  protected:
   InPassing();
 
