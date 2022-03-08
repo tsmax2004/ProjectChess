@@ -16,7 +16,7 @@ class Position {
 
   Piece* at(int row, int col);
 
-  std::vector<Piece*> board_;
+  std::vector<std::vector<Piece*>> board_;
   COLOR move_color_;
   POSITION_TYPE position_type_ = NOT_DEFINE;
 
