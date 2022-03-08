@@ -3,7 +3,7 @@
 #define POSITION_H_
 
 #include <vector>
-#include "Pieces/Piece.h"
+#include "pieces.h"
 #include "Enums.h"
 
 class Position {
@@ -24,14 +24,15 @@ class Position {
   // info about figures movement in order: WhiteKing, WhiteRookA, WhiteRookH, BlackKing, BlackRookA, BlackRookH
   std::vector<int> last_move_;
   // for in passing, in order from_row, from_col, to_row, to_col
+  int move_cnt_;
 
   void define_position_type();
 
  private:
-  bool if_check() const;
-  bool if_checkmate() const;
-  bool if_draw() const;
-  bool if_stalemate() const;
+  bool if_check(COLOR color) const;
+  bool if_checkmate(COLOR color) const;
+  bool if_draw(COLOR color) const;
+  bool if_stalemate(COLOR color) const;
 };
 
 #endif
