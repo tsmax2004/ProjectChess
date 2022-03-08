@@ -12,6 +12,8 @@ class Position {
 
   Position(const Position&);
 
+  bool operator==(const Position&) const;
+
   void start_position();
 
   Piece* at(int row, int col);
