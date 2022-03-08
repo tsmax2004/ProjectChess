@@ -4,7 +4,7 @@
 
 #include "Move.h"
 
-class Castle : Move {
+class Castle : public Move {
  protected:
   Castle();
 

@@ -4,7 +4,7 @@
 
 #include "Move.h"
 
-class Promotion : Move {
+class Promotion : public Move {
  protected:
   Promotion();
 

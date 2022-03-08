@@ -5,7 +5,7 @@
 #include "Piece.h"
 
 // Singleton + Bridge patterns
-class Empty : Piece {
+class Empty : public Piece {
  protected:
   Empty();
 

@@ -5,7 +5,7 @@
 #include "Piece.h"
 
 // Singleton + Bridge patterns
-class Bishop : Piece {
+class Bishop : public Piece {
  protected:
   Bishop(COLOR color);
 
