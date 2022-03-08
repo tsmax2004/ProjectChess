@@ -2,25 +2,25 @@
 #ifndef ENUMS_H_
 #define ENUMS_H_
 
-enum COLOR { WHITE, BLACK };
+enum COLOR: char { WHITE = 'W', BLACK = 'B' };
 enum POSITION_TYPE {
   NOT_DEFINE,
+  INVALID,
   COMMON,
-  CHECK_FOR_WHITE,
-  CHECK_FOR_BLACK,
-  CHECKMATE_FOR_WHITE,
-  CHECKMATE_FOR_BLACK,
-  DRAW
+  CHECK,
+  CHECKMATE,
+  DRAW,
+  STALEMATE
 };
 
-enum PIECE_NAME {
+enum PIECE_NAME: char {
   EMPTY,
-  PAWN,
-  KNIGHT,
-  BISHOP,
-  ROOK,
-  QUEEN,
-  KING
+  PAWN = 'p',
+  KNIGHT = 'k',
+  BISHOP = 'b',
+  ROOK = 'r',
+  QUEEN = 'q',
+  KING = 'K'
 };
 
 #endif
