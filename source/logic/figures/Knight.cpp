@@ -17,10 +17,10 @@ Knight* Knight::get_piece(COLOR color) {
     return white_knight_;
   }
   if (color == BLACK) {
-    if (white_knight_ == nullptr) {
-      white_knight_ = new Knight(BLACK);
+    if (black_knight_ == nullptr) {
+      black_knight_ = new Knight(BLACK);
     }
-    return white_knight_;
+    return black_knight_;
   }
 }
 
