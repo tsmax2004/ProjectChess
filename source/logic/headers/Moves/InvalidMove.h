@@ -4,7 +4,7 @@
 
 #include "Move.h"
 
-class InvalidMove : Move {
+class InvalidMove : public Move {
  protected:
   InvalidMove();
 

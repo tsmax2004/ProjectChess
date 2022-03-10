@@ -14,15 +14,15 @@ class Position {
 
   void start_position();
 
-  Piece* at(int row, int col);
+  Piece* at(int row_, int col_) const;
 
-  std::vector<std::vector<Piece*>> board_;
+  std::vector<std::vector<Piece*> > board_;
   COLOR move_color_;
   POSITION_TYPE position_type_ = NOT_DEFINE;
 
   std::vector<bool> info_for_castle_;
   // info about figures movement in order: WhiteKing, WhiteRookA, WhiteRookH, BlackKing, BlackRookA, BlackRookH
-  std::vector<int> last_move;
+  std::vector<int> last_move_;
   // for in passing, in order from_row, from_col, to_row, to_col
 
   void define_position_type();
