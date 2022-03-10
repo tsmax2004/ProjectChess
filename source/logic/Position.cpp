@@ -45,7 +45,7 @@ void Position::start_position() {
   move_cnt_ = 1;
 }
 
-Piece* Position::at(int row, int col) {
+Piece* Position::at(int row, int col) const {
   if ((row < 0) || (row >= 8) || (col < 0) || (col >= 8))
     throw std::out_of_range("invalid coordinates input");
 
