@@ -54,8 +54,8 @@ const Move* Pawn::define_move(int from_row_,
         }
     }
     if (is_correct_ && !position_.last_move_.empty() && (std::abs(position_.last_move_.at(0) - position_.last_move_.at(2)) == 2)) {
-        if (position_.board_[position_.last_move_[2]][Position::last_move_[3]] == Pawn
-        && (std::abs(Position::last_move_[2] - from_row_) + std::abs(Position::last_move_[3] - from_col_)) == 1) {
+        if (position_.board_.at(position_.last_move_.at(2)).at(position_.last_move_.at(3))->piece_name_ == PAWN
+        && (std::abs(position_.last_move_.at(2) - from_row_) + std::abs(position_.last_move_.at(3) - from_col_)) == 1) {
             return InPassing::get_move();
         }
     }
