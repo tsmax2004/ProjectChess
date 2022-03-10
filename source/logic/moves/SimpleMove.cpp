@@ -33,7 +33,7 @@ void SimpleMove::make_move(int from_row, int from_col, int to_row, int to_col, P
         }
     }
     if (position.at(from_row, from_col)->piece_name_ == KING) {
-        position.info_for_castle_[(position.at(from_row, from_col)->color_ == WHITE ? 0 : 3)];
+        position.info_for_castle_[(position.at(from_row, from_col)->color_ == WHITE ? 0 : 3)] = true;
     }
     position.move_color_ = (position.at(to_row, to_col)->color_ == WHITE ? BLACK : WHITE);
     position.board_.at(to_row).at(to_col) = position.board_.at(from_row).at(from_col);
