@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "headers/Position.h"
 
 Position::Position(): board_(),
