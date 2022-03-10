@@ -97,7 +97,7 @@ void Game::print_board() const {
       if (piece->piece_name_ == EMPTY) {
         std::cout << "  ";
       } else {
-        std::cout << piece->color << piece->piece_name_;
+        std::cout << piece->color_ << piece->piece_name_;
       }
       std::cout << " ";
     }

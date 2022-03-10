@@ -4,7 +4,7 @@ Position::Position(): board_(),
                       move_color_(WHITE),
                       position_type_(NOT_DEFINE),
                       info_for_castle_(),
-                      last_move(),
+                      last_move_(),
                       move_cnt_(0) {}
 
 Position::Position(const Position& other) = default;

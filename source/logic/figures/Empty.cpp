@@ -6,7 +6,7 @@
 
 Empty::Empty() = default;
 
-Empty* Empty::get_piece(COLOR color) {
+Empty* Empty::get_piece() {
     return (new Empty());
 }
 
