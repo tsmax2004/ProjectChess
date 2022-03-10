@@ -4,4 +4,3 @@ set(CMAKE_CXX_STANDARD 20)
 
 set(SOURCE_LIB Position.cpp Game.cpp)
 add_library(Logic SHARED ${SOURCE_LIB})
-add_executable(LogicLib figures/Bishop.cpp figures/Knight.cpp)
