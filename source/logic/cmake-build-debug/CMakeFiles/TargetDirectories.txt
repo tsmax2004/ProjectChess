@@ -1,0 +1,3 @@
+/home/evgen/CHESS1/ProjectChess/source/logic/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/evgen/CHESS1/ProjectChess/source/logic/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/evgen/CHESS1/ProjectChess/source/logic/cmake-build-debug/CMakeFiles/Logic.dir
