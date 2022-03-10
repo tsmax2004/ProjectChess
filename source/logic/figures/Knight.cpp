@@ -2,10 +2,7 @@
 // Created by Георгий Кузнецов on 10.03.2022.
 //
 
-#include "../headers/Pieces/Knight.h"
-#include "Position.h"
-#include "Moves/SimpleMove.h"
-#include "Moves/InvalidMove.h"
+#include "logic.h"
 
 Knight::Knight(COLOR color_): color_(color_) {}
 
