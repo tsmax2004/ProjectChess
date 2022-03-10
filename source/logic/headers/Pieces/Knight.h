@@ -7,7 +7,7 @@
 // Singleton + Bridge patterns
 class Knight : public Piece {
  protected:
-  Knight(COLOR color);
+  Knight(COLOR color_);
 
   static Knight* white_knight_;
   static Knight* black_knight_;

@@ -17,7 +17,11 @@ class Empty : public Piece {
 
   static Empty* get_piece();
 
-  const Move* define_move(int from_row, int from_col, int to_row, int to_col, const Position& position) const override;
+  const Move* define_move(int from_row_,
+                          int from_col_,
+                          int to_row_,
+                          int to_col_,
+                          const Position& position_) const override;
 
   PIECE_NAME piece_name_ = EMPTY;
 };

@@ -4,24 +4,24 @@
 
 #include "../headers/logic.h"
 
-Knight::Knight(COLOR color_): color_(color_) {}
+Bishop::Bishop(COLOR color_) : color_(color_) {}
 
-Knight* Knight::get_piece(COLOR color) {
+Bishop* Bishop::get_piece(COLOR color) {
   if (color == WHITE) {
-    if (white_knight_ == nullptr) {
-      white_knight_ = new Knight(WHITE);
+    if (white_bishop_ == nullptr) {
+      white_bishop_ = new Bishop(WHITE);
     }
-    return white_knight_;
+    return white_bishop_;
   }
   if (color == BLACK) {
-    if (black_knight_ == nullptr) {
-      black_knight_ = new Knight(BLACK);
+    if (black_bishop_ == nullptr) {
+      black_bishop_ = new Bishop(BLACK);
     }
-    return black_knight_;
+    return black_bishop_;
   }
 }
 
-const Move* Knight::define_move(int from_row_,
+const Move* Bishop::define_move(int from_row_,
                                 int from_col_,
                                 int to_row_,
                                 int to_col_,
@@ -35,12 +35,20 @@ const Move* Knight::define_move(int from_row_,
   // if move_ is made on friend square
   if (position_.at(to_row_, to_col_)->piece_name_ != EMPTY && position_.at(to_row_, to_col_)->color_ == color_)
     is_correct_ = false;
-  // if knight movement is incorrect
-  auto mov_ = std::pair<int, int>(std::abs(to_row_ - from_row_), std::abs(to_col_ - from_col_));
-  auto cor_mov_ = std::pair<int, int>(1, 2);
-  if (mov_ != cor_mov_ &&
-      (mov_.first != cor_mov_.second || mov_.second != cor_mov_.first))
-    is_correct_ = false;
+  // if bishop movement is incorrect
+  if (std::abs(to_row_ - from_row_) != std::abs(to_col_ - from_col_)) is_correct_ = false;
+  else {
+    if ((to_row_ - from_row_) == 0) is_correct_ = false;
+    else if (is_correct_) {
+      int diff_row_ = (to_row_ - from_row_) / std::abs(to_row_ - from_row_);
+      int diff_col_ = (to_col_ - from_col_) / std::abs(to_col_ - from_col_);
+      for (int i = 0; i < std::abs(to_row_ - from_row_); ++i) {
+        if (position_.at(from_row_, from_col_)->piece_name_ != EMPTY) is_correct_ = false;
+        from_row_ += diff_row_;
+        from_col_ += diff_col_;
+      }
+    }
+  }
   if (is_correct_) {
     return SimpleMove::get_move();
   }
