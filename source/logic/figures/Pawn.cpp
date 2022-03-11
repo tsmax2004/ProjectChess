@@ -19,6 +19,7 @@ Pawn* Pawn::get_piece(COLOR color) {
         }
         return black_pawn_;
     }
+    return nullptr;
 }
 
 const Move* Pawn::define_move(int from_row_,
@@ -56,7 +57,7 @@ const Move* Pawn::define_move(int from_row_,
     if (is_correct_ && !position_.last_move_.empty() && (std::abs(position_.last_move_.at(0) - position_.last_move_.at(2)) == 2)) {
         if (position_.board_.at(position_.last_move_.at(2)).at(position_.last_move_.at(3))->piece_name_ == PAWN
         && (std::abs(position_.last_move_.at(2) - from_row_) + std::abs(position_.last_move_.at(3) - from_col_)) == 1) {
-            return InPassing::get_move();
+            return EnPassant::get_move();
         }
     }
     else if (is_correct_) {

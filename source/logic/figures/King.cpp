@@ -19,6 +19,7 @@ King* King::get_piece(COLOR color) {
         }
         return black_king_;
     }
+    return nullptr;
 }
 
 const Move* King::define_move(int from_row_,

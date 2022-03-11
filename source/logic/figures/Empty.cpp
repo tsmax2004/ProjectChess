@@ -7,7 +7,9 @@
 Empty::Empty() = default;
 
 Empty* Empty::get_piece() {
-    return (new Empty());
+  if (empty_ == nullptr)
+    empty_ = new Empty();
+  return empty_;
 }
 
 const Move* Empty::define_move(int from_row_, int from_col_, int to_row_, int to_col_,

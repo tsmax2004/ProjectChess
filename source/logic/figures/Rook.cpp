@@ -19,6 +19,7 @@ Rook* Rook::get_piece(COLOR color) {
         }
         return black_rook_;
     }
+  return nullptr;
 }
 
 const Move* Rook::define_move(int from_row_,
