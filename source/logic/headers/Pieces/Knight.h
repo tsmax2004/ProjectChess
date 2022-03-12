@@ -24,8 +24,10 @@ class Knight : public Piece {
                           int to_col_,
                           const Position& position_) const override;
 
+  PIECE_NAME get_piece_name() const override;
+  COLOR get_color() const override;
+
   COLOR color_;
-  static const PIECE_NAME piece_name_ = KNIGHT;
 };
 
 inline Knight* Knight::white_knight_ = nullptr;

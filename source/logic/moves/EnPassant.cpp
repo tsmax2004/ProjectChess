@@ -12,11 +12,10 @@ EnPassant* EnPassant::get_move() {
 }
 
 void EnPassant::make_move(int from_row, int from_col, int to_row, int to_col, Position& position) const {
-  COLOR pawn_color_ = position.at(from_row, from_col)->color_;
-  position.at(from_row, from_col)->piece_name_ = EMPTY;
-  position.at(position.last_move_[2], position.last_move_[2])->piece_name_ = EMPTY;
-  position.at(position.last_move_[2], position.last_move_[2])->color_ = pawn_color_;
-  position.at(to_row, to_col)->piece_name_ = PAWN;
-  position.at(to_row, to_col)->color_ = pawn_color_;
+  position.board_[to_row][to_col] = position.board_[from_row][from_col];
+  position.board_[from_row][from_col] = Empty::get_piece();
+  position.board_[position.last_move_[2]][position.last_move_[3]] = Empty::get_piece();
+  position.move_color_ = ((position.move_color_ == BLACK) ? WHITE : BLACK);
+  position.position_type_ = NOT_DEFINE;
   position.last_move_ = {from_row, from_col, to_row, to_col};
 }

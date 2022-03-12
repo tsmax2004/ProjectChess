@@ -23,7 +23,8 @@ class Empty : public Piece {
                           int to_col_,
                           const Position& position_) const override;
 
-  PIECE_NAME piece_name_ = EMPTY;
+  PIECE_NAME get_piece_name() const override;
+  COLOR get_color() const override;
 };
 
 inline Empty* Empty::empty_ = nullptr;

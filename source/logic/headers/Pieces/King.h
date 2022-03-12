@@ -24,8 +24,10 @@ class King : public Piece {
                           int to_col_,
                           const Position& position_) const override;
 
+  PIECE_NAME get_piece_name() const override;
+  COLOR get_color() const override;
+
   COLOR color_;
-  PIECE_NAME piece_name_ = KING;
 };
 
 inline King* King::white_king_ = nullptr;

@@ -94,10 +94,10 @@ void Game::print_board() const {
     for (int col = 0; col < 8; ++col) {
       std::cout << "| ";
       Piece* piece = position_->at(row - 1, col);
-      if (piece->piece_name_ == EMPTY) {
+      if (piece->get_piece_name() == EMPTY) {
         std::cout << "  ";
       } else {
-        std::cout << piece->color_ << piece->piece_name_;
+        std::cout << piece->get_color() << piece->get_piece_name();
       }
       std::cout << " ";
     }

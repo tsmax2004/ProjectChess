@@ -31,7 +31,7 @@ const Move* Knight::define_move(int from_row_,
   //if move_ color is correct
   if (color_ != position_.move_color_) is_correct_ = false;
   // if move_ is made on friend square
-  if (position_.at(to_row_, to_col_)->piece_name_ != EMPTY && position_.at(to_row_, to_col_)->color_ == color_)
+  if (position_.at(to_row_, to_col_)->get_piece_name() != EMPTY && position_.at(to_row_, to_col_)->get_color() == color_)
     is_correct_ = false;
   // if knight movement is incorrect
   auto mov_ = std::pair<int, int>(std::abs(to_row_ - from_row_), std::abs(to_col_ - from_col_));
@@ -43,4 +43,11 @@ const Move* Knight::define_move(int from_row_,
     return SimpleMove::get_move();
   }
   return InvalidMove::get_move();
+}
+
+PIECE_NAME Knight::get_piece_name() const {
+  return KNIGHT;
+}
+COLOR Knight::get_color() const {
+  return color_;
 }
