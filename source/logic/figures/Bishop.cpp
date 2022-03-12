@@ -30,9 +30,6 @@ const Move* Bishop::define_move(int from_row_,
   bool is_correct_ = true;
   //if move_ color is correct
   if (color_ != position_.move_color_) is_correct_ = false;
-  //if move_ is made out of board borders
-  if (to_row_ >= 0 && to_row_ < position_.board_.size()) is_correct_ = false;
-  if (to_col_ >= 0 && to_col_ < position_.board_.size()) is_correct_ = false;
   // if move_ is made on friend square
   if (position_.at(to_row_, to_col_)->piece_name_ != EMPTY && position_.at(to_row_, to_col_)->color_ == color_)
     is_correct_ = false;
