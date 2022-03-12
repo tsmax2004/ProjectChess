@@ -21,6 +21,6 @@ class InvalidMove : public Move {
   bool is_valid = false;
 };
 
-InvalidMove* InvalidMove::invalid_move_ = nullptr;
+inline InvalidMove* InvalidMove::invalid_move_ = nullptr;
 
 #endif

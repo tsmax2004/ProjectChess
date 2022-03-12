@@ -21,6 +21,6 @@ class Castle : public Move {
   bool is_valid = true;
 };
 
-Castle* Castle::castle_ = nullptr;
+inline Castle* Castle::castle_ = nullptr;
 
 #endif

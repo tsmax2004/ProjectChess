@@ -21,6 +21,6 @@ class EnPassant : public Move {
   bool is_valid = true;
 };
 
-EnPassant* EnPassant::en_passant_move_ = nullptr;
+inline EnPassant* EnPassant::en_passant_move_ = nullptr;
 
 #endif

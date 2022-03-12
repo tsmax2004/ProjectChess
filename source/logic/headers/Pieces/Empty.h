@@ -26,6 +26,6 @@ class Empty : public Piece {
   PIECE_NAME piece_name_ = EMPTY;
 };
 
-Empty* Empty::empty_ = nullptr;
+inline Empty* Empty::empty_ = nullptr;
 
 #endif

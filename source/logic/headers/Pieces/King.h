@@ -28,7 +28,7 @@ class King : public Piece {
   PIECE_NAME piece_name_ = KING;
 };
 
-King* King::white_king_ = nullptr;
-King* King::black_king_ = nullptr;
+inline King* King::white_king_ = nullptr;
+inline King* King::black_king_ = nullptr;
 
 #endif

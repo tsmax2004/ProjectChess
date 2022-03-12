@@ -21,6 +21,6 @@ class SimpleMove : public Move {
   bool is_valid = true;
 };
 
-SimpleMove* SimpleMove::simple_move_ = nullptr;
+inline SimpleMove* SimpleMove::simple_move_ = nullptr;
 
 #endif

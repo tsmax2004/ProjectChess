@@ -21,6 +21,6 @@ class Promotion : public Move {
   bool is_valid = true;
 };
 
-Promotion* Promotion::promotion_move_ = nullptr;
+inline Promotion* Promotion::promotion_move_ = nullptr;
 
 #endif

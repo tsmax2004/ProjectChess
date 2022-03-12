@@ -28,7 +28,7 @@ class Pawn : public Piece {
   PIECE_NAME piece_name_ = PAWN;
 };
 
-Pawn* Pawn::white_pawn_ = nullptr;
-Pawn* Pawn::black_pawn_ = nullptr;
+inline Pawn* Pawn::white_pawn_ = nullptr;
+inline Pawn* Pawn::black_pawn_ = nullptr;
 
 #endif

@@ -28,7 +28,7 @@ class Knight : public Piece {
   static const PIECE_NAME piece_name_ = KNIGHT;
 };
 
-Knight* Knight::white_knight_ = nullptr;
-Knight* Knight::black_knight_ = nullptr;
+inline Knight* Knight::white_knight_ = nullptr;
+inline Knight* Knight::black_knight_ = nullptr;
 
 #endif

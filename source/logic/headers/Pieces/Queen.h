@@ -28,7 +28,7 @@ class Queen : public Piece {
   PIECE_NAME piece_name_ = QUEEN;
 };
 
-Queen* Queen::white_queen_ = nullptr;
-Queen* Queen::black_queen_ = nullptr;
+inline Queen* Queen::white_queen_ = nullptr;
+inline Queen* Queen::black_queen_ = nullptr;
 
 #endif

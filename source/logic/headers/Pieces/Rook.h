@@ -28,7 +28,7 @@ class Rook : public Piece {
   PIECE_NAME piece_name_ = ROOK;
 };
 
-Rook* Rook::white_rook_ = nullptr;
-Rook* Rook::black_rook_ = nullptr;
+inline Rook* Rook::white_rook_ = nullptr;
+inline Rook* Rook::black_rook_ = nullptr;
 
 #endif

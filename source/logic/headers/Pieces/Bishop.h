@@ -28,7 +28,7 @@ class Bishop : public Piece {
   PIECE_NAME piece_name_ = BISHOP;
 };
 
-Bishop* Bishop::white_bishop_ = nullptr;
-Bishop* Bishop::black_bishop_ = nullptr;
+inline Bishop* Bishop::white_bishop_ = nullptr;
+inline Bishop* Bishop::black_bishop_ = nullptr;
 
 #endif
