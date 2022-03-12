@@ -49,6 +49,28 @@ const Move* King::define_move(int from_row_,
             }
         }
     }
+    //check for castling
+    if (position_.info_for_castle_[color_ == WHITE ? 0:3]) {
+      if (to_row_ - from_row_ == 0 && std::abs(to_col_ - from_col_) == 2) {
+        bool correct_castle = true;
+        if (to_col_ - from_col_ == 2) {
+          correct_castle = position_.info_for_castle_[color_ == WHITE ? 1:4];
+          for (int i = 1; i < from_col_; ++i) {
+            if (position_.at(from_row_, i)->piece_name_ != EMPTY) {
+              correct_castle = false;
+            }
+          }
+        }else {
+          correct_castle = position_.info_for_castle_[color_ == WHITE ? 2:5];
+          for (int i = from_col_ + 1; i < position_.board_[0].size(); ++i) {
+            if (position_.at(from_row_, i)->piece_name_ != EMPTY) {
+              correct_castle = false;
+            }
+          }
+        }
+        if (correct_castle) return Castle::get_move();
+      }
+    }
     if (is_correct_) {
         return SimpleMove::get_move();
     }

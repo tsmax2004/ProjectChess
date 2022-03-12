@@ -48,6 +48,7 @@ const Move* Rook::define_move(int from_row_,
             }
         }
     }
+    /*
     bool flag = false;
     if (is_correct_ && ((to_row_ == 0 && to_col_ == 3) || (to_row_ == 0 && to_col_ == 5) || (to_row_ == 7 && to_col_ == 3) || (to_row_ == 7 && to_col_ == 5))) {
         if (color_ == WHITE && !position_.info_for_castle_.at(0) &&
@@ -61,7 +62,7 @@ const Move* Rook::define_move(int from_row_,
             return  Castle::get_move();
         }
     }
-    else if (is_correct_ && !flag) {
+    else*/ if (is_correct_ /*&& !flag*/) {
         return SimpleMove::get_move();
     }
     return InvalidMove::get_move();
