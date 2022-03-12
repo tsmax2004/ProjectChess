@@ -8,7 +8,7 @@ class EnPassant : public Move {
  protected:
   EnPassant();
 
-  static EnPassant* in_passing_move_;
+  static EnPassant* en_passant_move_;
 
  public:
   EnPassant(const EnPassant&) = delete;
@@ -21,6 +21,6 @@ class EnPassant : public Move {
   bool is_valid = true;
 };
 
-EnPassant* EnPassant::in_passing_move_ = nullptr;
+EnPassant* EnPassant::en_passant_move_ = nullptr;
 
 #endif
