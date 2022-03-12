@@ -30,7 +30,7 @@ void Game::game_cycle() {
     --to_col;
     try {
       const Move* move = position_->at(from_row, from_col)->define_move(from_row, from_col, to_row, to_col, *position_);
-      if (!move->is_valid) {
+      if (!move->is_valid()) {
         std::cout << "Incorrect move\n";
         continue;
       }

@@ -14,3 +14,7 @@ InvalidMove* InvalidMove::get_move() {
 }
 
 void InvalidMove::make_move(int from_row, int from_col, int to_row, int to_col, Position& position) const {};
+
+bool InvalidMove::is_valid() const {
+  return false;
+}

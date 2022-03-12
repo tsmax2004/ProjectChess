@@ -25,3 +25,7 @@ void Castle::make_move(int from_row, int from_col, int to_row, int to_col, Posit
   position.move_color_ = (position.at(to_row, to_col)->get_color() == WHITE ? BLACK : WHITE);
   position.last_move_ = {from_row, from_col, to_row, to_col};
 }
+
+bool Castle::is_valid() const {
+  return true;
+}

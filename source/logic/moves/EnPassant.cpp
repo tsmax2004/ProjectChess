@@ -19,3 +19,7 @@ void EnPassant::make_move(int from_row, int from_col, int to_row, int to_col, Po
   position.position_type_ = NOT_DEFINE;
   position.last_move_ = {from_row, from_col, to_row, to_col};
 }
+
+bool EnPassant::is_valid() const {
+  return true;
+}

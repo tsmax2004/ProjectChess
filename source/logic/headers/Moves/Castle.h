@@ -18,7 +18,7 @@ class Castle : public Move {
 
   void make_move(int from_row, int from_col, int to_row, int to_col, Position& position) const override;
 
-  bool is_valid = true;
+  bool is_valid() const override;
 };
 
 inline Castle* Castle::castle_ = nullptr;

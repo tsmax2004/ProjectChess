@@ -18,7 +18,7 @@ class InvalidMove : public Move {
 
   void make_move(int from_row, int from_col, int to_row, int to_col, Position& position) const override;
 
-  bool is_valid = false;
+  bool is_valid() const override;
 };
 
 inline InvalidMove* InvalidMove::invalid_move_ = nullptr;
