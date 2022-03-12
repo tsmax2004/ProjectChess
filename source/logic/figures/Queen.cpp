@@ -19,6 +19,7 @@ Queen* Queen::get_piece(COLOR color) {
         }
         return black_queen_;
     }
+  return nullptr;
 }
 
 const Move* Queen::define_move(int from_row_,

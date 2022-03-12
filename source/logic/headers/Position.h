@@ -25,7 +25,7 @@ class Position {
   std::vector<bool> info_for_castle_;
   // info about figures movement in order: WhiteKing, WhiteRookA, WhiteRookH, BlackKing, BlackRookA, BlackRookH
   std::vector<int> last_move_;
-  // for in passing, in order from_row, from_col, to_row, to_col
+  // for en' passant, in order from_row, from_col, to_row, to_col
   int move_cnt_;
 
   void define_position_type();

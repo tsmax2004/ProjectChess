@@ -19,6 +19,7 @@ Bishop* Bishop::get_piece(COLOR color) {
     }
     return black_bishop_;
   }
+  return nullptr;
 }
 
 const Move* Bishop::define_move(int from_row_,

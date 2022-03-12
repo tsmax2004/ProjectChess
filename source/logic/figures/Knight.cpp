@@ -19,6 +19,7 @@ Knight* Knight::get_piece(COLOR color) {
     }
     return black_knight_;
   }
+  return nullptr;
 }
 
 const Move* Knight::define_move(int from_row_,
