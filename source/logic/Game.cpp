@@ -22,12 +22,13 @@ void Game::game_cycle() {
   while (true) {
     print_board();
     std::cout << "Print move: ";
-    int from_row, from_col, to_row, to_col;
-    std::cin >> from_row >> from_col >> to_row >> to_col;
+    char from_col_ch, to_col_ch;
+    int from_row, to_row, from_col, to_col;
+    std::cin >> from_col_ch >> from_row >> to_col_ch >> to_row;
+    from_col = from_col_ch - 'a';
     --from_row;
-    --from_col;
+    to_col = to_col_ch - 'a';
     --to_row;
-    --to_col;
     try {
       const Move* move = position_->at(from_row, from_col)->define_move(from_row, from_col, to_row, to_col, *position_);
       if (!move->is_valid()) {
@@ -82,15 +83,11 @@ bool Game::check_for_repeating() const {
 void Game::print_board() const {
   std::cout << "\n\n";
   for (int row = 8; row >= 1; --row) {
-    std::cout << "       ";
+    std::cout << "      ";
     for (int col = 0; col < 8; ++col)
       std::cout << "---- ";
 
-    std::cout << "\n      ";
-    for (int col = 0; col < 8; ++col)
-      std::cout << "|    ";
-
-    std::cout << "|\n  " << row << "   ";
+    std::cout << "\n  " << row << "  ";
     for (int col = 0; col < 8; ++col) {
       std::cout << "| ";
       Piece* piece = position_->at(row - 1, col);
@@ -102,54 +99,34 @@ void Game::print_board() const {
       std::cout << " ";
     }
 
-    std::cout << "|\n      ";
-    for (int col = 0; col < 8; ++col)
-      std::cout << "|    ";
     std::cout << "|\n";
   }
 
-  std::cout << "       ";
+  std::cout << "      ";
   for (int col = 0; col < 8; ++col)
     std::cout << "---- ";
 
-  std::cout << "\n        a    b    c    d    e    f    g    h\n\n";
+  std::cout << "\n       a    b    c    d    e    f    g    h\n\n";
 }
 
 
 
 
-//       ---- ---- ---- ---- ---- ---- ---- ----
-//      |    |    |    |    |    |    |    |    |
-//  8   | Br | Bk | Bb | Bq | BK | Bb | Bk | Br |
-//      |    |    |    |    |    |    |    |    |
 //      ---- ---- ---- ---- ---- ---- ---- ----
-//      |    |    |    |    |    |    |    |    |
-//  7   | Bp | Bp | Bp | Bp | Bp | Bp | Bp | Bp |
-//      |    |    |    |    |    |    |    |    |
+//  8  | Br | Bk | Bb | Bq | BK | Bb | Bk | Br |
 //      ---- ---- ---- ---- ---- ---- ---- ----
-//      |    |    |    |    |    |    |    |    |
-//  6   |    |    |    |    |    |    |    |    |
-//      |    |    |    |    |    |    |    |    |
+//  7  | Bp | Bp | Bp | Bp | Bp | Bp | Bp | Bp |
 //      ---- ---- ---- ---- ---- ---- ---- ----
-//      |    |    |    |    |    |    |    |    |
-//  5   |    |    |    |    |    |    |    |    |
-//      |    |    |    |    |    |    |    |    |
+//  6  |    |    |    |    |    |    |    |    |
 //      ---- ---- ---- ---- ---- ---- ---- ----
-//      |    |    |    |    |    |    |    |    |
-//  4   |    |    |    |    |    |    |    |    |
-//      |    |    |    |    |    |    |    |    |
+//  5  |    |    |    |    |    |    |    |    |
 //      ---- ---- ---- ---- ---- ---- ---- ----
-//      |    |    |    |    |    |    |    |    |
-//  3   |    |    |    |    |    |    |    |    |
-//      |    |    |    |    |    |    |    |    |
+//  4  |    |    |    |    |    |    |    |    |
 //      ---- ---- ---- ---- ---- ---- ---- ----
-//      |    |    |    |    |    |    |    |    |
-//  2   | Wp | Wp | Wp | Wp | Wp | Wp | Wp | Wp |
-//      |    |    |    |    |    |    |    |    |
+//  3  |    |    |    |    |    |    |    |    |
 //      ---- ---- ---- ---- ---- ---- ---- ----
-//      |    |    |    |    |    |    |    |    |
-//  1   | Wr | Wk | Wb | Wq | WK | Wb | Wk | Wr |
-//      |    |    |    |    |    |    |    |    |
-//       ---- ---- ---- ---- ---- ---- ---- ----
-//
-//        a    b    c    d    e    f    g    h
+//  2  | Wp | Wp | Wp | Wp | Wp | Wp | Wp | Wp |
+//      ---- ---- ---- ---- ---- ---- ---- ----
+//  1  | Wr | Wk | Wb | Wq | WK | Wb | Wk | Wr |
+//      ---- ---- ---- ---- ---- ---- ---- ----
+//       a    b    c    d    e    f    g    h
