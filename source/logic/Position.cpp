@@ -1,5 +1,5 @@
 #include <stdexcept>
-#include "headers/Position.h"
+#include "headers/logic.h"
 
 Position::Position(): board_(),
                       move_color_(WHITE),
@@ -53,24 +53,77 @@ Piece* Position::at(int row, int col) const {
   return board_[row][col];
 }
 
+bool Position::if_square_is_under_attack(int row, int col, COLOR attack_color) const {
+  auto tmp_position(*this);
+  tmp_position.move_color_ = attack_color;
+  for (int i = 0; i < board_.size(); ++i) {
+    for (int j = 0; j < board_[i].size(); ++j) {
+      if ((board_[i][j]->get_piece_name() != EMPTY) && (board_[i][j]->get_color() == attack_color)) {
+        const Move* move = board_[i][j]->define_move(i, j, row, col, tmp_position);
+        if (move->is_valid())
+          return true;
+      }
+    }
+  }
+  return false;
+}
 
 // TODO: make check for position_type
 void Position::define_position_type() {
   position_type_ = COMMON;
+  if (if_check(move_color_ == WHITE ? BLACK : WHITE)) {
+    position_type_ = CHECK;
+    if (if_checkmate(move_color_ == WHITE ? BLACK : WHITE))
+      position_type_ = CHECKMATE;
+  } else if (if_draw() || if_stalemate()) {
+    position_type_ = DRAW;
+  }
 }
 
-bool Position::if_check(COLOR color) const {
+bool Position::if_check(COLOR attack_color) const {
+  std::vector<int> king_coord = find_king(attack_color == WHITE ? BLACK : WHITE);
+  int king_row = king_coord[0];
+  int king_col = king_coord[1];
+  return if_square_is_under_attack(king_row, king_col, attack_color);
+}
+
+bool Position::if_checkmate(COLOR attack_color) const {
+  for (int row = 0; row < board_.size(); ++row) {
+    for (int col = 0; col < board_[row].size(); ++col) {
+      if ((board_[row][col]->get_piece_name() != EMPTY) && (board_[row][col]->get_color() != attack_color)) {
+        auto piece = board_[row][col];
+        for (int to_row = 0; to_row < board_.size(); ++to_row) {
+          for (int to_col = 0; to_col < board_[to_row].size(); ++to_col) {
+            auto tmp_position = Position(*this);
+            auto move = piece->define_move(row, col, to_row, to_col, tmp_position);
+            if (move->is_valid()) {
+              move->make_move(row, col, to_row, to_col, tmp_position);
+              if (!tmp_position.if_check(attack_color))
+                return false;
+            }
+          }
+        }
+      }
+    }
+  }
+  return true;
+}
+
+bool Position::if_draw() const {
   return false;
 }
 
-bool Position::if_checkmate(COLOR color) const {
+bool Position::if_stalemate() const {
   return false;
 }
 
-bool Position::if_draw(COLOR color) const {
-  return false;
-}
-
-bool Position::if_stalemate(COLOR color) const {
-  return false;
+std::vector<int> Position::find_king(COLOR color) const {
+  for (int row = 0; row < board_.size(); ++row) {
+    for (int col = 0; col < board_[row].size(); ++col) {
+      if ((board_[row][col]->get_piece_name() == KING) && (board_[row][col]->get_color() == color)) {
+        return {row, col};
+      }
+    }
+  }
+  return {0, 0};
 }
