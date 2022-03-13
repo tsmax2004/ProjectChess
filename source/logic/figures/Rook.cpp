@@ -40,26 +40,13 @@ const Move* Rook::define_move(int from_row_,
         else if (is_correct_) {
             int diff_row_ = (to_row_ - from_row_) / (std::abs(to_row_ - from_row_) != 0 ? std::abs(to_row_ - from_row_) : 1);
             int diff_col_ = (to_col_ - from_col_) / (std::abs(to_col_ - from_col_) != 0 ? std::abs(to_col_ - from_col_) : 1);
-            for (int i = 0; i < std::abs(to_row_ - from_row_); ++i) {
+            for (int i = 1; i < std::max(std::abs(to_row_ - from_row_), std::abs(to_col_ - from_col_)); ++i) {
                 if (position_.at(from_row_ + diff_row_ * i, from_col_ + diff_col_ * i)->get_piece_name() != EMPTY) is_correct_ = false;
             }
         }
     }
-    /*
-    bool flag = false;
-    if (is_correct_ && ((to_row_ == 0 && to_col_ == 3) || (to_row_ == 0 && to_col_ == 5) || (to_row_ == 7 && to_col_ == 3) || (to_row_ == 7 && to_col_ == 5))) {
-        if (color_ == WHITE && !position_.info_for_castle_.at(0) &&
-            (from_row_ == 0 && from_col_ == 0 ? !position_.info_for_castle_.at(1) : !position_.info_for_castle_.at(2))) {
-            bool flag = true;
-            return  Castle::get_move();
-        }
-        if (color_ == BLACK && !position_.info_for_castle_.at(3) &&
-            (from_row_ == 7 && from_col_ == 7 ? !position_.info_for_castle_.at(4) : !position_.info_for_castle_.at(5))) {
-            bool flag = true;
-            return  Castle::get_move();
-        }
-    }
-    else*/ if (is_correct_ /*&& !flag*/) {
+
+    if (is_correct_) {
         return SimpleMove::get_move();
     }
     return InvalidMove::get_move();
