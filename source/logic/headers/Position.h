@@ -29,12 +29,14 @@ class Position {
   int move_cnt_;
 
   void define_position_type();
+  bool if_square_is_under_attack(int, int, COLOR) const;
 
  private:
-  bool if_check(COLOR color) const;
-  bool if_checkmate(COLOR color) const;
-  bool if_draw(COLOR color) const;
-  bool if_stalemate(COLOR color) const;
+  bool if_check(COLOR) const;
+  bool if_checkmate(COLOR) const;
+  bool if_draw() const;
+  bool if_stalemate() const;
+  std::vector<int> find_king(COLOR) const;
 };
 
 #endif

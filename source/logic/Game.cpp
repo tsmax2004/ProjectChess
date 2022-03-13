@@ -48,18 +48,22 @@ void Game::game_cycle() {
       position_ = new_position;
 
       if (position_->position_type_ == CHECKMATE) {
+        print_board();
         std::cout << "CHECKMATE!\n";
         break;
       }
       if (position_->position_type_ == DRAW) {
+        print_board();
         std::cout << "DRAW!\n";
         break;
       }
       if (position_->position_type_ == STALEMATE) {
+        print_board();
         std::cout << "STALEMATE!\n";
         break;
       }
       if (check_for_repeating()) {
+        print_board();
         std::cout << "DRAW by repeating moves!\n";
         break;
       }
