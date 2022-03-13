@@ -11,19 +11,19 @@ Castle* Castle::get_move() {
   return castle_;
 }
 void Castle::make_move(int from_row, int from_col, int to_row, int to_col, Position& position) const {
-  COLOR king_color_ = position.at(from_row, from_col)->get_color();
-  position.info_for_castle_[king_color_ == WHITE ? 0 : 3] = false;
+  position.info_for_castle_[position.at(from_row, from_col)->get_color() == WHITE ? 0 : 3] = false;
   if (from_col - to_col > 0) {
-    position.board_[to_row][0] = Empty::get_piece();
-    position.board_[from_row][from_col - 1] = Rook::get_piece(king_color_);
+    position.board_[from_row][from_col - 1] = position.at(from_row, 0);
+    position.board_[from_row][0] = Empty::get_piece();
   } else {
+    position.board_[from_row][from_col + 1] = position.at(from_row, position.board_[0].size() - 1);
     position.board_[to_row][position.board_[0].size() - 1] = Empty::get_piece();
-    position.board_[from_row][from_col + 1] = Rook::get_piece(king_color_);
   }
+  position.board_[to_row][to_col] = position.at(from_row, from_col);
   position.board_[from_row][from_col] = Empty::get_piece();
-  position.board_.at(to_row).at(to_col) = position.board_.at(from_row).at(from_col);
-  position.move_color_ = (position.at(to_row, to_col)->get_color() == WHITE ? BLACK : WHITE);
+  position.move_color_ = (position.move_color_ == WHITE ? BLACK : WHITE);
   position.last_move_ = {from_row, from_col, to_row, to_col};
+  position.position_type_ = NOT_DEFINE;
 }
 
 bool Castle::is_valid() const {

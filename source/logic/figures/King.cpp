@@ -34,35 +34,27 @@ const Move* King::define_move(int from_row_,
     if (position_.at(to_row_, to_col_)->get_piece_name() != EMPTY && position_.at(to_row_, to_col_)->get_color() == color_)
         is_correct_ = false;
     // if King movement is incorrect
-    if (std::abs(to_row_ - from_row_) != (std::abs(to_col_ - from_col_)) && (to_col_ != from_col_) && (to_row_ != from_row_)) is_correct_ = false;
-    if (std::abs(to_row_ - from_row_) > 2 || std::abs(to_col_ - from_col_) > 2) is_correct_ = false;
-    else {
-        if (from_col_ == to_col_ && from_row_ == to_row_) is_correct_ = false;
-        else if (is_correct_) {
-            int diff_row_ = (to_row_ - from_row_) / (std::abs(to_row_ - from_row_) != 0 ? std::abs(to_row_ - from_row_) : 1);
-            int diff_col_ = (to_col_ - from_col_) / (std::abs(to_col_ - from_col_) != 0 ? std::abs(to_col_ - from_col_) : 1);
-            for (int i = 0; i < std::abs(to_row_ - from_row_); ++i) {
-                if (position_.at(from_row_ + diff_row_ * i, from_col_ + diff_col_ * i)->get_piece_name() != EMPTY) is_correct_ = false;
-            }
-        }
-    }
+    if (std::abs(to_row_ - from_row_) >= 2 || std::abs(to_col_ - from_col_) >= 2) is_correct_ = false;
+    if ((to_row_ == from_row_) && (to_col_ == from_col_)) is_correct_ = false;
     //check for castling
-    if (position_.info_for_castle_[color_ == WHITE ? 0:3]) {
+    if ((position_.info_for_castle_[color_ == WHITE ? 0:3]) && (position_.position_type_ == COMMON)) {
       if (to_row_ - from_row_ == 0 && std::abs(to_col_ - from_col_) == 2) {
         bool correct_castle = true;
         if (to_col_ - from_col_ == 2) {
-          correct_castle = position_.info_for_castle_[color_ == WHITE ? 1:4];
-          for (int i = 1; i < from_col_; ++i) {
-            if (position_.at(from_row_, i)->get_piece_name() != EMPTY) {
-              correct_castle = false;
-            }
-          }
-        }else {
           correct_castle = position_.info_for_castle_[color_ == WHITE ? 2:5];
-          for (int i = from_col_ + 1; i < position_.board_[0].size(); ++i) {
+          for (int i = from_col_ + 1; i <= to_col_; ++i) {
             if (position_.at(from_row_, i)->get_piece_name() != EMPTY) {
               correct_castle = false;
             }
+            // TODO: check square for attacking
+          }
+        } else {
+          correct_castle = position_.info_for_castle_[color_ == WHITE ? 1:4];
+          for (int i = to_col_ - 1; i < from_col_; ++i) {
+            if (position_.at(from_row_, i)->get_piece_name() != EMPTY) {
+              correct_castle = false;
+            }
+            // TODO: check square for attacking
           }
         }
         if (correct_castle) return Castle::get_move();

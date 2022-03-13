@@ -33,43 +33,52 @@ const Move* Pawn::define_move(int from_row_,
   // if move_ is made on friend square
   if (position_.at(to_row_, to_col_)->get_piece_name() != EMPTY && position_.at(to_row_, to_col_)->get_color() == color_)
     is_correct_ = false;
+
   // if Pawn movement is incorrect
-//  if (std::abs(to_row_ - from_row_) != 1 || std::abs(to_col_ - from_col_) > 1) is_correct_ = false;
-  if (std::abs(to_row_ - from_row_) != (std::abs(to_col_ - from_col_)) || (to_col_ != from_col_)
-      || (to_row_ != from_row_))
+  if ((std::abs(from_col_ - to_col_) > 1) || (std::abs(from_row_ - to_row_) > 2))
     is_correct_ = false;
-  if ((color_ == WHITE && from_row_ != 1 && (std::abs(to_row_ - from_row_) + std::abs(to_col_ - from_col_)) > 1))
-    is_correct_ = false;
-  if ((color_ == WHITE && from_row_ == 1 && (std::abs(to_row_ - from_row_) + std::abs(to_col_ - from_col_)) > 2))
-    is_correct_ = false;
-  if ((color_ == BLACK && from_row_ != 6 && (std::abs(to_row_ - from_row_) + std::abs(to_col_ - from_col_)) > 1))
-    is_correct_ = false;
-  if ((color_ == BLACK && from_row_ == 6 && (std::abs(to_row_ - from_row_) + std::abs(to_col_ - from_col_)) > 2))
-    is_correct_ = false;
-  else {
-    if (from_col_ == to_col_ && from_row_ == to_row_) is_correct_ = false;
-    else if (is_correct_) {
-      int diff_row_ = (to_row_ - from_row_) / (std::abs(to_row_ - from_row_) != 0 ? std::abs(to_row_ - from_row_) : 1);
-      int diff_col_ = (to_col_ - from_col_) / (std::abs(to_col_ - from_col_) != 0 ? std::abs(to_col_ - from_col_) : 1);
-      for (int i = 0; i < std::abs(to_row_ - from_row_); ++i) {
-        if (position_.at(from_row_, from_col_)->get_piece_name() != EMPTY) is_correct_ = false;
-        from_row_ += diff_row_;
-        from_col_ += diff_col_;
+  if ((color_ == WHITE) && (to_row_ - from_row_ <= 0)) is_correct_ = false;
+  if ((color_ == BLACK) && (to_row_ - from_row_ >= 0)) is_correct_ = false;
+  if (std::abs(to_row_ - from_row_) == 2) {
+    if (to_col_ != from_col_) is_correct_ = false;
+    if (from_row_ != (color_ == WHITE ? 1 : 6)) is_correct_ = false;
+    int diff_row = (to_row_ - from_row_) / 2;
+    for (int i = 1; i <= 2; ++i) {
+      if (position_.at(from_row_ + i * diff_row, from_col_)->get_piece_name() != EMPTY)
+        is_correct_ = false;
+    }
+  }
+  if (std::abs(to_row_ - from_row_) == 1) {
+    if (from_col_ == to_col_) {
+      if (position_.at(to_row_, to_col_)->get_piece_name() != EMPTY) is_correct_ = false;
+    } else {
+      if (position_.at(to_row_, to_col_)->get_piece_name() == EMPTY) {
+        if (position_.last_move_.empty()) {
+          is_correct_ = false;
+        } else {
+          auto last_move = position_.last_move_;
+          if (color_ == WHITE) {
+            std::vector<int> correct_last_move = {to_row_ + 1, to_col_, to_row_ - 1, to_col_};
+            if ((last_move != correct_last_move) || (position_.at(to_row_ - 1, to_col_) != Pawn::get_piece(BLACK))) {
+              is_correct_ = false;
+            } else {
+              return EnPassant::get_move();
+            }
+          } else {
+            std::vector<int> correct_last_move = {to_row_ - 1, to_col_, to_row_ + 1, to_col_};
+            if ((last_move != correct_last_move) || (position_.at(to_row_ + 1, to_col_) != Pawn::get_piece(WHITE))) {
+              is_correct_ = false;
+            } else {
+              return EnPassant::get_move();
+            }
+          }
+        }
       }
     }
   }
-  if (is_correct_ && to_row_ == position_.board_.size() - 1) {
-    return Promotion::get_move();
-  }
-  if (is_correct_ && !position_.last_move_.empty()
-      && (std::abs(position_.last_move_.at(0) - position_.last_move_.at(2)) == 2)) {
-    if (position_.board_.at(position_.last_move_.at(2)).at(position_.last_move_.at(3))->get_piece_name() == PAWN
-        && (std::abs(position_.last_move_.at(2) - from_row_) + std::abs(position_.last_move_.at(3) - from_col_)) == 1) {
-      return EnPassant::get_move();
-    }
-  } else if (is_correct_) {
+
+  if (is_correct_)
     return SimpleMove::get_move();
-  }
   return InvalidMove::get_move();
 }
 
