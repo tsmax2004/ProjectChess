@@ -38,6 +38,7 @@ void Game::game_cycle() {
 
       Position* new_position = new Position(*position_);
       move->make_move(from_row, from_col, to_row, to_col, *new_position);
+      new_position->define_position_type();
       if (new_position->position_type_ == INVALID) {
         std::cout << "Incorrect move\n";
         continue;
