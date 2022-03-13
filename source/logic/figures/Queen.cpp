@@ -41,9 +41,7 @@ const Move* Queen::define_move(int from_row_,
             int diff_row_ = (to_row_ - from_row_) / (std::abs(to_row_ - from_row_) != 0 ? std::abs(to_row_ - from_row_) : 1);
             int diff_col_ = (to_col_ - from_col_) / (std::abs(to_col_ - from_col_) != 0 ? std::abs(to_col_ - from_col_) : 1);
             for (int i = 1; i < std::max(std::abs(to_row_ - from_row_), std::abs(to_col_ - from_col_)); ++i) {
-              from_row_ += diff_row_;
-              from_col_ += diff_col_;
-              if (position_.at(from_row_, from_col_)->get_piece_name() != EMPTY) is_correct_ = false;
+              if (position_.at(from_row_ + i*diff_row_, from_col_ + i*diff_col_)->get_piece_name() != EMPTY) is_correct_ = false;
             }
         }
     }
