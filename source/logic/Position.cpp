@@ -68,7 +68,6 @@ bool Position::if_square_is_under_attack(int row, int col, COLOR attack_color) c
   return false;
 }
 
-// TODO: make check for position_type
 void Position::define_position_type() {
   position_type_ = COMMON;
   if (if_check(move_color_ == WHITE ? BLACK : WHITE)) {
@@ -109,8 +108,9 @@ bool Position::if_checkmate(COLOR attack_color) const {
   return true;
 }
 
+//TODO: checking for draw
 bool Position::if_draw() const {
-  return false;
+
 }
 
 bool Position::if_stalemate() const {
