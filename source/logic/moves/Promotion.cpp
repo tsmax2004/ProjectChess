@@ -16,6 +16,7 @@ void Promotion::make_move(int from_row, int from_col, int to_row, int to_col, Po
   position.board_[from_row][from_col] = Empty::get_piece();
   position.last_move_ = {from_row, from_col, to_row, to_col};
   position.move_color_ = {position.move_color_ == WHITE ? BLACK : WHITE};
+  position.position_type_ = NOT_DEFINE;
 }
 
 bool Promotion::is_valid() const {
