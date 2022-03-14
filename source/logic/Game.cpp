@@ -73,9 +73,8 @@ void Game::game_cycle() {
 
       if (position_->position_type_ == CHECK) {
         print_board();
-        if (position_ -> position_type_ == CHECKMATE) std::cout << "CHECKMATE!\n";
-        else std::cout << "CHECK!\n";
-        break;
+        if (position_ -> position_type_ == CHECKMATE) { std::cout << "CHECKMATE!\n"; break; }
+        std::cout << "CHECK!\n";
       }
       if (position_->position_type_ == DRAW) {
         print_board();
