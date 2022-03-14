@@ -22,13 +22,13 @@ void Game::start_new_game() {
 void debug(Position* position) {
   for (int from_row = 0; from_row < position->board_.size(); ++from_row) {
     for (int from_col = 0; from_col < position->board_[from_row].size(); ++from_col) {
-      std::cout << "On Square: " << char(from_row + 'a') << from_col << " -- ";
+      std::cout << "On Square: " << char(from_row + 'a') << from_col+1 << " -- ";
       if (position->at(from_row, from_col)->get_piece_name() != EMPTY){
         std::cout << position->at(from_row, from_col)->get_color() << position->at(from_row, from_col)->get_piece_name() << " -- {";
         for (int to_row = 0; to_row < position->board_.size(); ++to_row) {
           for (int to_col = 0; to_col < position->board_[to_row].size(); ++to_col) {
             const Move* move = position->at(from_row, from_col)->define_move(from_row, from_col, to_row, to_col, *position);
-            if (move->is_valid()) std::cout << '(' << to_row << ", " << to_col << "), ";
+            if (move->is_valid()) std::cout << '(' << to_row+1 << ", " << char(to_col+'a') << "), ";
           }
         }
         std::cout << "#}\n";
