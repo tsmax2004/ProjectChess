@@ -16,6 +16,7 @@ void Game::start_new_game() {
   }
   if (ans == "y")
     start_new_game();
+  if (ans == "n") std::cout << "Thank you for the game!";
 }
 
 void Game::game_cycle() {
@@ -99,7 +100,7 @@ void Game::print_board() const {
       if (piece->get_piece_name() == EMPTY) {
         std::cout << "  ";
       } else {
-        std::cout << piece->get_color() << piece->get_piece_name();
+        std::cout << char(piece->get_color()) << char(piece->get_piece_name());
       }
       std::cout << " ";
     }
