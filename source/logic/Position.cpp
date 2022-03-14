@@ -110,7 +110,7 @@ bool Position::if_checkmate(COLOR attack_color) const {
 
 //TODO: checking for draw
 bool Position::if_draw() const {
-
+  return false;
 }
 
 bool Position::if_stalemate() const {
