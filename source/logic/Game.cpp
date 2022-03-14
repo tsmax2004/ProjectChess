@@ -1,6 +1,7 @@
 #include "headers/Game.h"
 #include <iostream>
 #include <string>
+#include <fstream>
 
 Game::Game() : position_(nullptr),
                position_history_() {}
@@ -39,12 +40,15 @@ void debug(Position* position) {
 }
 
 void Game::game_cycle() {
+  std::ifstream inp("../moves.txt");
   while (true) {
     print_board();
     std::cout << "Print move: ";
     char from_col_ch, to_col_ch;
     int from_row, to_row, from_col, to_col;
-    std::cin >> from_col_ch >> from_row >> to_col_ch >> to_row;
+    inp >> from_col_ch >> from_row >> to_col_ch >> to_row;
+    if (from_col_ch == '!')
+      break;
     from_col = from_col_ch - 'a';
     --from_row;
     to_col = to_col_ch - 'a';
