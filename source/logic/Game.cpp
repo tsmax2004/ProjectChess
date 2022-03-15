@@ -45,7 +45,6 @@ void debug(Position* position) {
 }
 
 void Game::game_cycle() {
-  std::ifstream inp("../moves.txt");
   int t = 0;
   while (true) {
       print_board();
@@ -55,6 +54,7 @@ void Game::game_cycle() {
     char from_col_ch, to_col_ch;
     int from_row, to_row, from_col, to_col;
     return_move_positions(*this, t - 1);
+    std::ifstream inp("../moves.txt");
     inp >> from_col_ch >> from_row >> to_col_ch >> to_row;
     if (from_col_ch == '!')
       break;
