@@ -64,8 +64,8 @@ void Game::game_cycle() {
         continue;
       }
 
-      position_history_.push_back(position_);
       position_ = new_position;
+      position_history_.push_back(position_);
 
       if (position_->position_type_ == CHECK) {
         print_board();
@@ -97,12 +97,26 @@ void Game::game_cycle() {
 
 bool Game::check_for_repeating() const {
   size_t cnt_of_moves = position_history_.size();
-  if (cnt_of_moves < 5) {
-    return false;
+  int pos_count = 0;
+  auto first_position = position_history_[cnt_of_moves - 1];
+  for (size_t j = 0; j < cnt_of_moves - 1; ++j) {
+    bool is_equal = true;
+    auto second_position = position_history_[j];
+    for (int row = 0; row < first_position->board_.size(); ++row) {
+      if (is_equal) {
+        for (int col = 0; col < first_position->board_[row].size(); ++col) {
+          if (first_position->at(row, col)->get_piece_name() != second_position->at(row, col)->get_piece_name() ||
+              (first_position->at(row, col)->get_color() != second_position->at(row, col)->get_color()
+                  && first_position->at(row, col)->get_piece_name() != EMPTY)) {
+            is_equal = false;
+            break;
+          }
+        }
+      }
+    }
+    pos_count += is_equal;
   }
-  if ((position_history_[cnt_of_moves - 1] == position_history_[cnt_of_moves - 3])
-      && (position_history_[cnt_of_moves - 3] == position_history_[cnt_of_moves - 5]))
-    return true;
+  if (pos_count >= 2) return true;
   return false;
 }
 
