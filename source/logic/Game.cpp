@@ -27,18 +27,19 @@ Position* Game::return_position() const {
 void debug(Position* position) {
   for (int from_row = 0; from_row < position->board_.size(); ++from_row) {
     for (int from_col = 0; from_col < position->board_[from_row].size(); ++from_col) {
-      std::cout << "On Square: " << char(from_col + 'a') << from_row+1 << " -- ";
-      if (position->at(from_row, from_col)->get_piece_name() != EMPTY){
-        std::cout << position->at(from_row, from_col)->get_color() << position->at(from_row, from_col)->get_piece_name() << " -- {";
+      std::cout << "On Square: " << char(from_col + 'a') << from_row + 1 << " -- ";
+      if (position->at(from_row, from_col)->get_piece_name() != EMPTY) {
+        std::cout << position->at(from_row, from_col)->get_color() << position->at(from_row, from_col)->get_piece_name()
+                  << " -- {";
         for (int to_row = 0; to_row < position->board_.size(); ++to_row) {
           for (int to_col = 0; to_col < position->board_[to_row].size(); ++to_col) {
-            const Move* move = position->at(from_row, from_col)->define_move(from_row, from_col, to_row, to_col, *position);
-            if (move->is_valid()) std::cout << '(' << to_row+1 << ", " << char(to_col+'a') << "), ";
+            const Move
+                * move = position->at(from_row, from_col)->define_move(from_row, from_col, to_row, to_col, *position);
+            if (move->is_valid()) std::cout << '(' << to_row + 1 << ", " << char(to_col + 'a') << "), ";
           }
         }
         std::cout << "#}\n";
-      }
-      else std::cout << "EMPTY\n";
+      } else std::cout << "EMPTY\n";
     }
   }
 }
@@ -75,12 +76,15 @@ void Game::game_cycle() {
         continue;
       }
 
-      position_history_.push_back(position_);
       position_ = new_position;
+      position_history_.push_back(position_);
 
       if (position_->position_type_ == CHECK) {
         print_board();
-        if (position_ -> position_type_ == CHECKMATE) { std::cout << "CHECKMATE!\n"; break; }
+        if (position_->position_type_ == CHECKMATE) {
+          std::cout << "CHECKMATE!\n";
+          break;
+        }
         std::cout << "CHECK!\n";
       }
       if (position_->position_type_ == DRAW) {
@@ -108,12 +112,26 @@ void Game::game_cycle() {
 
 bool Game::check_for_repeating() const {
   size_t cnt_of_moves = position_history_.size();
-  if (cnt_of_moves < 5) {
-    return false;
+  int pos_count = 0;
+  auto first_position = position_history_[cnt_of_moves - 1];
+  for (int j = 0; j < cnt_of_moves - 1; ++j) {
+    bool is_equal = true;
+    auto second_position = position_history_[j];
+    for (int row = 0; row < first_position->board_.size(); ++row) {
+      if (is_equal) {
+        for (int col = 0; col < first_position->board_[row].size(); ++col) {
+          if (first_position->at(row, col)->get_piece_name() != second_position->at(row, col)->get_piece_name() ||
+              (first_position->at(row, col)->get_color() != second_position->at(row, col)->get_color()
+                  && first_position->at(row, col)->get_piece_name() != EMPTY)) {
+            is_equal = false;
+            break;
+          }
+        }
+      }
+    }
+    pos_count += is_equal;
   }
-  if ((position_history_[cnt_of_moves - 1] == position_history_[cnt_of_moves - 3])
-      && (position_history_[cnt_of_moves - 3] == position_history_[cnt_of_moves - 5]))
-    return true;
+  if (pos_count >= 2) return true;
   return false;
 }
 
