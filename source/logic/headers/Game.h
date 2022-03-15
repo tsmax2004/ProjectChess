@@ -20,6 +20,8 @@ class Game {
   bool check_for_repeating() const;
 
   void print_board() const;
+
+  Position* return_position() const;
 };
 
 #endif

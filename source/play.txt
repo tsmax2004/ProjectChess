@@ -1,0 +1,9 @@
+[Event "Grand Chess Tour Croatia Rapid & Blitz 2021"]
+[Site ""]
+[Date "2021.07.10"]
+[Round "?"]
+[White "Viswanathan Anand"]
+[Black "Garry Kasparov"]
+[Result "1-0"]
+
+1. e4 f5 2. f5

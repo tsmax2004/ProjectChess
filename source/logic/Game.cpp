@@ -2,10 +2,10 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "Convert.cpp"
 
 Game::Game() : position_(nullptr),
                position_history_() {}
-
 void Game::start_new_game() {
   position_ = new Position();
   position_->start_position();
@@ -18,6 +18,10 @@ void Game::start_new_game() {
   if (ans == "y")
     start_new_game();
   if (ans == "n") std::cout << "Thank you for the game!";
+}
+
+Position* Game::return_position() const {
+    return position_;
 }
 
 void debug(Position* position) {
@@ -41,11 +45,14 @@ void debug(Position* position) {
 
 void Game::game_cycle() {
   std::ifstream inp("../moves.txt");
+  int t = 0;
   while (true) {
-    print_board();
+      std::cout << t << '\n';
+      ++t;
     std::cout << "Print move: ";
     char from_col_ch, to_col_ch;
     int from_row, to_row, from_col, to_col;
+    return_move_positions(*this, t - 1);
     inp >> from_col_ch >> from_row >> to_col_ch >> to_row;
     if (from_col_ch == '!')
       break;
@@ -59,7 +66,7 @@ void Game::game_cycle() {
         std::cout << "Incorrect move\n";
         continue;
       }
-
+        print_board();
       Position* new_position = new Position(*position_);
       move->make_move(from_row, from_col, to_row, to_col, *new_position);
       new_position->define_position_type();
@@ -91,7 +98,7 @@ void Game::game_cycle() {
         std::cout << "DRAW by repeating moves!\n";
         break;
       }
-      debug(Game::position_);
+      //debug(Game::position_);
     } catch (std::out_of_range&) {
       std::cout << "Incorrect coordinates\n";
       continue;
