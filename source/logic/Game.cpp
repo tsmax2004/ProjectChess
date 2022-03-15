@@ -48,6 +48,7 @@ void Game::game_cycle() {
   std::ifstream inp("../moves.txt");
   int t = 0;
   while (true) {
+      print_board();
       std::cout << t << '\n';
       ++t;
     std::cout << "Print move: ";
@@ -67,7 +68,6 @@ void Game::game_cycle() {
         std::cout << "Incorrect move\n";
         continue;
       }
-        print_board();
       Position* new_position = new Position(*position_);
       move->make_move(from_row, from_col, to_row, to_col, *new_position);
       new_position->define_position_type();

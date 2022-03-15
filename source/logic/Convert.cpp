@@ -9,7 +9,7 @@ std::vector<char> letters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
 std::vector<char> figures = {'N', 'Q', 'K', 'B', 'R'};
 std::ifstream inp("../play.txt");
 //Game new_game;
-std::vector<std::string> normal_moves = {"e4", "f6", "e5", "e5"};
+std::vector<std::string> normal_moves = {};
 
 void prepare() {
     std::string s;
@@ -49,7 +49,7 @@ void prepare() {
 }
 
 void return_move_positions(const Game& new_game, int t, std::string mv = "") {
-    prepare();
+    if (t == 0) prepare();
     std::ofstream out("../moves.txt");
     mv = normal_moves[t];
     //define move
@@ -71,10 +71,10 @@ void return_move_positions(const Game& new_game, int t, std::string mv = "") {
     }
     if (tmp.size() == 3) {
         from_coordinates = tmp[0] - 'a';
-        move_coordinates = {tmp[1] - 'a', tmp[2] - '0'};
+        move_coordinates = {tmp[2] - '0', tmp[1] - 'a'};
     }
     else {
-        move_coordinates = {tmp[0] - 'a', tmp[1] - '0'};
+        move_coordinates = {tmp[1] - '0', tmp[0] - 'a'};
     }
     --move_coordinates.first;
     std::vector<int> full_move = {0, 0, move_coordinates.first, move_coordinates.second};
@@ -92,22 +92,22 @@ void return_move_positions(const Game& new_game, int t, std::string mv = "") {
             if (!if_attack) {
                 if (if_white) {
                     Position* pos = new_game.return_position();
-                    if (move_coordinates.second - 1 >= 0 && pos->board_[move_coordinates.first - 1][move_coordinates.second]->get_piece_name() == PAWN && pos->board_[move_coordinates.first - 1][move_coordinates.second]->get_color() == WHITE) {
+                    if (move_coordinates.first - 1 >= 0 && pos->board_[move_coordinates.first - 1][move_coordinates.second]->get_piece_name() == PAWN && pos->board_[move_coordinates.first - 1][move_coordinates.second]->get_color() == WHITE) {
                         full_move[0] = move_coordinates.first - 1;
                         full_move[1] = move_coordinates.second;
                     }
-                    if (move_coordinates.second - 2 >= 0 && pos->board_[move_coordinates.first - 2][move_coordinates.second]->get_piece_name() == PAWN && pos->board_[move_coordinates.first - 2][move_coordinates.second]->get_color() == WHITE) {
+                    if (move_coordinates.first - 2 >= 0 && pos->board_[move_coordinates.first - 2][move_coordinates.second]->get_piece_name() == PAWN && pos->board_[move_coordinates.first - 2][move_coordinates.second]->get_color() == WHITE) {
                         full_move[0] = move_coordinates.first - 2;
                         full_move[1] = move_coordinates.second;
                     }
                 }
                 if (!if_white) {
                     Position* pos = new_game.return_position();
-                    if (move_coordinates.second + 1 >= 0 && pos->board_[move_coordinates.first + 1][move_coordinates.second]->get_piece_name() == PAWN && pos->board_[move_coordinates.first + 1][move_coordinates.second]->get_color() == BLACK) {
+                    if (move_coordinates.first + 1 >= 0 && pos->board_[move_coordinates.first + 1][move_coordinates.second]->get_piece_name() == PAWN && pos->board_[move_coordinates.first + 1][move_coordinates.second]->get_color() == BLACK) {
                         full_move[0] = move_coordinates.first + 1;
                         full_move[1] = move_coordinates.second;
                     }
-                    if (move_coordinates.second + 2 >= 0 && pos->board_[move_coordinates.first + 2][move_coordinates.second]->get_piece_name() == PAWN && pos->board_[move_coordinates.first + 2][move_coordinates.second]->get_color() == BLACK) {
+                    if (move_coordinates.first + 2 >= 0 && pos->board_[move_coordinates.first + 2][move_coordinates.second]->get_piece_name() == PAWN && pos->board_[move_coordinates.first + 2][move_coordinates.second]->get_color() == BLACK) {
                         full_move[0] = move_coordinates.first + 2;
                         full_move[1] = move_coordinates.second;
                     }
