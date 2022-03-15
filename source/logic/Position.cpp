@@ -110,6 +110,33 @@ bool Position::if_checkmate(COLOR attack_color) const {
 
 //TODO: checking for draw
 bool Position::if_draw() const {
+  std::vector<int> white_bishops(2);
+  std::vector<int> black_bishops(2);
+  std::vector<PIECE_NAME> white_pieces;
+  std::vector<PIECE_NAME> black_pieces;
+  for (int row = 0; row < board_.size(); ++row) {
+    for (int col = 0; col < board_[row].size(); ++col) {
+      if (at(row, col)->get_color() == BLACK) {
+        if (at(row, col)->get_piece_name() == BISHOP) {
+          ++black_bishops[col % 2];
+        }
+        black_pieces.push_back(at(row, col)->get_piece_name());
+      } else {
+        if (at(row, col)->get_piece_name() == BISHOP) ++white_bishops[col % 2];
+        white_pieces.push_back(at(row, col)->get_piece_name());
+      }
+    }
+  }
+  if (white_pieces == std::vector{KING} && black_pieces == std::vector{KING}) return true;
+  if (white_pieces == std::vector{KING, KNIGHT} && black_pieces == std::vector{KING} ||
+      black_pieces == std::vector{KING, KNIGHT} && white_pieces == std::vector{KING})
+    return true;
+  if (white_pieces == std::vector{KING, BISHOP} && black_pieces == std::vector{KING} ||
+      black_pieces == std::vector{KING, BISHOP} && white_pieces == std::vector{KING})
+    return true;
+  if (white_pieces == std::vector{KING, BISHOP} && black_pieces == std::vector{KING, BISHOP}
+      && white_bishops == black_bishops)
+    return true;
   return false;
 }
 
