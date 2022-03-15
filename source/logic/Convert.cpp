@@ -7,7 +7,6 @@
 
 std::vector<char> letters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
 std::vector<char> figures = {'N', 'Q', 'K', 'B', 'R'};
-std::ofstream out("../moves.txt");
 std::ifstream inp("../play.txt");
 //Game new_game;
 std::vector<std::string> normal_moves = {"e4", "f6", "e5", "e5"};
@@ -51,6 +50,7 @@ void prepare() {
 
 void return_move_positions(const Game& new_game, int t, std::string mv = "") {
     prepare();
+    std::ofstream out("../moves.txt");
     mv = normal_moves[t];
     //define move
     char figure = 'P';
@@ -154,7 +154,7 @@ void return_move_positions(const Game& new_game, int t, std::string mv = "") {
                 }
             }
     }
-    out << full_move[0] + 'a' << full_move[1] << ' ' << full_move[2] + 'a' << full_move[3];
+    out << letters[full_move[1]] << full_move[0] + 1 << ' ' << letters[full_move[3]] << full_move[2] + 1;
 }
 
 int main() {
