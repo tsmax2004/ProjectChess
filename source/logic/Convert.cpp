@@ -54,10 +54,6 @@ void prepare() {
 void return_move_positions(const Game &new_game, int t, std::string mv = "") {
     if (t == 0) prepare();
     std::ofstream out("../moves.txt");
-    if (t == 90) {
-        t += 1;
-        t -= 1;
-    }
     mv = normal_moves[t];
     //define move
     char figure = 'P';
@@ -151,15 +147,23 @@ void return_move_positions(const Game &new_game, int t, std::string mv = "") {
                             pos->board_[move_coordinates.first - 1][move_coordinates.second]->get_piece_name() ==
                             PAWN &&
                             pos->board_[move_coordinates.first - 1][move_coordinates.second]->get_color() == WHITE) {
-                            full_move[0] = move_coordinates.first - 1;
-                            full_move[1] = move_coordinates.second;
+                            if (pos->board_[move_coordinates.first - 1][move_coordinates.second]->define_move(move_coordinates.first - 1, move_coordinates.second, move_coordinates.first,
+                                                               move_coordinates.second,
+                                                               *pos)->is_valid()) {
+                                full_move[0] = move_coordinates.first - 1;
+                                full_move[1] = move_coordinates.second;
+                            }
                         }
                         if (move_coordinates.first - 2 >= 0 &&
                             pos->board_[move_coordinates.first - 2][move_coordinates.second]->get_piece_name() ==
                             PAWN &&
                             pos->board_[move_coordinates.first - 2][move_coordinates.second]->get_color() == WHITE) {
-                            full_move[0] = move_coordinates.first - 2;
-                            full_move[1] = move_coordinates.second;
+                            if (pos->board_[move_coordinates.first - 2][move_coordinates.second]->define_move(move_coordinates.first - 2, move_coordinates.second, move_coordinates.first,
+                                                                                                              move_coordinates.second,
+                                                                                                              *pos)->is_valid()) {
+                                full_move[0] = move_coordinates.first - 2;
+                                full_move[1] = move_coordinates.second;
+                            }
                         }
                     }
                     if (!if_white) {
@@ -168,15 +172,23 @@ void return_move_positions(const Game &new_game, int t, std::string mv = "") {
                             pos->board_[move_coordinates.first + 1][move_coordinates.second]->get_piece_name() ==
                             PAWN &&
                             pos->board_[move_coordinates.first + 1][move_coordinates.second]->get_color() == BLACK) {
-                            full_move[0] = move_coordinates.first + 1;
-                            full_move[1] = move_coordinates.second;
+                            if (pos->board_[move_coordinates.first + 1][move_coordinates.second]->define_move(move_coordinates.first + 1, move_coordinates.second, move_coordinates.first,
+                                                                                                              move_coordinates.second,
+                                                                                                              *pos)->is_valid()) {
+                                full_move[0] = move_coordinates.first + 1;
+                                full_move[1] = move_coordinates.second;
+                            }
                         }
                         if (move_coordinates.first + 2 >= 0 &&
                             pos->board_[move_coordinates.first + 2][move_coordinates.second]->get_piece_name() ==
                             PAWN &&
                             pos->board_[move_coordinates.first + 2][move_coordinates.second]->get_color() == BLACK) {
-                            full_move[0] = move_coordinates.first + 2;
-                            full_move[1] = move_coordinates.second;
+                            if (pos->board_[move_coordinates.first + 2][move_coordinates.second]->define_move(move_coordinates.first + 2, move_coordinates.second, move_coordinates.first,
+                                                                                                              move_coordinates.second,
+                                                                                                              *pos)->is_valid()) {
+                                full_move[0] = move_coordinates.first + 2;
+                                full_move[1] = move_coordinates.second;
+                            }
                         }
                     }
                 }
@@ -188,16 +200,28 @@ void return_move_positions(const Game &new_game, int t, std::string mv = "") {
                             PAWN &&
                             pos->board_[move_coordinates.first - 1][move_coordinates.second - 1]->get_color() ==
                             WHITE) {
-                            full_move[0] = move_coordinates.first - 1;
-                            full_move[1] = move_coordinates.second - 1;
+                            if (if_from_row && move_coordinates.first - 1 == from_coordinates) {
+                                full_move[0] = move_coordinates.first - 1;
+                                full_move[1] = move_coordinates.second - 1;
+                            }
+                            if (!if_from_row && move_coordinates.second - 1 == from_coordinates) {
+                                full_move[0] = move_coordinates.first - 1;
+                                full_move[1] = move_coordinates.second - 1;
+                            }
                         }
                         if (move_coordinates.second + 1 <= 7 && move_coordinates.first - 1 >= 0 &&
                             pos->board_[move_coordinates.first - 1][move_coordinates.second + 1]->get_piece_name() ==
                             PAWN &&
                             pos->board_[move_coordinates.first - 1][move_coordinates.second + 1]->get_color() ==
                             WHITE) {
-                            full_move[0] = move_coordinates.first - 1;
-                            full_move[1] = move_coordinates.second + 1;
+                            if (if_from_row && move_coordinates.first - 1 == from_coordinates) {
+                                full_move[0] = move_coordinates.first - 1;
+                                full_move[1] = move_coordinates.second + 1;
+                            }
+                            if (!if_from_row && move_coordinates.second + 1 == from_coordinates) {
+                                full_move[0] = move_coordinates.first - 1;
+                                full_move[1] = move_coordinates.second + 1;
+                            }
                         }
                     }
                     if (!if_white) {
@@ -207,16 +231,28 @@ void return_move_positions(const Game &new_game, int t, std::string mv = "") {
                             PAWN &&
                             pos->board_[move_coordinates.first + 1][move_coordinates.second + 1]->get_color() ==
                             BLACK) {
-                            full_move[0] = move_coordinates.first + 1;
-                            full_move[1] = move_coordinates.second + 1;
+                            if (if_from_row && move_coordinates.first + 1 == from_coordinates) {
+                                full_move[0] = move_coordinates.first + 1;
+                                full_move[1] = move_coordinates.second + 1;
+                            }
+                            if (!if_from_row && move_coordinates.second + 1 == from_coordinates) {
+                                full_move[0] = move_coordinates.first + 1;
+                                full_move[1] = move_coordinates.second + 1;
+                            }
                         }
                         if (move_coordinates.second - 1 >= 0 && move_coordinates.first + 1 <= 7 &&
                             pos->board_[move_coordinates.first + 1][move_coordinates.second - 1]->get_piece_name() ==
                             PAWN &&
                             pos->board_[move_coordinates.first + 1][move_coordinates.second - 1]->get_color() ==
                             BLACK) {
-                            full_move[0] = move_coordinates.first + 1;
-                            full_move[1] = move_coordinates.second - 1;
+                            if (if_from_row && move_coordinates.first + 1 == from_coordinates) {
+                                full_move[0] = move_coordinates.first + 1;
+                                full_move[1] = move_coordinates.second - 1;
+                            }
+                            if (!if_from_row && move_coordinates.second - 1 == from_coordinates) {
+                                full_move[0] = move_coordinates.first + 1;
+                                full_move[1] = move_coordinates.second - 1;
+                            }
                         }
                     }
                 }
