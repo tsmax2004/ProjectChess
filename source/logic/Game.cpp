@@ -19,25 +19,6 @@ void Game::start_new_game() {
   if (ans == "n") std::cout << "Thank you for the game!";
 }
 
-void debug(Position* position) {
-  for (int from_row = 0; from_row < position->board_.size(); ++from_row) {
-    for (int from_col = 0; from_col < position->board_[from_row].size(); ++from_col) {
-      std::cout << "On Square: " << char(from_col + 'a') << from_row+1 << " -- ";
-      if (position->at(from_row, from_col)->get_piece_name() != EMPTY){
-        std::cout << position->at(from_row, from_col)->get_color() << position->at(from_row, from_col)->get_piece_name() << " -- {";
-        for (int to_row = 0; to_row < position->board_.size(); ++to_row) {
-          for (int to_col = 0; to_col < position->board_[to_row].size(); ++to_col) {
-            const Move* move = position->at(from_row, from_col)->define_move(from_row, from_col, to_row, to_col, *position);
-            if (move->is_valid()) std::cout << '(' << to_row+1 << ", " << char(to_col+'a') << "), ";
-          }
-        }
-        std::cout << "#}\n";
-      }
-      else std::cout << "EMPTY\n";
-    }
-  }
-}
-
 void Game::game_cycle() {
   while (true) {
     print_board();
@@ -49,6 +30,7 @@ void Game::game_cycle() {
     --from_row;
     to_col = to_col_ch - 'a';
     --to_row;
+
     try {
       const Move* move = position_->at(from_row, from_col)->define_move(from_row, from_col, to_row, to_col, *position_);
       if (!move->is_valid()) {
@@ -56,7 +38,7 @@ void Game::game_cycle() {
         continue;
       }
 
-      Position* new_position = new Position(*position_);
+      auto* new_position = new Position(*position_);
       move->make_move(from_row, from_col, to_row, to_col, *new_position);
       new_position->define_position_type();
       if (new_position->position_type_ == INVALID) {
@@ -91,7 +73,6 @@ void Game::game_cycle() {
         std::cout << "DRAW by repeating moves!\n";
         break;
       }
-      debug(Game::position_);
     } catch (std::out_of_range&) {
       std::cout << "Incorrect coordinates\n";
       continue;
