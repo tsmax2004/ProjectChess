@@ -79,7 +79,7 @@ void Game::game_cycle() {
       position_ = new_position;
       position_history_.push_back(position_);
 
-      if (position_->position_type_ == CHECK) {
+      if ((position_->position_type_ == CHECK) || (position_->position_type_ == CHECKMATE)) {
         print_board();
         if (position_->position_type_ == CHECKMATE) {
           std::cout << "CHECKMATE!\n";

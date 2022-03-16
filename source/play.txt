@@ -1,16 +1,22 @@
-[Event "Grand Chess Tour Croatia Rapid & Blitz 2021"]
-[Site ""]
-[Date "2021.07.10"]
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2022.01.26"]
 [Round "?"]
-[White "Maxime Vachier-Lagrave"]
-[Black "Garry Kasparov"]
-[Result "1-0"]
+[White "guselprincipiante"]
+[Black "Maks402"]
+[Result "0-1"]
+[ECO "C22"]
+[WhiteElo "1245"]
+[BlackElo "1272"]
+[TimeControl "600"]
+[EndTime "5:30:16 PST"]
+[Termination "Maks402 won by checkmate"]
 
-1. e4 c5 2. Nf3 e6 3. c3 d5 4. e5 d4 5. Bd3 Bd7 6. O-O Bc6 7. Re1 g5 8. h3 h5
-9. Na3 g4 10. Nh2 Nh6 11. Be4 d3 12. b4 Bxe4 13. Rxe4 Qd5 14. Qa4+ Nc6 15. bxc5 Bxc5
-16. Nb5 O-O-O 17. Qc4 g3 18. Nf1 gxf2+ 19. Kh2 Nf5 20. Ba3 Bxa3 21. Nxa3 Kb8
-22. Qxd5 Rxd5 23. Nc4 b5 24. Nce3 Nxe3 25. Nxe3 Rxe5 26. Rf4 f5 27. Kg3 Kc7
-28. a4 a6 29. axb5 axb5 30. Kxf2 Re4 31. Rxe4 fxe4 32. Kg3 Rf8 33. Re1 Ne7
-34. Rb1 Kc6 35. Rb4 Nf5+ 36. Kf4 Nd6+ 37. Ke5 Rf2 38. Rd4 Nf7+ 39. Kxe6 Ng5+
-40. Ke5 Rxd2 41. h4 Re2 42. Rd6+ Kb7 43. hxg5 Rxe3 44. g6 Re2 45. g4 Rg2 46. gxh5 d2
-47. Kxe4 1-0
+1. e4 e5 2. d4 exd4 3. Qxd4 Nc6 4. Qe3 Bd6 5. Bd3 Nf6 6. Nc3 O-O 7. h4 Re8
+8. Bd2 b6 9. O-O-O Bc5 10. Qf3 Ne5 11. Qf4 Nxd3+ 12. cxd3 Ba6 13. g4 Bxd3 14. g5 Nxe4
+15. g6 fxg6 16. h5 gxh5 17. Rxh5 Nxf2 18. Qg3 Nxd1 19. Bh6 g6 20. Re5 Bd6
+21. Rxe8+ Qxe8 22. Qxd3 Nxc3 23. Qxc3 Qf7 24. Bd2 Bf4 25. b3 Bxd2+ 26. Qxd2 Qf1+
+27. Kc2 Re8 28. Qg5 Qf2+ 29. Kc3 Qe3+ 30. Qxe3 Rxe3+ 31. Kc4 h5 32. Kb5 Re5+
+33. Ka6 Ra5+ 34. Kb7 c5 35. Kc7 Rxa2 36. Kxd7 a5 37. Kc6 Rb2 38. Kxb6 Rxb3+ 39. Kxa5 Rc3
+40. Ka4 Rc1 41. Ka3 Rxg1 42. Kb3 h4 43. Kc4 h3 44. Kxc5 h2 45. Kd4 h1=Q
+46. Ke3 Rg4 47. Kf2 Qh3 48. Ke2 Rg2+ 49. Kf1 Qh1# 0-1
