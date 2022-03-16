@@ -64,13 +64,17 @@ void Game::game_cycle() {
         continue;
       }
 
-      position_ = new_position;
       position_history_.push_back(position_);
+      position_ = new_position;
 
       if (position_->position_type_ == CHECK) {
         print_board();
-        if (position_ -> position_type_ == CHECKMATE) { std::cout << "CHECKMATE!\n"; break; }
         std::cout << "CHECK!\n";
+      }
+      if (position_->position_type_ == CHECKMATE) {
+        print_board();
+        std::cout << "CHECKMATE!\n";
+        break;
       }
       if (position_->position_type_ == DRAW) {
         print_board();

@@ -77,8 +77,11 @@ const Move* Pawn::define_move(int from_row_,
     }
   }
 
-  if (is_correct_)
+  if (is_correct_) {
+    if (to_row_ == 0 || to_row_ == 7)
+      return Promotion::get_move();
     return SimpleMove::get_move();
+  }
   return InvalidMove::get_move();
 }
 
