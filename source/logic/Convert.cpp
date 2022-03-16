@@ -54,10 +54,6 @@ void prepare() {
 void return_move_positions(const Game &new_game, int t, std::string mv = "") {
     if (t == 0) prepare();
     std::ofstream out("../moves.txt");
-    if (t == 29) {
-        t += 1;
-        t -= 1;
-    }
     mv = normal_moves[t];
     //define move
     char figure = 'P';
