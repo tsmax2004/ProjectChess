@@ -5,14 +5,9 @@ Position::Position(): board_(),
                       move_color_(WHITE),
                       position_type_(NOT_DEFINE),
                       info_for_castle_(),
-                      last_move_(),
-                      move_cnt_(0) {}
+                      last_move_() {}
 
 Position::Position(const Position& other) = default;
-
-bool Position::operator==(const Position& other) const {
-  return board_ == other.board_;
-}
 
 void Position::start_position() {
   board_ = std::vector<std::vector<Piece*>>(8, std::vector<Piece*>(8, nullptr));
@@ -43,7 +38,6 @@ void Position::start_position() {
   move_color_ = WHITE;
   position_type_ = COMMON;
   info_for_castle_ = std::vector<bool>(6, true);
-  move_cnt_ = 1;
 }
 
 Piece* Position::at(int row, int col) const {
@@ -108,7 +102,6 @@ bool Position::if_checkmate(COLOR attack_color) const {
   return true;
 }
 
-//TODO: checking for draw
 bool Position::if_draw() const {
   std::vector<int> white_bishops(2);
   std::vector<int> black_bishops(2);
