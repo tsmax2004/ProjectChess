@@ -1,12 +1,15 @@
 #include <stdexcept>
 #include <set>
 #include "headers/logic.h"
+#include <iostream>
 
 Position::Position() : board_(),
                        move_color_(WHITE),
                        position_type_(NOT_DEFINE),
                        info_for_castle_(),
                        last_move_() {}
+
+Position::Position(const Position&) = default;
 
 void Position::start_position() {
   board_ = std::vector<std::vector<Piece*>>(8, std::vector<Piece*>(8, nullptr));
@@ -111,13 +114,24 @@ bool Position::if_draw() const {
     for (int col = 0; col < board_[row].size(); ++col) {
       if (at(row, col)->get_color() == BLACK) {
         if (at(row, col)->get_piece_name() == BISHOP) ++black_bishops[(row + col) % 2];
-        black_pieces.insert(at(row, col)->get_piece_name());
+        if (at(row, col)->get_piece_name() != EMPTY) black_pieces.insert(at(row, col)->get_piece_name());
       } else {
         if (at(row, col)->get_piece_name() == BISHOP) ++white_bishops[(row + col) % 2];
-        white_pieces.insert(at(row, col)->get_piece_name());
+        if (at(row, col)->get_piece_name() != EMPTY) white_pieces.insert(at(row, col)->get_piece_name());
       }
     }
   }
+  std::cout << "WHITE PIECES : ";
+  for (auto i: white_pieces) {
+    std::cout << i << ' ';
+  }
+  std::cout << '\n';
+  std::cout << "BLACK PIECES : ";
+  for (auto i: black_pieces) {
+    std::cout << i << ' ';
+  }
+  std::cout << '\n';
+
   if (white_pieces == std::set{KING} && black_pieces == std::set{KING}) return true;
   if (white_pieces == std::set{KING, KNIGHT} && black_pieces == std::set{KING} ||
       black_pieces == std::set{KING, KNIGHT} && white_pieces == std::set{KING})

@@ -8,8 +8,43 @@ Game::Game() : position_(nullptr),
 void Game::start_new_game() {
   position_ = new Position();
   position_->start_position();
-  game_cycle();
+  std::cout << "Do you want to start a new game?[y/n/set]: ";
   std::string ans;
+  std::cin >> ans;
+  if (ans == "y") {
+    game_cycle();
+  } else if (ans == "set") {
+    for (auto & row : position_->board_) {
+      for (auto & piece : row) {
+        piece = Empty::get_piece();
+      }
+    }
+    print_board();
+    std::cout << "\nEnter pieces by: '+' col row color piece name(ex Empty)\n";
+    char end, col;
+    std::cin >> end;
+    int row;
+    std::string color, piece_name;
+    COLOR piece_color;
+    while (end != '#') {
+      std::cin >> col >> row >> color >> piece_name;
+      col -= 'a';
+      --row;
+      if (color == "w") piece_color = WHITE;
+      if (color == "b") piece_color = BLACK;
+      if (piece_name == "p") position_->board_[row][col] = Pawn::get_piece(piece_color);
+      if (piece_name == "n") position_->board_[row][col] = Knight::get_piece(piece_color);
+      if (piece_name == "b") position_->board_[row][col] = Bishop::get_piece(piece_color);
+      if (piece_name == "r") position_->board_[row][col] = Rook::get_piece(piece_color);
+      if (piece_name == "q") position_->board_[row][col] = Queen::get_piece(piece_color);
+      if (piece_name == "k") position_->board_[row][col] = King::get_piece(piece_color);
+      print_board();
+      std::cout << "For end type '#'\n";
+      std::cin >> end;
+    }
+    game_cycle();
+  }
+  ans.clear();
   while ((ans != "y") && (ans != "n")) {
     std::cout << "Do you want play again? (y/n): ";
     std::cin >> ans;
