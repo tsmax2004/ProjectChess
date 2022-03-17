@@ -103,7 +103,6 @@ bool Position::if_checkmate(COLOR attack_color) const {
   return true;
 }
 
-//TODO: checking for draw
 bool Position::if_draw() const {
   std::vector<int> white_bishops(2);
   std::vector<int> black_bishops(2);
