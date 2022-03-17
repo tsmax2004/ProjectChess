@@ -24,27 +24,40 @@ void prepare() {
     while (getline(inp, s)) {
         all_moves.push_back(s);
     }
+    std::vector<bool> flags = {false, false};
     for (int i = 0; i < all_moves.size(); ++i) {
         int pos = 0;
         while (pos < all_moves[i].size() - 1) {
-            while (all_moves[i][pos] != '.') {
+            while (!flags[0] && !flags[1] && all_moves[i][pos] != '.') {
                 ++pos;
             }
-             if (all_moves[i][pos] == '.') {
-                pos += 2;
+             if (all_moves[i][pos] == '.' || flags[0] || flags[1]) {
+                 if (!flags[0] && !flags[1]) pos += 2;
                 s = "";
-                while (pos < all_moves[i].size() && all_moves[i][pos] != ' ') {
+                while ((!flags[0] && pos == 0) || (pos < all_moves[i].size() && all_moves[i][pos] != ' ')) {
                     s += all_moves[i][pos];
                     ++pos;
                 }
-                ++pos;
-                normal_moves.push_back(s);
+                if (!(!flags[0] && flags[1])) ++pos;
+                if (s != "") {
+                    normal_moves.push_back(s);
+                    flags[0] = false;
+                }
+                else {
+                    flags[0] = true;
+                }
                 s = "";
-                while (pos < all_moves[i].size() && all_moves[i][pos] != ' ') {
+                while (((!flags[0] && flags[1]) || (!flags[0] && !flags[1])) && (pos < all_moves[i].size() && all_moves[i][pos] != ' ')) {
                     s += all_moves[i][pos];
                     ++pos;
                 }
-                normal_moves.push_back(s);
+                if (s != "") {
+                    normal_moves.push_back(s);
+                    flags[1] = false;
+                }
+                else {
+                    flags[1] = true;
+                }
                 ++pos;
             }
         }
