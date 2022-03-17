@@ -12,8 +12,6 @@ class Position {
 
   Position(const Position&);
 
-  bool operator==(const Position&) const;
-
   void start_position();
 
   Piece* at(int row_, int col_) const;
@@ -26,7 +24,6 @@ class Position {
   // info about figures movement in order: WhiteKing, WhiteRookA, WhiteRookH, BlackKing, BlackRookA, BlackRookH
   std::vector<int> last_move_;
   // for en' passant, in order from_row, from_col, to_row, to_col
-  int move_cnt_;
 
   void define_position_type();
   bool if_square_is_under_attack(int, int, COLOR) const;
