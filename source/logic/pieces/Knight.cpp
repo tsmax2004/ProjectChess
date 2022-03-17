@@ -4,7 +4,7 @@
 
 #include "../headers/logic.h"
 
-Knight::Knight(COLOR color_): color_(color_) {}
+Knight::Knight(COLOR color_) : color_(color_) {}
 
 Knight* Knight::get_piece(COLOR color) {
   if (color == WHITE) {
@@ -31,7 +31,8 @@ const Move* Knight::define_move(int from_row_,
   //if move_ color is correct
   if (color_ != position_.move_color_) is_correct_ = false;
   // if move_ is made on friend square
-  if (position_.at(to_row_, to_col_)->get_piece_name() != EMPTY && position_.at(to_row_, to_col_)->get_color() == color_)
+  if (position_.at(to_row_, to_col_)->get_piece_name() != EMPTY
+      && position_.at(to_row_, to_col_)->get_color() == color_)
     is_correct_ = false;
   // if knight movement is incorrect
   auto mov_ = std::pair<int, int>(std::abs(to_row_ - from_row_), std::abs(to_col_ - from_col_));

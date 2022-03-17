@@ -14,8 +14,8 @@ Empty* Empty::get_piece() {
 }
 
 const Move* Empty::define_move(int from_row_, int from_col_, int to_row_, int to_col_,
-                               const Position &position_) const {
-    return InvalidMove::get_move();
+                               const Position& position_) const {
+  return InvalidMove::get_move();
 }
 
 PIECE_NAME Empty::get_piece_name() const {

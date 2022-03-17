@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 project(LogicLib)
 set(CMAKE_CXX_STANDARD 20)
 
-set(PIECES_LIB figures/Pawn.cpp figures/Bishop.cpp figures/Empty.cpp figures/King.cpp figures/Knight.cpp figures/Queen.cpp figures/Rook.cpp)
+set(PIECES_LIB pieces/Pawn.cpp pieces/Bishop.cpp pieces/Empty.cpp pieces/King.cpp pieces/Knight.cpp pieces/Queen.cpp pieces/Rook.cpp)
 
 set(SOURCE_LIB Position.cpp Game.cpp)
 

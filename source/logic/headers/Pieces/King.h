@@ -4,7 +4,6 @@
 
 #include "Piece.h"
 
-// Singleton + Bridge patterns
 class King : public Piece {
  protected:
   King(COLOR color);

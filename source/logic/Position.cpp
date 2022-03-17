@@ -8,6 +8,8 @@ Position::Position() : board_(),
                        info_for_castle_(),
                        last_move_() {}
 
+Position::Position(const Position&) = default;
+
 void Position::start_position() {
   board_ = std::vector<std::vector<Piece*>>(8, std::vector<Piece*>(8, nullptr));
   board_[0][0] = Rook::get_piece(WHITE);
