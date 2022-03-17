@@ -1,12 +1,13 @@
 #include <stdexcept>
+#include <set>
 #include "headers/logic.h"
 
-Position::Position(): board_(),
-                      move_color_(WHITE),
-                      position_type_(NOT_DEFINE),
-                      info_for_castle_(),
-                      last_move_(),
-                      move_cnt_(0) {}
+Position::Position() : board_(),
+                       move_color_(WHITE),
+                       position_type_(NOT_DEFINE),
+                       info_for_castle_(),
+                       last_move_(),
+                       move_cnt_(0) {}
 
 Position::Position(const Position& other) = default;
 
@@ -112,37 +113,46 @@ bool Position::if_checkmate(COLOR attack_color) const {
 bool Position::if_draw() const {
   std::vector<int> white_bishops(2);
   std::vector<int> black_bishops(2);
-  std::vector<PIECE_NAME> white_pieces;
-  std::vector<PIECE_NAME> black_pieces;
+  std::set<PIECE_NAME> white_pieces;
+  std::set<PIECE_NAME> black_pieces;
   for (int row = 0; row < board_.size(); ++row) {
     for (int col = 0; col < board_[row].size(); ++col) {
       if (at(row, col)->get_color() == BLACK) {
-        if (at(row, col)->get_piece_name() == BISHOP) {
-          ++black_bishops[col % 2];
-        }
-        black_pieces.push_back(at(row, col)->get_piece_name());
+        if (at(row, col)->get_piece_name() == BISHOP) ++black_bishops[(row + col) % 2];
+        black_pieces.insert(at(row, col)->get_piece_name());
       } else {
-        if (at(row, col)->get_piece_name() == BISHOP) ++white_bishops[col % 2];
-        white_pieces.push_back(at(row, col)->get_piece_name());
+        if (at(row, col)->get_piece_name() == BISHOP) ++white_bishops[(row + col) % 2];
+        white_pieces.insert(at(row, col)->get_piece_name());
       }
     }
   }
-  if (white_pieces == std::vector{KING} && black_pieces == std::vector{KING}) return true;
-  if (white_pieces == std::vector{KING, KNIGHT} && black_pieces == std::vector{KING} ||
-      black_pieces == std::vector{KING, KNIGHT} && white_pieces == std::vector{KING})
+  if (white_pieces == std::set{KING} && black_pieces == std::set{KING}) return true;
+  if (white_pieces == std::set{KING, KNIGHT} && black_pieces == std::set{KING} ||
+      black_pieces == std::set{KING, KNIGHT} && white_pieces == std::set{KING})
     return true;
-  if (white_pieces == std::vector{KING, BISHOP} && black_pieces == std::vector{KING} ||
-      black_pieces == std::vector{KING, BISHOP} && white_pieces == std::vector{KING})
+  if (white_pieces == std::set{KING, BISHOP} && black_pieces == std::set{KING} ||
+      black_pieces == std::set{KING, BISHOP} && white_pieces == std::set{KING})
     return true;
-  if (white_pieces == std::vector{KING, BISHOP} && black_pieces == std::vector{KING, BISHOP}
+  if (white_pieces == std::set{KING, BISHOP} && black_pieces == std::set{KING, BISHOP}
       && white_bishops == black_bishops)
     return true;
   return false;
 }
 
-
 bool Position::if_stalemate() const {
-  return false;
+  for (int from_row = 0; from_row < board_.size(); ++from_row) {
+    for (int from_col = 0; from_col < board_[from_row].size(); ++from_col) {
+      if (at(from_row, from_col)->get_color() == move_color_) {
+        Piece* piece = at(from_row, from_col);
+        for (int to_row = 0; to_row < board_.size(); ++to_row) {
+          for (int to_col = 0; to_col < board_[to_row].size(); ++to_col) {
+            if (piece->define_move(from_row, from_col, to_row, to_col, *this)->is_valid()) return false;
+          }
+        }
+      }
+    }
+  }
+  return true;
 }
 
 std::vector<int> Position::find_king(COLOR color) const {
