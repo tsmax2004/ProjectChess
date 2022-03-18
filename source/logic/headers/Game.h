@@ -19,7 +19,7 @@ class Game {
 
   bool check_for_repeating() const;
 
-  void print_board() const;
+  void print_board(COLOR color) const;
 };
 
 #endif

@@ -19,7 +19,7 @@ void Game::start_new_game() {
         piece = Empty::get_piece();
       }
     }
-    print_board();
+    print_board(position_->move_color_);
     std::cout << "\nEnter pieces by: '+' col row color piece name(ex Empty)\n";
     char end, col;
     std::cin >> end;
@@ -38,7 +38,7 @@ void Game::start_new_game() {
       if (piece_name == "r") position_->board_[row][col] = Rook::get_piece(piece_color);
       if (piece_name == "q") position_->board_[row][col] = Queen::get_piece(piece_color);
       if (piece_name == "k") position_->board_[row][col] = King::get_piece(piece_color);
-      print_board();
+      print_board(position_->move_color_);
       std::cout << "For end type '#'\n";
       std::cin >> end;
     }
@@ -56,7 +56,7 @@ void Game::start_new_game() {
 
 void Game::game_cycle() {
   while (true) {
-    print_board();
+    print_board(position_->move_color_);
     std::cout << "Print move: ";
     char from_col_ch, to_col_ch;
     int from_row, to_row, from_col, to_col;
@@ -83,28 +83,27 @@ void Game::game_cycle() {
 
       position_history_.push_back(position_);
       position_ = new_position;
-
       if (position_->position_type_ == CHECK) {
-        print_board();
+        print_board(position_->move_color_);
         std::cout << "CHECK!\n";
       }
       if (position_->position_type_ == CHECKMATE) {
-        print_board();
+        print_board(position_->move_color_);
         std::cout << "CHECKMATE!\n";
         break;
       }
       if (position_->position_type_ == DRAW) {
-        print_board();
+        print_board(position_->move_color_);
         std::cout << "DRAW!\n";
         break;
       }
       if (position_->position_type_ == STALEMATE) {
-        print_board();
+        print_board(position_->move_color_);
         std::cout << "STALEMATE!\n";
         break;
       }
       if (check_for_repeating()) {
-        print_board();
+        print_board(position_->move_color_);
         std::cout << "DRAW by repeating moves!\n";
         break;
       }
@@ -140,17 +139,19 @@ bool Game::check_for_repeating() const {
   return false;
 }
 
-void Game::print_board() const {
+void Game::print_board(COLOR color) const {
   std::cout << "\n\n";
   for (int row = 8; row >= 1; --row) {
     std::cout << "      ";
     for (int col = 0; col < 8; ++col)
       std::cout << "---- ";
-
-    std::cout << "\n  " << row << "  ";
+    if (color == WHITE) std::cout << "\n  " << row << "  ";
+    else std::cout << "\n  " << 9 - row << "  ";
     for (int col = 0; col < 8; ++col) {
       std::cout << "| ";
-      Piece* piece = position_->at(row - 1, col);
+      Piece* piece = nullptr;
+      if (color == WHITE) piece = position_->at(row - 1, col);
+      else piece = position_->at(8-row, 7 - col);
       if (piece->get_piece_name() == EMPTY) {
         std::cout << "  ";
       } else {
@@ -166,7 +167,8 @@ void Game::print_board() const {
   for (int col = 0; col < 8; ++col)
     std::cout << "---- ";
 
-  std::cout << "\n       a    b    c    d    e    f    g    h\n\n";
+  if (color == WHITE) std::cout << "\n       a    b    c    d    e    f    g    h\n\n";
+  else  std::cout << "\n       h    g    f    e    d    c    b    a\n\n";
 }
 
 
