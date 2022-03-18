@@ -112,10 +112,10 @@ bool Position::if_draw() const {
     for (int col = 0; col < board_[row].size(); ++col) {
       if (at(row, col)->get_color() == BLACK) {
         if (at(row, col)->get_piece_name() == BISHOP) ++black_bishops[(row + col) % 2];
-        black_pieces.insert(at(row, col)->get_piece_name());
+        if (at(row, col)->get_piece_name() != EMPTY) black_pieces.insert(at(row, col)->get_piece_name());
       } else {
         if (at(row, col)->get_piece_name() == BISHOP) ++white_bishops[(row + col) % 2];
-        white_pieces.insert(at(row, col)->get_piece_name());
+        if (at(row, col)->get_piece_name() != EMPTY) white_pieces.insert(at(row, col)->get_piece_name());
       }
     }
   }
@@ -139,7 +139,12 @@ bool Position::if_stalemate() const {
         Piece* piece = at(from_row, from_col);
         for (int to_row = 0; to_row < board_.size(); ++to_row) {
           for (int to_col = 0; to_col < board_[to_row].size(); ++to_col) {
-            if (piece->define_move(from_row, from_col, to_row, to_col, *this)->is_valid()) return false;
+            if (piece->define_move(from_row, from_col, to_row, to_col, *this)->is_valid()) {
+              auto* new_pos = new Position(*this);
+              auto* new_move = new_pos->at(from_row, from_col)->define_move(from_row, from_col, to_row, to_col, *new_pos);
+              new_move->make_move(from_row, from_col, to_row, to_col, *new_pos);
+              if (!new_pos->if_check(move_color_)) return false;
+            }
           }
         }
       }
