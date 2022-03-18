@@ -1,25 +1,28 @@
 [Event "Live Chess"]
 [Site "Chess.com"]
-[Date "2021.12.20"]
+[Date "2021.02.26"]
 [Round "?"]
 [White "Maks402"]
-[Black "George_SM"]
-[Result "0-1"]
-[ECO "C20"]
-[WhiteElo "1274"]
-[BlackElo "1169"]
+[Black "rodritaber"]
+[Result "1/2-1/2"]
+[ECO "C45"]
+[WhiteElo "1335"]
+[BlackElo "1293"]
 [TimeControl "600"]
-[EndTime "7:35:31 PST"]
-[Termination "George_SM won by checkmate"]
+[EndTime "7:39:48 PST"]
+[Termination "Game drawn by stalemate"]
 
-1. e4 e5 2. Bb5 Nf6 3. Nc3 c6 4. Ba4 b5 5. Bb3 Bc5 6. h3 O-O 7. Nge2 b4
-8.
-Na4 Na6 9. Nxc5 Nxc5 10. d3 a5 11. a3 Nxb3 12. cxb3 c5 13. O-O d5 14. f3 d4
-15. Bg5 Ba6 16. Ng3 Qd6 17. Nf5 Qe6 18. axb4 axb4 19. Qc2 g6 20. Nh6+ Kg7
-21. Ng4 Nxg4
-22. fxg4 f6 23. Bh4 Bb7 24. Rxa8 Bxa8 25. Qxc5 Qxb3 26. Qe7+ Qf7 27. Bxf6+ Kg8
-28. Qxe5 Re8 29. Qxd4 b3 30. Qc3 Re6 31. Qxb3 Rxf6 32. Rxf6 Qxb3 33. Rd6 Qd1+
-34. Kh2 Qd2 35. Rd8+ Kf7 36. Rxa8 Qf4+ 37. Kg1 Qe3+ 38. Kh2 Qxd3 39. Ra7+ Ke6
-40. Rxh7 Qxe4 41. Rb7 Qd3 42. Rh7 Qe4 43. Rh6 Qf4+ 44. g3 Qxh6 45. Kg2 Qd2+
-46. Kf3 Qxb2 47. Kf4 Qd4+ 48. Kg5 Qf6+ 49. Kh6 g5+ 50. Kh5 Qh8+ 51. Kxg5 Qf6+
-52. Kh5 Qg7 53. g5 Kf5 54. g4+ Kf4 55. g6 Qh8#
+1. e4
+e5 2.
+Nf3 Nc6 3. d4 exd4 4. Nxd4 Nxd4 5. Qxd4 d6 6. e5 Bf5 7. Bd3 Bxd3
+8. Qxd3 dxe5 9. Qxd8+ Rxd8 10. O-O Nf6 11. Bg5 Be7 12. Nc3 O-O 13. Nb5 h6
+14. Bh4 a6 15. Nxc7 Rc8 16.
+Bxf6 Rxc7 17. Bxe7 Rxe7 18. Rad1 Rc8 19. c3 e4 20. Rfe1 f5
+21. Rd5 g6 22. Rd6 Kg7 23. g3 Rc5 24. b4 Rxc3 25. Kg2 Rc2 26. a3 Ra2 27. Re3 Rc7
+28. Kh3 h5 29. Kh4 Kh6 30. h3 Rxf2 31. Rd8 Rf3 32. Re1
+Rxa3 33. Red1 e3
+34.
+R1d6 e2 35. Re6 Ra4 36. Rh8+ Rh7 37. Rxh7+ Kxh7 38. Kg5 Rxb4 39. Rxe2 Re4 40. Rb2 Re7
+41.
+Rb6 Kg7 42. Rxg6+ Kh7 43. Kf6 Rc7 44. Kxf5 Rc5+ 45. Kf6 Rc6+ 46. Kg5 Rxg6+
+47. Kxh5 Rxg3 48. h4 b5

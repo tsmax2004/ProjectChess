@@ -26,6 +26,8 @@ void prepare() {
     }
     std::vector<bool> flags = {false, false};
     for (int i = 0; i < all_moves.size(); ++i) {
+        for (auto it : normal_moves) std::cout << it << ' ';
+        std::cout << std::endl;
         int pos = 0;
         while (pos < all_moves[i].size() - 1) {
             while (!flags[0] && !flags[1] && all_moves[i][pos] != '.') {
@@ -34,7 +36,7 @@ void prepare() {
              if (all_moves[i][pos] == '.' || flags[0] || flags[1]) {
                  if (!flags[0] && !flags[1]) pos += 2;
                 s = "";
-                while ((!flags[0] && pos == 0) || (pos < all_moves[i].size() && all_moves[i][pos] != ' ')) {
+                while (!(flags[1] && !flags[0]) && ((!flags[0] && pos == 0) || (pos < all_moves[i].size() && all_moves[i][pos] != ' '))) {
                     s += all_moves[i][pos];
                     ++pos;
                 }
@@ -43,7 +45,7 @@ void prepare() {
                     normal_moves.push_back(s);
                     flags[0] = false;
                 }
-                else {
+                else if (!flags[1]) {
                     flags[0] = true;
                 }
                 s = "";
@@ -67,6 +69,10 @@ void prepare() {
 void return_move_positions(const Game &new_game, int t, std::string mv = "") {
     if (t == 0) prepare();
     std::ofstream out("../moves.txt");
+    if (t == 1) {
+        ++t;
+        --t;
+    }
     mv = normal_moves[t];
     //define move
     char figure = 'P';
@@ -93,8 +99,13 @@ void return_move_positions(const Game &new_game, int t, std::string mv = "") {
         }
     }
     if (tmp.size() == 3) {
-        if (tmp[0] - 'a' >= 0 && tmp[0] - 'a' < 8) if_from_row = false;
-        from_coordinates = tmp[0] - 'a';
+        if (tmp[0] - 'a' >= 0 && tmp[0] - 'a' < 8) {
+            if_from_row = false;
+            from_coordinates = tmp[0] - 'a';
+        }
+        else {
+            from_coordinates = tmp[0] - '0' - 1;
+        }
         move_coordinates = {tmp[2] - '0', tmp[1] - 'a'};
     } else {
         move_coordinates = {tmp[1] - '0', tmp[0] - 'a'};
