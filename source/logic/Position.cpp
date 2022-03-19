@@ -135,15 +135,16 @@ bool Position::if_draw() const {
 bool Position::if_stalemate() const {
   for (int from_row = 0; from_row < board_.size(); ++from_row) {
     for (int from_col = 0; from_col < board_[from_row].size(); ++from_col) {
-      if (at(from_row, from_col)->get_color() == move_color_) {
+      if ((at(from_row, from_col)->get_piece_name() != EMPTY) && (at(from_row, from_col)->get_color() == move_color_)) {
         Piece* piece = at(from_row, from_col);
         for (int to_row = 0; to_row < board_.size(); ++to_row) {
           for (int to_col = 0; to_col < board_[to_row].size(); ++to_col) {
-            if (piece->define_move(from_row, from_col, to_row, to_col, *this)->is_valid()) {
-              auto* new_pos = new Position(*this);
-              auto* new_move = new_pos->at(from_row, from_col)->define_move(from_row, from_col, to_row, to_col, *new_pos);
-              new_move->make_move(from_row, from_col, to_row, to_col, *new_pos);
-              if (!new_pos->if_check(move_color_)) return false;
+            auto move = piece->define_move(from_row, from_col, to_row, to_col, *this);
+            if (move->is_valid()) {
+              auto new_pos = Position(*this);
+              move->make_move(from_row, from_col, to_row, to_col, new_pos);
+              if (!new_pos.if_check(move_color_ == WHITE ? BLACK : WHITE))
+                return false;
             }
           }
         }
