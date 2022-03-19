@@ -3,6 +3,7 @@
 //
 
 #include "../headers/logic.h"
+#include <cstdlib>
 
 King::King(COLOR color_) : color_(color_) {}
 

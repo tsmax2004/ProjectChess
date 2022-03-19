@@ -3,6 +3,7 @@
 //
 
 #include "../headers/logic.h"
+#include <cstdlib>
 
 Pawn::Pawn(COLOR color_) : color_(color_) {}
 

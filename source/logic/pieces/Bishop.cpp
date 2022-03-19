@@ -3,6 +3,7 @@
 //
 
 #include "../headers/logic.h"
+#include <cstdlib>
 
 Bishop::Bishop(COLOR color_) : color_(color_) {}
 

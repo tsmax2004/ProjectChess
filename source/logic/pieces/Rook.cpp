@@ -3,6 +3,7 @@
 //
 
 #include "../headers/logic.h"
+#include <cstdlib>
 
 Rook::Rook(COLOR color_) : color_(color_) {}
 
