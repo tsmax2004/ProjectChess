@@ -9,8 +9,7 @@ enum POSITION_TYPE {
   COMMON,
   CHECK,
   CHECKMATE,
-  DRAW,
-  STALEMATE
+  DRAW
 };
 
 enum PIECE_NAME: char {
