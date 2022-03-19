@@ -26,8 +26,6 @@ void prepare() {
     }
     std::vector<bool> flags = {false, false};
     for (int i = 0; i < all_moves.size(); ++i) {
-        for (auto it : normal_moves) std::cout << it << ' ';
-        std::cout << std::endl;
         int pos = 0;
         while (pos < all_moves[i].size() - 1) {
             while (!flags[0] && !flags[1] && all_moves[i][pos] != '.') {
@@ -69,7 +67,7 @@ void prepare() {
 void return_move_positions(const Game &new_game, int t, std::string mv = "") {
     if (t == 0) prepare();
     std::ofstream out("../moves.txt");
-    if (t == 1) {
+    if (t == 69) {
         ++t;
         --t;
     }
@@ -291,8 +289,19 @@ void return_move_positions(const Game &new_game, int t, std::string mv = "") {
                                 if (pos->board_[i][j]->define_move(i, j, move_coordinates.first,
                                                                    move_coordinates.second,
                                                                    *pos)->is_valid()) {
-                                    full_move[0] = i;
-                                    full_move[1] = j;
+                                    if (from_coordinates != -1) {
+                                        if (if_from_row && from_coordinates == i) {
+                                            full_move[0] = i;
+                                            full_move[1] = j;
+                                        }
+                                        if (!if_from_row && from_coordinates == j) {
+                                            full_move[0] = i;
+                                            full_move[1] = j;
+                                        }
+                                    } else {
+                                        full_move[0] = i;
+                                        full_move[1] = j;
+                                    }
                                 }
                             }
                         }
@@ -307,8 +316,19 @@ void return_move_positions(const Game &new_game, int t, std::string mv = "") {
                                 if (pos->board_[i][j]->define_move(i, j, move_coordinates.first,
                                                                    move_coordinates.second,
                                                                    *pos)->is_valid()) {
-                                    full_move[0] = i;
-                                    full_move[1] = j;
+                                    if (from_coordinates != -1) {
+                                        if (if_from_row && from_coordinates == i) {
+                                            full_move[0] = i;
+                                            full_move[1] = j;
+                                        }
+                                        if (!if_from_row && from_coordinates == j) {
+                                            full_move[0] = i;
+                                            full_move[1] = j;
+                                        }
+                                    } else {
+                                        full_move[0] = i;
+                                        full_move[1] = j;
+                                    }
                                 }
                             }
                         }
