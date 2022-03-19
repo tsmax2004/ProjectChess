@@ -31,7 +31,8 @@ const Move* Pawn::define_move(int from_row_,
   //if move_ color is correct
   if (color_ != position_.move_color_) is_correct_ = false;
   // if move_ is made on friend square
-  if (position_.at(to_row_, to_col_)->get_piece_name() != EMPTY && position_.at(to_row_, to_col_)->get_color() == color_)
+  if (position_.at(to_row_, to_col_)->get_piece_name() != EMPTY
+  && position_.at(to_row_, to_col_)->get_color() == color_)
     is_correct_ = false;
 
   // if Pawn movement is incorrect
@@ -59,14 +60,16 @@ const Move* Pawn::define_move(int from_row_,
           auto last_move = position_.last_move_;
           if (color_ == WHITE) {
             std::vector<int> correct_last_move = {to_row_ + 1, to_col_, to_row_ - 1, to_col_};
-            if ((last_move != correct_last_move) || (position_.at(to_row_ - 1, to_col_) != Pawn::get_piece(BLACK))) {
+            if ((last_move != correct_last_move)
+            || (position_.at(to_row_ - 1, to_col_) != Pawn::get_piece(BLACK))) {
               is_correct_ = false;
             } else {
               return EnPassant::get_move();
             }
           } else {
             std::vector<int> correct_last_move = {to_row_ - 1, to_col_, to_row_ + 1, to_col_};
-            if ((last_move != correct_last_move) || (position_.at(to_row_ + 1, to_col_) != Pawn::get_piece(WHITE))) {
+            if ((last_move != correct_last_move)
+            || (position_.at(to_row_ + 1, to_col_) != Pawn::get_piece(WHITE))) {
               is_correct_ = false;
             } else {
               return EnPassant::get_move();

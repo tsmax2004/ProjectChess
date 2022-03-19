@@ -21,7 +21,7 @@ void Game::start_new_game() {
 }
 
 Position* Game::return_position() const {
-    return position_;
+  return position_;
 }
 
 void debug(Position* position) {
@@ -47,9 +47,9 @@ void debug(Position* position) {
 void Game::game_cycle() {
   int t = 0;
   while (true) {
-      print_board();
-      std::cout << t << '\n';
-      ++t;
+    print_board();
+    std::cout << t << '\n';
+    ++t;
     std::cout << "Print move: ";
     char from_col_ch, to_col_ch;
     int from_row, to_row, from_col, to_col;
