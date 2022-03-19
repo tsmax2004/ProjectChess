@@ -71,6 +71,10 @@ void return_move_positions(const Game &new_game, int t, std::string mv = "") {
         ++t;
         --t;
     }
+    if (t >= normal_moves.size()) {
+        std::cout << "We are out of turns" << std::endl;
+        return;
+    }
     mv = normal_moves[t];
     //define move
     char figure = 'P';
