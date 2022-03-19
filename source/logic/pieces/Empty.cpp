@@ -3,7 +3,6 @@
 //
 
 #include "../headers/logic.h"
-#include "../headers/Pieces/Empty.h"
 
 Empty::Empty() = default;
 
