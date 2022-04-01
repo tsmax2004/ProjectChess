@@ -6,7 +6,7 @@
 
 class Pawn : public Piece {
  protected:
-  Pawn(COLOR color_);
+  explicit Pawn(COLOR color_);
 
   static Pawn* white_pawn_;
   static Pawn* black_pawn_;
@@ -15,16 +15,16 @@ class Pawn : public Piece {
   Pawn(const Pawn&) = delete;
   void operator=(const Pawn&) = delete;
 
-  static Pawn* get_piece(COLOR color);
+  static Pawn* GetPiece(COLOR color);
 
-  const Move* define_move(int from_row_,
-                          int from_col_,
-                          int to_row_,
-                          int to_col_,
-                          const Position& position_) const override;
+  [[nodiscard]] const Move* DefineMove(int from_row_,
+                         int from_col_,
+                         int to_row_,
+                         int to_col_,
+                         const Position& position_) const override;
 
-  PIECE_NAME get_piece_name() const override;
-  COLOR get_color() const override;
+  [[nodiscard]] PIECE_NAME GetPieceName() const override;
+  [[nodiscard]] COLOR GetColor() const override;
 
   COLOR color_;
 };

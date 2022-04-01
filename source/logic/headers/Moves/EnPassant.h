@@ -14,11 +14,11 @@ class EnPassant : public Move {
   EnPassant(const EnPassant&) = delete;
   void operator=(const EnPassant&) = delete;
 
-  static EnPassant* get_move();
+  static EnPassant* GetMove();
 
-  void make_move(int from_row, int from_col, int to_row, int to_col, Position& position) const override;
+  void MakeMove(int from_row, int from_col, int to_row, int to_col, Position& position) const override;
 
-  bool is_valid() const override;
+  [[nodiscard]] bool IsValid() const override;
 };
 
 inline EnPassant* EnPassant::en_passant_move_ = nullptr;

@@ -14,16 +14,16 @@ class Empty : public Piece {
   Empty(const Empty&) = delete;
   void operator=(const Empty&) = delete;
 
-  static Empty* get_piece();
+  static Empty* GetPiece();
 
-  const Move* define_move(int from_row_,
-                          int from_col_,
-                          int to_row_,
-                          int to_col_,
-                          const Position& position_) const override;
+  [[nodiscard]] const Move* DefineMove(int from_row_,
+                         int from_col_,
+                         int to_row_,
+                         int to_col_,
+                         const Position& position_) const override;
 
-  PIECE_NAME get_piece_name() const override;
-  COLOR get_color() const override;
+  [[nodiscard]] PIECE_NAME GetPieceName() const override;
+  [[nodiscard]] COLOR GetColor() const override;
 };
 
 inline Empty* Empty::empty_ = nullptr;

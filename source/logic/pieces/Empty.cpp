@@ -6,20 +6,20 @@
 
 Empty::Empty() = default;
 
-Empty* Empty::get_piece() {
+Empty* Empty::GetPiece() {
   if (empty_ == nullptr)
     empty_ = new Empty();
   return empty_;
 }
 
-const Move* Empty::define_move(int from_row_, int from_col_, int to_row_, int to_col_,
-                               const Position& position_) const {
-  return InvalidMove::get_move();
+const Move* Empty::DefineMove(int from_row_, int from_col_, int to_row_, int to_col_,
+                              const Position& position_) const {
+  return InvalidMove::GetMove();
 }
 
-PIECE_NAME Empty::get_piece_name() const {
+PIECE_NAME Empty::GetPieceName() const {
   return EMPTY;
 }
-COLOR Empty::get_color() const {
-  return WHITE;
+COLOR Empty::GetColor() const {
+  return COLOR::WHITE;
 }

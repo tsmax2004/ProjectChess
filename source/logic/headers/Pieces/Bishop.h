@@ -6,7 +6,7 @@
 
 class Bishop : public Piece {
  protected:
-  Bishop(COLOR color_);
+  explicit Bishop(COLOR color_);
 
   static Bishop* white_bishop_;
   static Bishop* black_bishop_;
@@ -15,16 +15,16 @@ class Bishop : public Piece {
   Bishop(const Bishop&) = delete;
   void operator=(const Bishop&) = delete;
 
-  static Bishop* get_piece(COLOR color);
+  static Bishop* GetPiece(COLOR color);
 
-  const Move* define_move(int from_row_,
-                          int from_col_,
-                          int to_row_,
-                          int to_col_,
-                          const Position& position_) const override;
+  [[nodiscard]] const Move* DefineMove(int from_row_,
+                         int from_col_,
+                         int to_row_,
+                         int to_col_,
+                         const Position& position_) const override;
 
-  PIECE_NAME get_piece_name() const override;
-  COLOR get_color() const override;
+  [[nodiscard]] PIECE_NAME GetPieceName() const override;
+  [[nodiscard]] COLOR GetColor() const override;
 
   COLOR color_;
 };

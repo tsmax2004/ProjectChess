@@ -6,7 +6,7 @@
 
 class Knight : public Piece {
  protected:
-  Knight(COLOR color_);
+  explicit Knight(COLOR color_);
 
   static Knight* white_knight_;
   static Knight* black_knight_;
@@ -15,16 +15,16 @@ class Knight : public Piece {
   Knight(const Knight&) = delete;
   void operator=(const Knight&) = delete;
 
-  static Knight* get_piece(COLOR color);
+  static Knight* GetPiece(COLOR color);
 
-  const Move* define_move(int from_row_,
-                          int from_col_,
-                          int to_row_,
-                          int to_col_,
-                          const Position& position_) const override;
+  [[nodiscard]] const Move* DefineMove(int from_row_,
+                         int from_col_,
+                         int to_row_,
+                         int to_col_,
+                         const Position& position_) const override;
 
-  PIECE_NAME get_piece_name() const override;
-  COLOR get_color() const override;
+  [[nodiscard]] PIECE_NAME GetPieceName() const override;
+  [[nodiscard]] COLOR GetColor() const override;
 
   COLOR color_;
 };

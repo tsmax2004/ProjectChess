@@ -14,11 +14,11 @@ class SimpleMove : public Move {
   SimpleMove(const SimpleMove&) = delete;
   void operator=(const SimpleMove&) = delete;
 
-  static SimpleMove* get_move();
+  static SimpleMove* GetMove();
 
-  void make_move(int from_row, int from_col, int to_row, int to_col, Position& position) const override;
+  void MakeMove(int from_row, int from_col, int to_row, int to_col, Position& position) const override;
 
-  bool is_valid() const override;
+  [[nodiscard]] bool IsValid() const override;
 };
 
 inline SimpleMove* SimpleMove::simple_move_ = nullptr;

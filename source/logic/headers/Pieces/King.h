@@ -6,7 +6,7 @@
 
 class King : public Piece {
  protected:
-  King(COLOR color);
+  explicit King(COLOR color);
 
   static King* white_king_;
   static King* black_king_;
@@ -15,16 +15,16 @@ class King : public Piece {
   King(const King&) = delete;
   void operator=(const King&) = delete;
 
-  static King* get_piece(COLOR color);
+  static King* GetPiece(COLOR color);
 
-  const Move* define_move(int from_row_,
-                          int from_col_,
-                          int to_row_,
-                          int to_col_,
-                          const Position& position_) const override;
+  [[nodiscard]] const Move* DefineMove(int from_row_,
+                         int from_col_,
+                         int to_row_,
+                         int to_col_,
+                         const Position& position_) const override;
 
-  PIECE_NAME get_piece_name() const override;
-  COLOR get_color() const override;
+  [[nodiscard]] PIECE_NAME GetPieceName() const override;
+  [[nodiscard]] COLOR GetColor() const override;
 
   COLOR color_;
 };

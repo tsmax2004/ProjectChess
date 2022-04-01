@@ -14,11 +14,11 @@ class InvalidMove : public Move {
   InvalidMove(const InvalidMove&) = delete;
   void operator=(const InvalidMove&) = delete;
 
-  static InvalidMove* get_move();
+  static InvalidMove* GetMove();
 
-  void make_move(int from_row, int from_col, int to_row, int to_col, Position& position) const override;
+  void MakeMove(int from_row, int from_col, int to_row, int to_col, Position& position) const override;
 
-  bool is_valid() const override;
+  [[nodiscard]] bool IsValid() const override;
 };
 
 inline InvalidMove* InvalidMove::invalid_move_ = nullptr;

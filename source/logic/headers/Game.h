@@ -13,13 +13,13 @@ class Game {
 
  public:
   Game();
-  void start_new_game();
+  void StartNewGame();
 
-  void game_cycle();
+  void GameCycle();
 
-  bool check_for_repeating() const;
+  [[nodiscard]] bool CheckForRepeating() const;
 
-  void print_board() const;
+  void PrintBoard() const;
 };
 
 #endif

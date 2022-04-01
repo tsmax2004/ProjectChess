@@ -10,13 +10,13 @@ class Position;
 
 class Piece {
  public:
-  virtual const Move* define_move(int from_row_,
-                                  int from_col_,
-                                  int to_row_,
-                                  int to_col_,
-                                  const Position& position_) const = 0;
-  virtual PIECE_NAME get_piece_name() const = 0;
-  virtual COLOR get_color() const = 0;
+  [[nodiscard]] virtual const Move* DefineMove(int from_row_,
+                                               int from_col_,
+                                               int to_row_,
+                                               int to_col_,
+                                               const Position& position_) const = 0;
+  [[nodiscard]] virtual PIECE_NAME GetPieceName() const = 0;
+  [[nodiscard]] virtual COLOR GetColor() const = 0;
 };
 
 #endif

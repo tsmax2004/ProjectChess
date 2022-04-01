@@ -6,7 +6,7 @@
 
 class Rook : public Piece {
  protected:
-  Rook(COLOR color_);
+  explicit Rook(COLOR color_);
 
   static Rook* white_rook_;
   static Rook* black_rook_;
@@ -15,16 +15,16 @@ class Rook : public Piece {
   Rook(const Rook&) = delete;
   void operator=(const Rook&) = delete;
 
-  static Rook* get_piece(COLOR color);
+  static Rook* GetPiece(COLOR color);
 
-  const Move* define_move(int from_row_,
-                          int from_col_,
-                          int to_row_,
-                          int to_col_,
-                          const Position& position_) const override;
+  [[nodiscard]] const Move* DefineMove(int from_row_,
+                         int from_col_,
+                         int to_row_,
+                         int to_col_,
+                         const Position& position_) const override;
 
-  PIECE_NAME get_piece_name() const override;
-  COLOR get_color() const override;
+  [[nodiscard]] PIECE_NAME GetPieceName() const override;
+  [[nodiscard]] COLOR GetColor() const override;
 
   COLOR color_;
 };
