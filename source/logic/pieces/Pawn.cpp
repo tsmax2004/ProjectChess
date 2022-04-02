@@ -46,7 +46,9 @@ bool Pawn::CheckMoveOnTwoSquares(int from_row_,
                                  const Position& position_) const {
   if (color_ == COLOR::WHITE && from_row_ != 1) { return false; }
   if (color_ == COLOR::BLACK && from_row_ != position_.cnt_rows - 2) { return false; }
-  if ((std::abs(from_row_ - to_row_) != 2) || (from_col_ != to_col_)) { return false; }
+  if (to_row_ - from_row_ != (color_ == COLOR::WHITE ? 2 : -2)) { return false; }
+  if (from_col_ != to_col_) { return false; }
+  if (position_.at(to_row_, to_col_)->GetPieceName() != PIECE_NAME::EMPTY) { return false; }
   return CheckBetweenSquaresAreEmpty(from_row_, from_col_, to_row_, to_col_, position_);
 }
 
@@ -55,7 +57,7 @@ bool Pawn::CheckMoveOnOneSquare(int from_row_,
                                 int to_row_,
                                 int to_col_,
                                 const Position& position_) const {
-  if (std::abs(from_row_ - to_row_) != 1) { return false; }
+  if (to_row_ - from_row_ != (color_ == COLOR::WHITE ? 1 : -1)) { return false; }
   if (from_col_ == to_col_) { return true; }
   return (std::abs(from_col_ - to_col_) == 1 && position_.at(to_row_, to_col_)->GetPieceName() != PIECE_NAME::EMPTY);
 }
