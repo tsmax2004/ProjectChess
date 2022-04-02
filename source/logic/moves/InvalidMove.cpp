@@ -6,9 +6,9 @@
 
 InvalidMove::InvalidMove() = default;
 
-InvalidMove* InvalidMove::GetMove() {
+std::shared_ptr<InvalidMove> InvalidMove::GetMove() {
   if (invalid_move_ == nullptr) {
-    return (new InvalidMove());
+    invalid_move_ = std::shared_ptr<InvalidMove>(new InvalidMove());
   }
   return invalid_move_;
 }

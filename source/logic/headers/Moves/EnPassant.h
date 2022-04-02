@@ -3,24 +3,25 @@
 #define INPASSING_H_
 
 #include "Move.h"
+#include <memory>
 
 class EnPassant : public Move {
  protected:
   EnPassant();
 
-  static EnPassant* en_passant_move_;
+  static std::shared_ptr<EnPassant> en_passant_move_;
 
  public:
   EnPassant(const EnPassant&) = delete;
   void operator=(const EnPassant&) = delete;
 
-  static EnPassant* GetMove();
+  static std::shared_ptr<EnPassant> GetMove();
 
   void MakeMove(int from_row, int from_col, int to_row, int to_col, Position& position) const override;
 
   [[nodiscard]] bool IsValid() const override;
 };
 
-inline EnPassant* EnPassant::en_passant_move_ = nullptr;
+inline std::shared_ptr<EnPassant> EnPassant::en_passant_move_ = nullptr;
 
 #endif

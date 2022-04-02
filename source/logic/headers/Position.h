@@ -3,6 +3,7 @@
 #define POSITION_H_
 
 #include <vector>
+#include <memory>
 #include "pieces.h"
 #include "Enums.h"
 
@@ -14,9 +15,9 @@ class Position {
 
   void StartPosition();
 
-  [[nodiscard]] Piece* at(int row_, int col_) const;
+  [[nodiscard]] std::shared_ptr<Piece> at(int row_, int col_) const;
 
-  std::vector<std::vector<Piece*> > board_;
+  std::vector<std::vector<std::shared_ptr<Piece>>> board_;
   COLOR move_color_;
   POSITION_TYPE position_type_ = POSITION_TYPE::NOT_DEFINED;
 
@@ -24,6 +25,9 @@ class Position {
   // info about figures movement in order: WhiteKing, WhiteRookA, WhiteRookH, BlackKing, BlackRookA, BlackRookH
   std::vector<int> last_move_;
   // for en' passant, in order from_row, from_col, to_row, to_col
+
+  int cnt_rows = 8;
+  int cnt_cols = 8;
 
   void DefinePositionType();
   [[nodiscard]] bool SquareIsUnderAttack(int row, int col, COLOR attack_color) const;

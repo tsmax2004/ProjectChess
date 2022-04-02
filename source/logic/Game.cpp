@@ -1,6 +1,7 @@
 #include "headers/Game.h"
 #include <iostream>
 #include <string>
+#include <memory>
 
 Game::Game() : position_(nullptr),
                position_history_() {}
@@ -32,7 +33,7 @@ void Game::GameCycle() {
     --to_row;
 
     try {
-      const Move* move = position_->at(from_row, from_col)->DefineMove(from_row, from_col, to_row, to_col, *position_);
+      auto move = position_->at(from_row, from_col)->DefineMove(from_row, from_col, to_row, to_col, *position_);
       if (!move->IsValid()) {
         std::cout << "Incorrect move\n";
         continue;
@@ -87,7 +88,7 @@ bool Game::CheckForRepeating() const {
         for (int col = 0; col < first_position->board_[row].size(); ++col) {
           if (first_position->at(row, col)->GetPieceName() != second_position->at(row, col)->GetPieceName() ||
               (first_position->at(row, col)->GetColor() != second_position->at(row, col)->GetColor()
-                  && first_position->at(row, col)->GetPieceName() != EMPTY)) {
+                  && first_position->at(row, col)->GetPieceName() != PIECE_NAME::EMPTY)) {
             is_equal = false;
             break;
           }
@@ -110,8 +111,8 @@ void Game::PrintBoard() const {
     std::cout << "\n  " << row << "  ";
     for (int col = 0; col < 8; ++col) {
       std::cout << "| ";
-      Piece* piece = position_->at(row - 1, col);
-      if (piece->GetPieceName() == EMPTY) {
+      auto piece = position_->at(row - 1, col);
+      if (piece->GetPieceName() == PIECE_NAME::EMPTY) {
         std::cout << "  ";
       } else {
         std::cout << char(piece->GetColor()) << char(piece->GetPieceName());

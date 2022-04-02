@@ -6,15 +6,15 @@
 
 SimpleMove::SimpleMove() = default;
 
-SimpleMove* SimpleMove::GetMove() {
+std::shared_ptr<SimpleMove> SimpleMove::GetMove() {
   if (simple_move_ == nullptr) {
-    return (new SimpleMove());
+    simple_move_ = std::shared_ptr<SimpleMove>(new SimpleMove());
   }
   return simple_move_;
 }
 
 void SimpleMove::MakeMove(int from_row, int from_col, int to_row, int to_col, Position& position) const {
-  if (position.at(from_row, from_col)->GetPieceName() == ROOK) {
+  if (position.at(from_row, from_col)->GetPieceName() == PIECE_NAME::ROOK) {
     if (position.at(from_row, from_col)->GetColor() == COLOR::WHITE) {
       if (from_row == 0 && from_col == 0) {
         position.info_for_castle_[1] = false;
@@ -32,7 +32,7 @@ void SimpleMove::MakeMove(int from_row, int from_col, int to_row, int to_col, Po
       }
     }
   }
-  if (position.at(from_row, from_col)->GetPieceName() == KING) {
+  if (position.at(from_row, from_col)->GetPieceName() == PIECE_NAME::KING) {
     position.info_for_castle_[(position.at(from_row, from_col)->GetColor() == COLOR::WHITE ? 0 : 3)] = false;
   }
   position.move_color_ = (position.move_color_ == COLOR::WHITE ? COLOR::BLACK : COLOR::WHITE);

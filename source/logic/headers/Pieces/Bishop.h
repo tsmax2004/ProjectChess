@@ -8,28 +8,31 @@ class Bishop : public Piece {
  protected:
   explicit Bishop(COLOR color_);
 
-  static Bishop* white_bishop_;
-  static Bishop* black_bishop_;
+  [[nodiscard]] bool CheckMove(int from_row_,
+                               int from_col_,
+                               int to_row_,
+                               int to_col_,
+                               const Position& position_) const;
+
+  static std::shared_ptr<Bishop> white_bishop_;
+  static std::shared_ptr<Bishop> black_bishop_;
 
  public:
   Bishop(const Bishop&) = delete;
   void operator=(const Bishop&) = delete;
 
-  static Bishop* GetPiece(COLOR color);
+  static std::shared_ptr<Bishop> GetPiece(COLOR color);
 
-  [[nodiscard]] const Move* DefineMove(int from_row_,
-                         int from_col_,
-                         int to_row_,
-                         int to_col_,
-                         const Position& position_) const override;
+  [[nodiscard]] std::shared_ptr<Move> DefineMove(int from_row_,
+                                                       int from_col_,
+                                                       int to_row_,
+                                                       int to_col_,
+                                                       const Position& position_) const override;
 
   [[nodiscard]] PIECE_NAME GetPieceName() const override;
-  [[nodiscard]] COLOR GetColor() const override;
-
-  COLOR color_;
 };
 
-inline Bishop* Bishop::white_bishop_ = nullptr;
-inline Bishop* Bishop::black_bishop_ = nullptr;
+inline std::shared_ptr<Bishop> Bishop::white_bishop_ = nullptr;
+inline std::shared_ptr<Bishop> Bishop::black_bishop_ = nullptr;
 
 #endif

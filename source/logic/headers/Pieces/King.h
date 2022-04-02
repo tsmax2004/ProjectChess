@@ -8,28 +8,43 @@ class King : public Piece {
  protected:
   explicit King(COLOR color);
 
-  static King* white_king_;
-  static King* black_king_;
+  [[nodiscard]] bool CheckCastle(int from_row_,
+                                 int from_col_,
+                                 int to_row_,
+                                 int to_col_,
+                                 const Position& position_) const;
+
+  [[nodiscard]] bool CheckBetweenSquaresAreNotUnderAttack(int from_row_,
+                                                          int from_col_,
+                                                          int to_row_,
+                                                          int to_col_,
+                                                          const Position& position_) const;
+
+  [[nodiscard]] bool CheckSimpleMove(int from_row_,
+                                     int from_col_,
+                                     int to_row_,
+                                     int to_col_,
+                                     const Position& position_) const;
+
+  static std::shared_ptr<King> white_king_;
+  static std::shared_ptr<King> black_king_;
 
  public:
   King(const King&) = delete;
   void operator=(const King&) = delete;
 
-  static King* GetPiece(COLOR color);
+  static std::shared_ptr<King> GetPiece(COLOR color);
 
-  [[nodiscard]] const Move* DefineMove(int from_row_,
-                         int from_col_,
-                         int to_row_,
-                         int to_col_,
-                         const Position& position_) const override;
+  [[nodiscard]] std::shared_ptr<Move> DefineMove(int from_row_,
+                                                 int from_col_,
+                                                 int to_row_,
+                                                 int to_col_,
+                                                 const Position& position_) const override;
 
   [[nodiscard]] PIECE_NAME GetPieceName() const override;
-  [[nodiscard]] COLOR GetColor() const override;
-
-  COLOR color_;
 };
 
-inline King* King::white_king_ = nullptr;
-inline King* King::black_king_ = nullptr;
+inline std::shared_ptr<King> King::white_king_ = nullptr;
+inline std::shared_ptr<King> King::black_king_ = nullptr;
 
 #endif

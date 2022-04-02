@@ -6,8 +6,10 @@
 
 Promotion::Promotion() = default;
 
-Promotion* Promotion::GetMove() {
-  if (promotion_move_ == nullptr) promotion_move_ = new Promotion;
+std::shared_ptr<Promotion> Promotion::GetMove() {
+  if (promotion_move_ == nullptr) {
+    promotion_move_ = std::shared_ptr<Promotion>(new Promotion());
+  }
   return promotion_move_;
 }
 

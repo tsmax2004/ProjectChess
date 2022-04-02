@@ -6,8 +6,10 @@
 
 EnPassant::EnPassant() = default;
 
-EnPassant* EnPassant::GetMove() {
-  if (en_passant_move_ == nullptr) en_passant_move_ = new EnPassant();
+std::shared_ptr<EnPassant> EnPassant::GetMove() {
+  if (en_passant_move_ == nullptr) {
+    en_passant_move_ = std::shared_ptr<EnPassant>(new EnPassant());
+  }
   return en_passant_move_;
 }
 

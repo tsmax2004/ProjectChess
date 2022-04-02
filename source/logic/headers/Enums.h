@@ -12,7 +12,7 @@ enum class POSITION_TYPE {
   DRAW
 };
 
-enum PIECE_NAME: char {
+enum class PIECE_NAME: char {
   EMPTY,
   PAWN = 'p',
   KNIGHT = 'k',

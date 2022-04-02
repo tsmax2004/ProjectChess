@@ -3,10 +3,11 @@
 //
 
 #include "../headers/logic.h"
+
 Castle::Castle() = default;
-Castle* Castle::GetMove() {
+std::shared_ptr<Castle> Castle::GetMove() {
   if (castle_ == nullptr) {
-    castle_ = new Castle();
+    castle_ = std::shared_ptr<Castle>(new Castle());
   }
   return castle_;
 }
