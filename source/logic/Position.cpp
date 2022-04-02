@@ -1,6 +1,9 @@
 #include <stdexcept>
 #include <set>
+#include <fstream>
+#include <memory>
 #include "headers/logic.h"
+#include "headers/Position.h"
 
 Position::Position() : board_(),
                        move_color_(COLOR::WHITE),
@@ -10,35 +13,40 @@ Position::Position() : board_(),
 
 Position::Position(const Position&) = default;
 
-void Position::StartPosition() {
-  board_ = std::vector<std::vector<std::shared_ptr<Piece>>>(8, std::vector<std::shared_ptr<Piece>>(8, nullptr));
-  board_[0][0] = Rook::GetPiece(COLOR::WHITE);
-  board_[7][0] = Rook::GetPiece(COLOR::BLACK);
-  board_[0][1] = Knight::GetPiece(COLOR::WHITE);
-  board_[7][1] = Knight::GetPiece(COLOR::BLACK);
-  board_[0][2] = Bishop::GetPiece(COLOR::WHITE);
-  board_[7][2] = Bishop::GetPiece(COLOR::BLACK);
-  board_[0][3] = Queen::GetPiece(COLOR::WHITE);
-  board_[7][3] = Queen::GetPiece(COLOR::BLACK);
-  board_[0][4] = King::GetPiece(COLOR::WHITE);
-  board_[7][4] = King::GetPiece(COLOR::BLACK);
-  board_[0][5] = Bishop::GetPiece(COLOR::WHITE);
-  board_[7][5] = Bishop::GetPiece(COLOR::BLACK);
-  board_[0][6] = Knight::GetPiece(COLOR::WHITE);
-  board_[7][6] = Knight::GetPiece(COLOR::BLACK);
-  board_[0][7] = Rook::GetPiece(COLOR::WHITE);
-  board_[7][7] = Rook::GetPiece(COLOR::BLACK);
-
-  for (int col = 0; col < 8; ++col) {
-    board_[1][col] = Pawn::GetPiece(COLOR::WHITE);
-    board_[6][col] = Pawn::GetPiece(COLOR::BLACK);
-    for (int row = 2; row < 6; ++row)
-      board_[row][col] = Empty::GetPiece();
-  }
-
+void Position::SetStartPosition() {
+  std::ifstream inp("logic/configs/start_position.txt");
+  SetBoard(inp);
   move_color_ = COLOR::WHITE;
   position_type_ = POSITION_TYPE::COMMON;
   info_for_castle_ = std::vector<bool>(6, true);
+}
+
+void Position::SetBoard(std::ifstream& inp) {
+  board_ = std::vector<std::vector<std::shared_ptr<Piece>>>(8, std::vector<std::shared_ptr<Piece>>(8, nullptr));
+  for (int row = cnt_rows - 1; row >= 0; --row) {
+    for (int col = 0; col < cnt_cols; ++col) {
+      char color_char, piece_char;
+      inp >> color_char >> piece_char;
+      COLOR color = (color_char == 'W' ? COLOR::WHITE : COLOR::BLACK);
+      std::shared_ptr<Piece> piece = Empty::GetPiece();
+      switch (piece_char) {
+        case 'p':piece = Pawn::GetPiece(color);
+          break;
+        case 'b':piece = Bishop::GetPiece(color);
+          break;
+        case 'k':piece = Knight::GetPiece(color);
+          break;
+        case 'r':piece = Rook::GetPiece(color);
+          break;
+        case 'q':piece = Queen::GetPiece(color);
+          break;
+        case 'K':piece = King::GetPiece(color);
+          break;
+        default:break;
+      }
+      board_[row][col] = piece;
+    }
+  }
 }
 
 std::shared_ptr<Piece> Position::at(int row, int col) const {

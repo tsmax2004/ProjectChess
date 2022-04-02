@@ -5,11 +5,12 @@
 #include "Position.h"
 #include "moves.h"
 #include <vector>
+#include <memory>
 
 class Game {
  protected:
-  Position* position_;
-  std::vector<Position*> position_history_;
+  std::shared_ptr<Position> position_;
+  std::vector<std::shared_ptr<Position>> position_history_;
 
  public:
   Game();

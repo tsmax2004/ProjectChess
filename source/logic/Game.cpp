@@ -1,14 +1,14 @@
 #include "headers/Game.h"
 #include <iostream>
-#include <string>
 #include <memory>
+#include <string>
 
 Game::Game() : position_(nullptr),
                position_history_() {}
 
 void Game::StartNewGame() {
-  position_ = new Position();
-  position_->StartPosition();
+  position_ = std::make_shared<Position>();
+  position_->SetStartPosition();
   GameCycle();
   std::string ans;
   while ((ans != "y") && (ans != "n")) {
@@ -39,7 +39,7 @@ void Game::GameCycle() {
         continue;
       }
 
-      auto* new_position = new Position(*position_);
+      auto new_position = std::make_shared<Position>(*position_);
       move->MakeMove(from_row, from_col, to_row, to_col, *new_position);
       new_position->DefinePositionType();
       if (new_position->position_type_ == POSITION_TYPE::INVALID) {

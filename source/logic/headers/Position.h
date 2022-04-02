@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <memory>
+#include <fstream>
 #include "pieces.h"
 #include "Enums.h"
 
@@ -13,7 +14,8 @@ class Position {
 
   Position(const Position&);
 
-  void StartPosition();
+  void SetStartPosition();
+  void SetBoard(std::ifstream&);
 
   [[nodiscard]] std::shared_ptr<Piece> at(int row_, int col_) const;
 
