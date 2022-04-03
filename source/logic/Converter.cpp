@@ -1,9 +1,6 @@
 #include "headers/Game.h"
-//#include "Game.cpp"
-#include "headers/logic.h"
 #include <iostream>
 #include <string>
-#include <fstream>
 
 std::vector<char> letters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
 std::vector<char> figures = {'N', 'Q', 'K', 'B', 'R'};
@@ -37,7 +34,8 @@ void prepare() {
             if (all_moves[i][pos] == '.' || flags[0] || flags[1]) {
                 if (!flags[0] && !flags[1]) pos += 2;
                 s = "";
-                while (!(flags[1] && !flags[0]) && ((!flags[0] && pos == 0) || (pos < all_moves[i].size() && all_moves[i][pos] != ' '))) {
+                while (!(flags[1] && !flags[0]) &&
+                       ((!flags[0] && pos == 0) || (pos < all_moves[i].size() && all_moves[i][pos] != ' '))) {
                     s += all_moves[i][pos];
                     ++pos;
                 }
@@ -45,23 +43,51 @@ void prepare() {
                 if (s != "") {
                     normal_moves.push_back(s);
                     flags[0] = false;
-                }
-                else if (!flags[1]) {
+                } else if (!flags[1]) {
                     flags[0] = true;
                 }
                 s = "";
-                while (((!flags[0] && flags[1]) || (!flags[0] && !flags[1])) && (pos < all_moves[i].size() && all_moves[i][pos] != ' ')) {
+                while (((!flags[0] && flags[1]) || (!flags[0] && !flags[1])) &&
+                       (pos < all_moves[i].size() && all_moves[i][pos] != ' ')) {
                     s += all_moves[i][pos];
                     ++pos;
                 }
                 if (s != "") {
                     normal_moves.push_back(s);
                     flags[1] = false;
-                }
-                else {
+                } else {
                     flags[1] = true;
                 }
                 ++pos;
+            }
+        }
+    }
+}
+
+void convert_move(const Game &new_game, std::vector<int> &full_move, COLOR color, PIECE_NAME piece,
+                  std::pair<int, int> move_coordinates, int from_coordinates, bool if_from_row) {
+    std::shared_ptr<Position> pos = new_game.return_position();
+    for (int i = 0; i < pos->board_.size(); ++i) {
+        for (int j = 0; j < pos->board_.size(); ++j) {
+            if (pos->board_[i][j]->GetPieceName() == piece &&
+                pos->board_[i][j]->GetColor() == color) {
+                if (pos->board_[i][j]->DefineMove(i, j, move_coordinates.first,
+                                                  move_coordinates.second,
+                                                  *pos)->IsValid()) {
+                    if (from_coordinates != -1) {
+                        if (if_from_row && from_coordinates == i) {
+                            full_move[0] = i;
+                            full_move[1] = j;
+                        }
+                        if (!if_from_row && from_coordinates == j) {
+                            full_move[0] = i;
+                            full_move[1] = j;
+                        }
+                    } else {
+                        full_move[0] = i;
+                        full_move[1] = j;
+                    }
+                }
             }
         }
     }
@@ -107,8 +133,7 @@ void return_move_positions(const Game &new_game, int t, std::string mv = "") {
         if (tmp[0] - 'a' >= 0 && tmp[0] - 'a' < 8) {
             if_from_row = false;
             from_coordinates = tmp[0] - 'a';
-        }
-        else {
+        } else {
             from_coordinates = tmp[0] - '0' - 1;
         }
         move_coordinates = {tmp[2] - '0', tmp[1] - 'a'};
@@ -145,8 +170,7 @@ void return_move_positions(const Game &new_game, int t, std::string mv = "") {
                 full_move[3] = 6;
             };
         }
-    }
-    else if (if_long_castle) {
+    } else if (if_long_castle) {
         if (if_white) {
             std::shared_ptr<Position> pos = new_game.return_position();
             if (pos->board_[0][4]->DefineMove(0, 4, 0, 2, *pos)->IsValid()) {
@@ -165,19 +189,21 @@ void return_move_positions(const Game &new_game, int t, std::string mv = "") {
                 full_move[3] = 2;
             };
         }
-    }
-    else {
+    } else {
         switch (figure) {
             case 'P':
                 if (!if_attack) {
                     if (if_white) {
                         std::shared_ptr<Position> pos = new_game.return_position();
                         if (move_coordinates.first - 1 >= 0 &&
-                            pos->board_[move_coordinates.first - 1][move_coordinates.second]->GetPieceName() == PIECE_NAME::PAWN &&
-                            pos->board_[move_coordinates.first - 1][move_coordinates.second]->GetColor() == COLOR::WHITE) {
-                            if (pos->board_[move_coordinates.first - 1][move_coordinates.second]->DefineMove(move_coordinates.first - 1, move_coordinates.second, move_coordinates.first,
-                                                                                                              move_coordinates.second,
-                                                                                                              *pos)->IsValid()) {
+                            pos->board_[move_coordinates.first - 1][move_coordinates.second]->GetPieceName() ==
+                            PIECE_NAME::PAWN &&
+                            pos->board_[move_coordinates.first - 1][move_coordinates.second]->GetColor() ==
+                            COLOR::WHITE) {
+                            if (pos->board_[move_coordinates.first - 1][move_coordinates.second]->DefineMove(
+                                    move_coordinates.first - 1, move_coordinates.second, move_coordinates.first,
+                                    move_coordinates.second,
+                                    *pos)->IsValid()) {
                                 full_move[0] = move_coordinates.first - 1;
                                 full_move[1] = move_coordinates.second;
                             }
@@ -185,10 +211,12 @@ void return_move_positions(const Game &new_game, int t, std::string mv = "") {
                         if (move_coordinates.first - 2 >= 0 &&
                             pos->board_[move_coordinates.first - 2][move_coordinates.second]->GetPieceName() ==
                             PIECE_NAME::PAWN &&
-                            pos->board_[move_coordinates.first - 2][move_coordinates.second]->GetColor() == COLOR::WHITE) {
-                            if (pos->board_[move_coordinates.first - 2][move_coordinates.second]->DefineMove(move_coordinates.first - 2, move_coordinates.second, move_coordinates.first,
-                                                                                                              move_coordinates.second,
-                                                                                                              *pos)->IsValid()) {
+                            pos->board_[move_coordinates.first - 2][move_coordinates.second]->GetColor() ==
+                            COLOR::WHITE) {
+                            if (pos->board_[move_coordinates.first - 2][move_coordinates.second]->DefineMove(
+                                    move_coordinates.first - 2, move_coordinates.second, move_coordinates.first,
+                                    move_coordinates.second,
+                                    *pos)->IsValid()) {
                                 full_move[0] = move_coordinates.first - 2;
                                 full_move[1] = move_coordinates.second;
                             }
@@ -199,10 +227,12 @@ void return_move_positions(const Game &new_game, int t, std::string mv = "") {
                         if (move_coordinates.first + 1 >= 0 &&
                             pos->board_[move_coordinates.first + 1][move_coordinates.second]->GetPieceName() ==
                             PIECE_NAME::PAWN &&
-                            pos->board_[move_coordinates.first + 1][move_coordinates.second]->GetColor() == COLOR::BLACK) {
-                            if (pos->board_[move_coordinates.first + 1][move_coordinates.second]->DefineMove(move_coordinates.first + 1, move_coordinates.second, move_coordinates.first,
-                                                                                                              move_coordinates.second,
-                                                                                                              *pos)->IsValid()) {
+                            pos->board_[move_coordinates.first + 1][move_coordinates.second]->GetColor() ==
+                            COLOR::BLACK) {
+                            if (pos->board_[move_coordinates.first + 1][move_coordinates.second]->DefineMove(
+                                    move_coordinates.first + 1, move_coordinates.second, move_coordinates.first,
+                                    move_coordinates.second,
+                                    *pos)->IsValid()) {
                                 full_move[0] = move_coordinates.first + 1;
                                 full_move[1] = move_coordinates.second;
                             }
@@ -210,10 +240,12 @@ void return_move_positions(const Game &new_game, int t, std::string mv = "") {
                         if (move_coordinates.first + 2 >= 0 &&
                             pos->board_[move_coordinates.first + 2][move_coordinates.second]->GetPieceName() ==
                             PIECE_NAME::PAWN &&
-                            pos->board_[move_coordinates.first + 2][move_coordinates.second]->GetColor() == COLOR::BLACK) {
-                            if (pos->board_[move_coordinates.first + 2][move_coordinates.second]->DefineMove(move_coordinates.first + 2, move_coordinates.second, move_coordinates.first,
-                                                                                                              move_coordinates.second,
-                                                                                                              *pos)->IsValid()) {
+                            pos->board_[move_coordinates.first + 2][move_coordinates.second]->GetColor() ==
+                            COLOR::BLACK) {
+                            if (pos->board_[move_coordinates.first + 2][move_coordinates.second]->DefineMove(
+                                    move_coordinates.first + 2, move_coordinates.second, move_coordinates.first,
+                                    move_coordinates.second,
+                                    *pos)->IsValid()) {
                                 full_move[0] = move_coordinates.first + 2;
                                 full_move[1] = move_coordinates.second;
                             }
@@ -286,262 +318,29 @@ void return_move_positions(const Game &new_game, int t, std::string mv = "") {
                 }
                 break;
             case 'Q':
-                if (if_white) {
-                    std::shared_ptr<Position> pos = new_game.return_position();
-                    for (int i = 0; i < pos->board_.size(); ++i) {
-                        for (int j = 0; j < pos->board_.size(); ++j) {
-                            if (pos->board_[i][j]->GetPieceName() == PIECE_NAME::QUEEN &&
-                                pos->board_[i][j]->GetColor() == COLOR::WHITE) {
-                                if (pos->board_[i][j]->DefineMove(i, j, move_coordinates.first,
-                                                                   move_coordinates.second,
-                                                                   *pos)->IsValid()) {
-                                    if (from_coordinates != -1) {
-                                        if (if_from_row && from_coordinates == i) {
-                                            full_move[0] = i;
-                                            full_move[1] = j;
-                                        }
-                                        if (!if_from_row && from_coordinates == j) {
-                                            full_move[0] = i;
-                                            full_move[1] = j;
-                                        }
-                                    } else {
-                                        full_move[0] = i;
-                                        full_move[1] = j;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                if (!if_white) {
-                    std::shared_ptr<Position> pos = new_game.return_position();
-                    for (int i = 0; i < pos->board_.size(); ++i) {
-                        for (int j = 0; j < pos->board_.size(); ++j) {
-                            if (pos->board_[i][j]->GetPieceName() == PIECE_NAME::QUEEN &&
-                                pos->board_[i][j]->GetColor() == COLOR::BLACK) {
-                                if (pos->board_[i][j]->DefineMove(i, j, move_coordinates.first,
-                                                                   move_coordinates.second,
-                                                                   *pos)->IsValid()) {
-                                    if (from_coordinates != -1) {
-                                        if (if_from_row && from_coordinates == i) {
-                                            full_move[0] = i;
-                                            full_move[1] = j;
-                                        }
-                                        if (!if_from_row && from_coordinates == j) {
-                                            full_move[0] = i;
-                                            full_move[1] = j;
-                                        }
-                                    } else {
-                                        full_move[0] = i;
-                                        full_move[1] = j;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                if (if_white) convert_move(new_game, full_move, COLOR::WHITE, PIECE_NAME::QUEEN, move_coordinates, from_coordinates
+                , if_from_row);
+                else convert_move(new_game, full_move, COLOR::BLACK, PIECE_NAME::QUEEN, move_coordinates, from_coordinates, if_from_row);
                 break;
             case 'K':
-                if (if_white) {
-                    std::shared_ptr<Position> pos = new_game.return_position();
-                    for (int i = 0; i < pos->board_.size(); ++i) {
-                        for (int j = 0; j < pos->board_.size(); ++j) {
-                            if (pos->board_[i][j]->GetPieceName() == PIECE_NAME::KING &&
-                                pos->board_[i][j]->GetColor() == COLOR::WHITE) {
-                                if (pos->board_[i][j]->DefineMove(i, j, move_coordinates.first,
-                                                                   move_coordinates.second,
-                                                                   *pos)->IsValid()) {
-                                    full_move[0] = i;
-                                    full_move[1] = j;
-                                }
-                            }
-                        }
-                    }
-                }
-                if (!if_white) {
-                    std::shared_ptr<Position> pos = new_game.return_position();
-                    for (int i = 0; i < pos->board_.size(); ++i) {
-                        for (int j = 0; j < pos->board_.size(); ++j) {
-                            if (pos->board_[i][j]->GetPieceName() == PIECE_NAME::KING &&
-                                pos->board_[i][j]->GetColor() == COLOR::BLACK) {
-                                if (pos->board_[i][j]->DefineMove(i, j, move_coordinates.first,
-                                                                   move_coordinates.second,
-                                                                   *pos)->IsValid()) {
-                                    full_move[0] = i;
-                                    full_move[1] = j;
-                                }
-                            }
-                        }
-                    }
-                }
+                if (if_white) convert_move(new_game, full_move, COLOR::WHITE, PIECE_NAME::KING, move_coordinates, from_coordinates
+                            , if_from_row);
+                else convert_move(new_game, full_move, COLOR::BLACK, PIECE_NAME::KING, move_coordinates, from_coordinates, if_from_row);
                 break;
             case 'N':
-                if (if_white) {
-                    std::shared_ptr<Position> pos = new_game.return_position();
-                    for (int i = 0; i < pos->board_.size(); ++i) {
-                        for (int j = 0; j < pos->board_.size(); ++j) {
-                            if (pos->board_[i][j]->GetPieceName() == PIECE_NAME::KNIGHT &&
-                                pos->board_[i][j]->GetColor() == COLOR::WHITE) {
-                                if (pos->board_[i][j]->DefineMove(i, j, move_coordinates.first,
-                                                                   move_coordinates.second,
-                                                                   *pos)->IsValid()) {
-                                    if (from_coordinates != -1) {
-                                        if (if_from_row && from_coordinates == i) {
-                                            full_move[0] = i;
-                                            full_move[1] = j;
-                                        }
-                                        if (!if_from_row && from_coordinates == j) {
-                                            full_move[0] = i;
-                                            full_move[1] = j;
-                                        }
-                                    } else {
-                                        full_move[0] = i;
-                                        full_move[1] = j;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                if (!if_white) {
-                    std::shared_ptr<Position> pos = new_game.return_position();
-                    for (int i = 0; i < pos->board_.size(); ++i) {
-                        for (int j = 0; j < pos->board_.size(); ++j) {
-                            if (pos->board_[i][j]->GetPieceName() == PIECE_NAME::KNIGHT &&
-                                pos->board_[i][j]->GetColor() == COLOR::BLACK) {
-                                if (pos->board_[i][j]->DefineMove(i, j, move_coordinates.first,
-                                                                   move_coordinates.second,
-                                                                   *pos)->IsValid()) {
-                                    if (from_coordinates != -1) {
-                                        if (if_from_row && from_coordinates == i) {
-                                            full_move[0] = i;
-                                            full_move[1] = j;
-                                        }
-                                        if (!if_from_row && from_coordinates == j) {
-                                            full_move[0] = i;
-                                            full_move[1] = j;
-                                        }
-                                    } else {
-                                        full_move[0] = i;
-                                        full_move[1] = j;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                if (if_white) convert_move(new_game, full_move, COLOR::WHITE, PIECE_NAME::KNIGHT, move_coordinates, from_coordinates
+                            , if_from_row);
+                else convert_move(new_game, full_move, COLOR::BLACK, PIECE_NAME::KNIGHT, move_coordinates, from_coordinates, if_from_row);
                 break;
             case 'R':
-                if (if_white) {
-                    std::shared_ptr<Position> pos = new_game.return_position();
-                    for (int i = 0; i < pos->board_.size(); ++i) {
-                        for (int j = 0; j < pos->board_.size(); ++j) {
-                            if (pos->board_[i][j]->GetPieceName() == PIECE_NAME::ROOK &&
-                                pos->board_[i][j]->GetColor() == COLOR::WHITE) {
-                                if (pos->board_[i][j]->DefineMove(i, j, move_coordinates.first,
-                                                                   move_coordinates.second,
-                                                                   *pos)->IsValid()) {
-                                    if (from_coordinates != -1) {
-                                        if (if_from_row && from_coordinates == i) {
-                                            full_move[0] = i;
-                                            full_move[1] = j;
-                                        }
-                                        if (!if_from_row && from_coordinates == j) {
-                                            full_move[0] = i;
-                                            full_move[1] = j;
-                                        }
-                                    } else {
-                                        full_move[0] = i;
-                                        full_move[1] = j;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                if (!if_white) {
-                    std::shared_ptr<Position> pos = new_game.return_position();
-                    for (int i = 0; i < pos->board_.size(); ++i) {
-                        for (int j = 0; j < pos->board_.size(); ++j) {
-                            if (pos->board_[i][j]->GetPieceName() == PIECE_NAME::ROOK &&
-                                pos->board_[i][j]->GetColor() == COLOR::BLACK) {
-                                if (pos->board_[i][j]->DefineMove(i, j, move_coordinates.first,
-                                                                   move_coordinates.second,
-                                                                   *pos)->IsValid()) {
-                                    if (from_coordinates != -1) {
-                                        if (if_from_row && from_coordinates == i) {
-                                            full_move[0] = i;
-                                            full_move[1] = j;
-                                        }
-                                        if (!if_from_row && from_coordinates == j) {
-                                            full_move[0] = i;
-                                            full_move[1] = j;
-                                        }
-                                    } else {
-                                        full_move[0] = i;
-                                        full_move[1] = j;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                if (if_white) convert_move(new_game, full_move, COLOR::WHITE, PIECE_NAME::ROOK, move_coordinates, from_coordinates
+                            , if_from_row);
+                else convert_move(new_game, full_move, COLOR::BLACK, PIECE_NAME::ROOK, move_coordinates, from_coordinates, if_from_row);
                 break;
             case 'B':
-                if (if_white) {
-                    std::shared_ptr<Position> pos = new_game.return_position();
-                    for (int i = 0; i < pos->board_.size(); ++i) {
-                        for (int j = 0; j < pos->board_.size(); ++j) {
-                            if (pos->board_[i][j]->GetPieceName() == PIECE_NAME::BISHOP &&
-                                pos->board_[i][j]->GetColor() == COLOR::WHITE) {
-                                if (pos->board_[i][j]->DefineMove(i, j, move_coordinates.first,
-                                                                   move_coordinates.second,
-                                                                   *pos)->IsValid()) {
-                                    if (from_coordinates != -1) {
-                                        if (if_from_row && from_coordinates == i) {
-                                            full_move[0] = i;
-                                            full_move[1] = j;
-                                        }
-                                        if (!if_from_row && from_coordinates == j) {
-                                            full_move[0] = i;
-                                            full_move[1] = j;
-                                        }
-                                    } else {
-                                        full_move[0] = i;
-                                        full_move[1] = j;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                if (!if_white) {
-                    std::shared_ptr<Position> pos = new_game.return_position();
-                    for (int i = 0; i < pos->board_.size(); ++i) {
-                        for (int j = 0; j < pos->board_.size(); ++j) {
-                            if (pos->board_[i][j]->GetPieceName() == PIECE_NAME::BISHOP &&
-                                pos->board_[i][j]->GetColor() == COLOR::BLACK) {
-                                if (pos->board_[i][j]->DefineMove(i, j, move_coordinates.first,
-                                                                   move_coordinates.second,
-                                                                   *pos)->IsValid()) {
-                                    if (from_coordinates != -1) {
-                                        if (if_from_row && from_coordinates == i) {
-                                            full_move[0] = i;
-                                            full_move[1] = j;
-                                        }
-                                        if (!if_from_row && from_coordinates == j) {
-                                            full_move[0] = i;
-                                            full_move[1] = j;
-                                        }
-                                    } else {
-                                        full_move[0] = i;
-                                        full_move[1] = j;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                if (if_white) convert_move(new_game, full_move, COLOR::WHITE, PIECE_NAME::BISHOP, move_coordinates, from_coordinates
+                            , if_from_row);
+                else convert_move(new_game, full_move, COLOR::BLACK, PIECE_NAME::BISHOP, move_coordinates, from_coordinates, if_from_row);
                 break;
         }
     }
