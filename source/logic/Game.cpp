@@ -2,9 +2,14 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include "Converter.cpp"
 
 Game::Game() : position_(nullptr),
                position_history_() {}
+
+std::shared_ptr<Position> Game::return_position() const {
+    return position_;
+}
 
 void Game::StartNewGame() {
   position_ = std::make_shared<Position>();
@@ -20,12 +25,16 @@ void Game::StartNewGame() {
 }
 
 void Game::GameCycle() {
+    int t = 0;
   while (true) {
+      ++t;
     PrintBoard();
     std::cout << "Print move: ";
     char from_col_ch, to_col_ch;
     int from_row, to_row, from_col, to_col;
-    std::cin >> from_col_ch >> from_row >> to_col_ch >> to_row;
+      return_move_positions(*this, t - 1);
+      std::ifstream inp("../moves.txt");
+      inp >> from_col_ch >> from_row >> to_col_ch >> to_row;
     from_col = from_col_ch - 'a';
     --from_row;
     to_col = to_col_ch - 'a';

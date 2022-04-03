@@ -21,6 +21,7 @@ class Game {
   [[nodiscard]] bool CheckForRepeating() const;
 
   void PrintBoard() const;
+  [[nodiscard]] std::shared_ptr<Position> return_position() const;
 };
 
 #endif

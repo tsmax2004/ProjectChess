@@ -5,6 +5,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 
 add_executable(test test.cpp)
+add_executable(Convert logic/Converter.cpp)
 
 target_include_directories(test PUBLIC ${PROJECT_SOURCE_DIR}/logic/headers)
 
