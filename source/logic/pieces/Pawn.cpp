@@ -58,7 +58,7 @@ bool Pawn::CheckMoveOnOneSquare(int from_row_,
                                 int to_col_,
                                 const Position& position_) const {
   if (to_row_ - from_row_ != (color_ == COLOR::WHITE ? 1 : -1)) { return false; }
-  if (from_col_ == to_col_) { return true; }
+  if (from_col_ == to_col_ && position_.at(to_row_, to_col_)->GetPieceName() == PIECE_NAME::EMPTY) { return true; }
   return (std::abs(from_col_ - to_col_) == 1 && position_.at(to_row_, to_col_)->GetPieceName() != PIECE_NAME::EMPTY);
 }
 
