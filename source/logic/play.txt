@@ -1,0 +1,20 @@
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2021.09.29"]
+[Round "?"]
+[White "danimp84"]
+[Black "George_SM"]
+[Result "0-1"]
+[ECO "C47"]
+[WhiteElo "1098"]
+[BlackElo "1122"]
+[TimeControl "600"]
+[EndTime "8:49:53 PDT"]
+[Termination "George_SM won by checkmate"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. Nc3 Bb4 5. a3 Bxc3 6. bxc3 O-O 7. d3 d6 8. d4
+Bg4 9. dxe5 Nxe5 10. Be2 Nxe4 11. Nxe5 Bxe2 12. Qxe2 Re8 13. Qxe4 Rxe5 14. Bg5
+Qxg5 15. Qxe5 Qxe5+ 16. Kf1 Qxc3 17. Re1 b5 18. g3 Qxc2 19. Re2 Qb3 20. Kg2 g5
+21. Rhe1 c5 22. Re8+ Rxe8 23. Rxe8+ Kg7 24. Ra8 Qxa3 25. Rd8 c4 26. Re8 b4 27.
+Re3 b3 28. h4 Qa2 29. hxg5 b2 30. g6 fxg6 31. Re7+ Kf6 32. Rxh7 b1=Q 33. Rh1
+Qe4+ 34. Kh3 Qxf2 35. Rh2 Qff5+ 36. g4 Qfxg4#

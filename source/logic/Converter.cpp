@@ -7,7 +7,7 @@
 
 std::vector<char> letters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
 std::vector<char> figures = {'N', 'Q', 'K', 'B', 'R'};
-std::ifstream inp("../play.txt");
+std::ifstream inp("logic/play.txt");
 std::vector<std::string> normal_moves = {};
 
 void prepare() {
@@ -26,6 +26,10 @@ void prepare() {
     std::vector<bool> flags = {false, false};
     for (int i = 0; i < all_moves.size(); ++i) {
         int pos = 0;
+        if (i == 4) {
+            pos++;
+            pos--;
+        }
         while (pos < all_moves[i].size() - 1) {
             while (!flags[0] && !flags[1] && all_moves[i][pos] != '.') {
                 ++pos;
@@ -65,7 +69,7 @@ void prepare() {
 
 void return_move_positions(const Game &new_game, int t, std::string mv = "") {
     if (t == 0) prepare();
-    std::ofstream out("../moves.txt");
+    std::ofstream out("logic/moves.txt");
     if (t == 69) {
         ++t;
         --t;

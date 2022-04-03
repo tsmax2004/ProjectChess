@@ -33,7 +33,7 @@ void Game::GameCycle() {
     char from_col_ch, to_col_ch;
     int from_row, to_row, from_col, to_col;
       return_move_positions(*this, t - 1);
-      std::ifstream inp("../moves.txt");
+      std::ifstream inp("logic/moves.txt");
       inp >> from_col_ch >> from_row >> to_col_ch >> to_row;
     from_col = from_col_ch - 'a';
     --from_row;
