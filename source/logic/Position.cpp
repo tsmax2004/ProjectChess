@@ -74,8 +74,9 @@ void Position::DefinePositionType() {
   position_type_ = POSITION_TYPE::COMMON;
   if (Check(move_color_ == COLOR::WHITE ? COLOR::BLACK : COLOR::WHITE)) {
     position_type_ = POSITION_TYPE::CHECK;
-    if (Checkmate(move_color_ == COLOR::WHITE ? COLOR::BLACK : COLOR::WHITE))
+    if (Checkmate(move_color_ == COLOR::WHITE ? COLOR::BLACK : COLOR::WHITE)) {
       position_type_ = POSITION_TYPE::CHECKMATE;
+    }
   } else if (Draw() || Stalemate()) {
     position_type_ = POSITION_TYPE::DRAW;
   }

@@ -15,9 +15,8 @@ void Game::StartNewGame() {
     std::cout << "Do you want play again? (y/n): ";
     std::cin >> ans;
   }
-  if (ans == "y")
-    StartNewGame();
-  if (ans == "n") std::cout << "Thank you for the game!";
+  if (ans == "y") { StartNewGame(); }
+  if (ans == "n") { std::cout << "Thank you for the game!"; }
 }
 
 void Game::GameCycle() {
@@ -97,7 +96,7 @@ bool Game::CheckForRepeating() const {
     }
     pos_count += is_equal;
   }
-  if (pos_count >= 2) return true;
+  if (pos_count >= 2) { return true; }
   return false;
 }
 
@@ -105,8 +104,7 @@ void Game::PrintBoard() const {
   std::cout << "\n\n";
   for (int row = 8; row >= 1; --row) {
     std::cout << "      ";
-    for (int col = 0; col < 8; ++col)
-      std::cout << "---- ";
+    for (int col = 0; col < 8; ++col) { std::cout << "---- "; }
 
     std::cout << "\n  " << row << "  ";
     for (int col = 0; col < 8; ++col) {
@@ -124,8 +122,7 @@ void Game::PrintBoard() const {
   }
 
   std::cout << "      ";
-  for (int col = 0; col < 8; ++col)
-    std::cout << "---- ";
+  for (int col = 0; col < 8; ++col) { std::cout << "---- "; }
 
   std::cout << "\n       a    b    c    d    e    f    g    h\n\n";
 }
