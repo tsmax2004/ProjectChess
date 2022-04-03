@@ -24,17 +24,17 @@ std::shared_ptr<Bishop> Bishop::GetPiece(COLOR color) {
 }
 
 std::shared_ptr<Move> Bishop::DefineMove(int from_row_,
-                               int from_col_,
-                               int to_row_,
-                               int to_col_,
-                               const Position& position_) const {
+                                         int from_col_,
+                                         int to_row_,
+                                         int to_col_,
+                                         const Position& position_) const {
   if (!CheckMoveColor(position_)) { return InvalidMove::GetMove(); }
   if (!CheckAttackSquareIsNotFriend(to_row_, to_col_, position_)) { return InvalidMove::GetMove(); }
   if (CheckMove(from_row_, from_col_, to_row_, to_col_, position_)) { return SimpleMove::GetMove(); }
   return InvalidMove::GetMove();
 }
 
-bool Bishop::CheckMove(int from_row_, int from_col_, int to_row_, int to_col_, const Position& position_) const {
+bool Bishop::CheckMove(int from_row_, int from_col_, int to_row_, int to_col_, const Position& position_) {
   if (std::abs(from_row_ - to_row_) != std::abs(from_col_ - to_col_)) { return false; }
   if (from_row_ == to_row_) { return false; }
   return CheckBetweenSquaresAreEmpty(from_row_, from_col_, to_row_, to_col_, position_);

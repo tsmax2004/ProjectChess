@@ -17,10 +17,10 @@ class Empty : public Piece {
   static std::shared_ptr<Empty> GetPiece();
 
   [[nodiscard]] std::shared_ptr<Move> DefineMove(int from_row_,
-                         int from_col_,
-                         int to_row_,
-                         int to_col_,
-                         const Position& position_) const override;
+                                                 int from_col_,
+                                                 int to_row_,
+                                                 int to_col_,
+                                                 const Position& position_) const override;
 
   [[nodiscard]] PIECE_NAME GetPieceName() const override;
 };

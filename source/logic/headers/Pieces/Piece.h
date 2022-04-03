@@ -14,10 +14,10 @@ class Piece {
   explicit Piece(COLOR);
 
   [[nodiscard]] virtual std::shared_ptr<Move> DefineMove(int from_row_,
-                                               int from_col_,
-                                               int to_row_,
-                                               int to_col_,
-                                               const Position& position_) const = 0;
+                                                         int from_col_,
+                                                         int to_row_,
+                                                         int to_col_,
+                                                         const Position& position_) const = 0;
   [[nodiscard]] virtual PIECE_NAME GetPieceName() const = 0;
   [[nodiscard]] COLOR GetColor() const;
 

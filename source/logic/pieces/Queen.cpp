@@ -34,7 +34,7 @@ std::shared_ptr<Move> Queen::DefineMove(int from_row_,
   return InvalidMove::GetMove();
 }
 
-bool Queen::CheckMove(int from_row_, int from_col_, int to_row_, int to_col_, const Position& position_) const {
+bool Queen::CheckMove(int from_row_, int from_col_, int to_row_, int to_col_, const Position& position_) {
   if (std::abs(to_row_ - from_row_) != (std::abs(to_col_ - from_col_))
       && (to_col_ != from_col_) && (to_row_ != from_row_)) { return false; }
   return CheckBetweenSquaresAreEmpty(from_row_, from_col_, to_row_, to_col_, position_);

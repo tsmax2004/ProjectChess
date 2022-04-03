@@ -13,7 +13,7 @@ std::shared_ptr<Empty> Empty::GetPiece() {
 }
 
 std::shared_ptr<Move> Empty::DefineMove(int from_row_, int from_col_, int to_row_, int to_col_,
-                              const Position& position_) const {
+                                        const Position& position_) const {
   return InvalidMove::GetMove();
 }
 

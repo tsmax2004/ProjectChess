@@ -19,15 +19,15 @@ void SimpleMove::MakeMove(int from_row, int from_col, int to_row, int to_col, Po
       if (from_row == 0 && from_col == 0) {
         position.info_for_castle_[1] = false;
       }
-      if (from_row == 0 && from_col == position.board_[0].size() - 1) {
+      if (from_row == 0 && from_col == position.cnt_cols - 1) {
         position.info_for_castle_[2] = false;
       }
     }
     if (position.at(from_row, from_col)->GetColor() == COLOR::BLACK) {
-      if (from_row == position.board_.size() - 1 && from_col == 0) {
+      if (from_row == position.cnt_rows - 1 && from_col == 0) {
         position.info_for_castle_[4] = false;
       }
-      if (from_row == position.board_.size() - 1 && from_col == position.board_[0].size() - 1) {
+      if (from_row == position.cnt_rows - 1 && from_col == position.cnt_cols - 1) {
         position.info_for_castle_[5] = false;
       }
     }

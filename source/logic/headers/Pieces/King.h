@@ -20,11 +20,11 @@ class King : public Piece {
                                                           int to_col_,
                                                           const Position& position_) const;
 
-  [[nodiscard]] bool CheckSimpleMove(int from_row_,
-                                     int from_col_,
-                                     int to_row_,
-                                     int to_col_,
-                                     const Position& position_) const;
+  [[nodiscard]] static bool CheckSimpleMove(int from_row_,
+                                            int from_col_,
+                                            int to_row_,
+                                            int to_col_,
+                                            const Position& position_);
 
   static std::shared_ptr<King> white_king_;
   static std::shared_ptr<King> black_king_;

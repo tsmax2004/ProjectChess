@@ -8,11 +8,11 @@ class Knight : public Piece {
  protected:
   explicit Knight(COLOR color_);
 
-  [[nodiscard]] bool CheckMove(int from_row_,
-                               int from_col_,
-                               int to_row_,
-                               int to_col_,
-                               const Position& position_) const;
+  [[nodiscard]] static bool CheckMove(int from_row_,
+                                      int from_col_,
+                                      int to_row_,
+                                      int to_col_,
+                                      const Position& position_);
 
   static std::shared_ptr<Knight> white_knight_;
   static std::shared_ptr<Knight> black_knight_;
@@ -24,10 +24,10 @@ class Knight : public Piece {
   static std::shared_ptr<Knight> GetPiece(COLOR color);
 
   [[nodiscard]] std::shared_ptr<Move> DefineMove(int from_row_,
-                         int from_col_,
-                         int to_row_,
-                         int to_col_,
-                         const Position& position_) const override;
+                                                 int from_col_,
+                                                 int to_row_,
+                                                 int to_col_,
+                                                 const Position& position_) const override;
 
   [[nodiscard]] PIECE_NAME GetPieceName() const override;
 };

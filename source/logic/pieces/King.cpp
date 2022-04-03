@@ -71,7 +71,7 @@ bool King::CheckBetweenSquaresAreNotUnderAttack(int from_row_,
   return true;
 }
 
-bool King::CheckSimpleMove(int from_row_, int from_col_, int to_row_, int to_col_, const Position& position_) const {
+bool King::CheckSimpleMove(int from_row_, int from_col_, int to_row_, int to_col_, const Position& position_) {
   if (std::abs(to_row_ - from_row_) >= 2 || std::abs(to_col_ - from_col_) >= 2) { return false; }
   if ((to_row_ == from_row_) && (to_col_ == from_col_)) { return false; }
   return true;

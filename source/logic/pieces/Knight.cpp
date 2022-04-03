@@ -24,17 +24,17 @@ std::shared_ptr<Knight> Knight::GetPiece(COLOR color) {
 }
 
 std::shared_ptr<Move> Knight::DefineMove(int from_row_,
-                               int from_col_,
-                               int to_row_,
-                               int to_col_,
-                               const Position& position_) const {
+                                         int from_col_,
+                                         int to_row_,
+                                         int to_col_,
+                                         const Position& position_) const {
   if (!CheckMoveColor(position_)) { return InvalidMove::GetMove(); }
   if (!CheckAttackSquareIsNotFriend(to_row_, to_col_, position_)) { return InvalidMove::GetMove(); }
   if (CheckMove(from_row_, from_col_, to_row_, to_col_, position_)) { return SimpleMove::GetMove(); }
   return InvalidMove::GetMove();
 }
 
-bool Knight::CheckMove(int from_row_, int from_col_, int to_row_, int to_col_, const Position& position_) const {
+bool Knight::CheckMove(int from_row_, int from_col_, int to_row_, int to_col_, const Position& position_) {
   auto mov_ = std::pair<int, int>(std::abs(to_row_ - from_row_), std::abs(to_col_ - from_col_));
   auto cor_mov_ = std::pair<int, int>(1, 2);
   if ((mov_ != cor_mov_) && (mov_.first != cor_mov_.second || mov_.second != cor_mov_.first)) { return false; }

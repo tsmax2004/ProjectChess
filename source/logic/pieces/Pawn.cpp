@@ -75,7 +75,7 @@ bool Pawn::CheckEnPassant(int from_row_, int from_col_, int to_row_, int to_col_
   return position_.last_move_ == correct_last_move;
 }
 
-bool Pawn::CheckPromotion(int from_row_, int from_col_, int to_row_, int to_col_, const Position& position_) const {
+bool Pawn::CheckPromotion(int from_row_, int from_col_, int to_row_, int to_col_, const Position& position_) {
   return ((to_row_ == 0) || (to_row_ == position_.cnt_rows - 1));
 }
 
