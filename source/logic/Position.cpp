@@ -8,21 +8,15 @@
 Position::Position() : board_(),
                        move_color_(COLOR::WHITE),
                        position_type_(POSITION_TYPE::NOT_DEFINED),
-                       info_for_castle_(),
+                       info_for_castle_(6, false),
                        last_move_() {}
 
 Position::Position(const Position&) = default;
 
 void Position::SetStartPosition() {
   std::ifstream inp("logic/configs/start_position.txt");
-  SetBoard(inp);
-  move_color_ = COLOR::WHITE;
-  position_type_ = POSITION_TYPE::COMMON;
-  info_for_castle_ = std::vector<bool>(6, true);
-}
-
-void Position::SetBoard(std::ifstream& inp) {
-  board_ = std::vector<std::vector<std::shared_ptr<Piece>>>(8, std::vector<std::shared_ptr<Piece>>(8, nullptr));
+  auto start_board =
+      std::vector<std::vector<std::shared_ptr<Piece>>>(8, std::vector<std::shared_ptr<Piece>>(8, nullptr));
   for (int row = cnt_rows - 1; row >= 0; --row) {
     for (int col = 0; col < cnt_cols; ++col) {
       char color_char, piece_char;
@@ -44,8 +38,33 @@ void Position::SetBoard(std::ifstream& inp) {
           break;
         default:break;
       }
-      board_[row][col] = piece;
+      start_board[row][col] = piece;
     }
+  }
+  SetPosition(start_board, COLOR::WHITE);
+  position_type_ = POSITION_TYPE::COMMON;
+}
+
+void Position::SetPosition(const std::vector<std::vector<std::shared_ptr<Piece>>>& new_board, COLOR color) {
+  board_ = new_board;
+  move_color_ = color;
+  if (at(0, 4)->GetPieceName() == PIECE_NAME::KING && at(0, 4)->GetColor() == COLOR::WHITE) {
+    info_for_castle_[0] = true;
+  }
+  if (at(0, 0)->GetPieceName() == PIECE_NAME::ROOK && at(0, 0)->GetColor() == COLOR::WHITE) {
+    info_for_castle_[1] = true;
+  }
+  if (at(0, 7)->GetPieceName() == PIECE_NAME::ROOK && at(0, 7)->GetColor() == COLOR::WHITE) {
+    info_for_castle_[2] = true;
+  }
+  if (at(7, 4)->GetPieceName() == PIECE_NAME::KING && at(7, 4)->GetColor() == COLOR::BLACK) {
+    info_for_castle_[3] = true;
+  }
+  if (at(7, 0)->GetPieceName() == PIECE_NAME::ROOK && at(7, 0)->GetColor() == COLOR::BLACK) {
+    info_for_castle_[4] = true;
+  }
+  if (at(7, 7)->GetPieceName() == PIECE_NAME::ROOK && at(7, 7)->GetColor() == COLOR::BLACK) {
+    info_for_castle_[5] = true;
   }
 }
 
