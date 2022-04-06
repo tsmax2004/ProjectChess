@@ -3,24 +3,25 @@
 #define SIMPLEMOVE_H_
 
 #include "Move.h"
+#include <memory>
 
 class SimpleMove : public Move {
  protected:
   SimpleMove();
 
-  static SimpleMove* simple_move_;
+  static std::shared_ptr<SimpleMove> simple_move_;
 
  public:
   SimpleMove(const SimpleMove&) = delete;
   void operator=(const SimpleMove&) = delete;
 
-  static SimpleMove* get_move();
+  static std::shared_ptr<SimpleMove> GetMove();
 
-  void make_move(int from_row, int from_col, int to_row, int to_col, Position& position) const override;
+  void MakeMove(int from_row, int from_col, int to_row, int to_col, Position& position) const override;
 
-  bool is_valid() const override;
+  [[nodiscard]] bool IsValid() const override;
 };
 
-inline SimpleMove* SimpleMove::simple_move_ = nullptr;
+inline std::shared_ptr<SimpleMove> SimpleMove::simple_move_ = nullptr;
 
 #endif

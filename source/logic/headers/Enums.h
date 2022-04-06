@@ -2,9 +2,9 @@
 #ifndef ENUMS_H_
 #define ENUMS_H_
 
-enum COLOR: char { WHITE = 'W', BLACK = 'B' };
-enum POSITION_TYPE {
-  NOT_DEFINE,
+enum class COLOR : char { WHITE = 'W', BLACK = 'B' };
+enum class POSITION_TYPE {
+  NOT_DEFINED,
   INVALID,
   COMMON,
   CHECK,
@@ -12,7 +12,7 @@ enum POSITION_TYPE {
   DRAW
 };
 
-enum PIECE_NAME: char {
+enum class PIECE_NAME : char {
   EMPTY,
   PAWN = 'p',
   KNIGHT = 'k',

@@ -6,30 +6,33 @@
 
 class Rook : public Piece {
  protected:
-  Rook(COLOR color_);
+  explicit Rook(COLOR color_);
 
-  static Rook* white_rook_;
-  static Rook* black_rook_;
+  [[nodiscard]] static bool CheckMove(int from_row_,
+                                      int from_col_,
+                                      int to_row_,
+                                      int to_col_,
+                                      const Position& position_);
+
+  static std::shared_ptr<Rook> white_rook_;
+  static std::shared_ptr<Rook> black_rook_;
 
  public:
   Rook(const Rook&) = delete;
   void operator=(const Rook&) = delete;
 
-  static Rook* get_piece(COLOR color);
+  static std::shared_ptr<Rook> GetPiece(COLOR color);
 
-  const Move* define_move(int from_row_,
-                          int from_col_,
-                          int to_row_,
-                          int to_col_,
-                          const Position& position_) const override;
+  [[nodiscard]] std::shared_ptr<Move> DefineMove(int from_row_,
+                                                 int from_col_,
+                                                 int to_row_,
+                                                 int to_col_,
+                                                 const Position& position_) const override;
 
-  PIECE_NAME get_piece_name() const override;
-  COLOR get_color() const override;
-
-  COLOR color_;
+  [[nodiscard]] PIECE_NAME GetPieceName() const override;
 };
 
-inline Rook* Rook::white_rook_ = nullptr;
-inline Rook* Rook::black_rook_ = nullptr;
+inline std::shared_ptr<Rook> Rook::white_rook_ = nullptr;
+inline std::shared_ptr<Rook> Rook::black_rook_ = nullptr;
 
 #endif

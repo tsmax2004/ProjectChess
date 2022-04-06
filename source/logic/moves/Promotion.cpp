@@ -6,19 +6,21 @@
 
 Promotion::Promotion() = default;
 
-Promotion* Promotion::get_move() {
-  if (promotion_move_ == nullptr) promotion_move_ = new Promotion;
+std::shared_ptr<Promotion> Promotion::GetMove() {
+  if (promotion_move_ == nullptr) {
+    promotion_move_ = std::shared_ptr<Promotion>(new Promotion());
+  }
   return promotion_move_;
 }
 
-void Promotion::make_move(int from_row, int from_col, int to_row, int to_col, Position& position) const {
-  position.board_[to_row][to_col] = Queen::get_piece(position.at(from_row, from_col)->get_color());
-  position.board_[from_row][from_col] = Empty::get_piece();
+void Promotion::MakeMove(int from_row, int from_col, int to_row, int to_col, Position& position) const {
+  position.board_[to_row][to_col] = Queen::GetPiece(position.at(from_row, from_col)->GetColor());
+  position.board_[from_row][from_col] = Empty::GetPiece();
   position.last_move_ = {from_row, from_col, to_row, to_col};
-  position.move_color_ = {position.move_color_ == WHITE ? BLACK : WHITE};
-  position.position_type_ = NOT_DEFINE;
+  position.move_color_ = {position.move_color_ == COLOR::WHITE ? COLOR::BLACK : COLOR::WHITE};
+  position.position_type_ = POSITION_TYPE::NOT_DEFINED;
 }
 
-bool Promotion::is_valid() const {
+bool Promotion::IsValid() const {
   return true;
 }

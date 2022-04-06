@@ -2,5 +2,5 @@
 
 int main() {
   Game game;
-  game.start_new_game();
+  game.StartNewGame();
 }

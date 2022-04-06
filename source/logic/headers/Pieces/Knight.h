@@ -6,30 +6,33 @@
 
 class Knight : public Piece {
  protected:
-  Knight(COLOR color_);
+  explicit Knight(COLOR color_);
 
-  static Knight* white_knight_;
-  static Knight* black_knight_;
+  [[nodiscard]] static bool CheckMove(int from_row_,
+                                      int from_col_,
+                                      int to_row_,
+                                      int to_col_,
+                                      const Position& position_);
+
+  static std::shared_ptr<Knight> white_knight_;
+  static std::shared_ptr<Knight> black_knight_;
 
  public:
   Knight(const Knight&) = delete;
   void operator=(const Knight&) = delete;
 
-  static Knight* get_piece(COLOR color);
+  static std::shared_ptr<Knight> GetPiece(COLOR color);
 
-  const Move* define_move(int from_row_,
-                          int from_col_,
-                          int to_row_,
-                          int to_col_,
-                          const Position& position_) const override;
+  [[nodiscard]] std::shared_ptr<Move> DefineMove(int from_row_,
+                                                 int from_col_,
+                                                 int to_row_,
+                                                 int to_col_,
+                                                 const Position& position_) const override;
 
-  PIECE_NAME get_piece_name() const override;
-  COLOR get_color() const override;
-
-  COLOR color_;
+  [[nodiscard]] PIECE_NAME GetPieceName() const override;
 };
 
-inline Knight* Knight::white_knight_ = nullptr;
-inline Knight* Knight::black_knight_ = nullptr;
+inline std::shared_ptr<Knight> Knight::white_knight_ = nullptr;
+inline std::shared_ptr<Knight> Knight::black_knight_ = nullptr;
 
 #endif

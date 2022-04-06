@@ -6,30 +6,51 @@
 
 class Pawn : public Piece {
  protected:
-  Pawn(COLOR color_);
+  explicit Pawn(COLOR color_);
 
-  static Pawn* white_pawn_;
-  static Pawn* black_pawn_;
+  [[nodiscard]] bool CheckMoveOnTwoSquares(int from_row_,
+                                           int from_col_,
+                                           int to_row_,
+                                           int to_col_,
+                                           const Position& position_) const;
+
+  [[nodiscard]] bool CheckMoveOnOneSquare(int from_row_,
+                                          int from_col_,
+                                          int to_row_,
+                                          int to_col_,
+                                          const Position& position_) const;
+
+  [[nodiscard]] bool CheckEnPassant(int from_row_,
+                                    int from_col_,
+                                    int to_row_,
+                                    int to_col_,
+                                    const Position& position_) const;
+
+  [[nodiscard]] static bool CheckPromotion(int from_row_,
+                                           int from_col_,
+                                           int to_row_,
+                                           int to_col_,
+                                           const Position& position_);
+
+  static std::shared_ptr<Pawn> white_pawn_;
+  static std::shared_ptr<Pawn> black_pawn_;
 
  public:
   Pawn(const Pawn&) = delete;
   void operator=(const Pawn&) = delete;
 
-  static Pawn* get_piece(COLOR color);
+  static std::shared_ptr<Pawn> GetPiece(COLOR color);
 
-  const Move* define_move(int from_row_,
-                          int from_col_,
-                          int to_row_,
-                          int to_col_,
-                          const Position& position_) const override;
+  [[nodiscard]] std::shared_ptr<Move> DefineMove(int from_row,
+                                                 int from_col,
+                                                 int to_row,
+                                                 int to_col,
+                                                 const Position& position) const override;
 
-  PIECE_NAME get_piece_name() const override;
-  COLOR get_color() const override;
-
-  COLOR color_;
+  [[nodiscard]] PIECE_NAME GetPieceName() const override;
 };
 
-inline Pawn* Pawn::white_pawn_ = nullptr;
-inline Pawn* Pawn::black_pawn_ = nullptr;
+inline std::shared_ptr<Pawn> Pawn::white_pawn_ = nullptr;
+inline std::shared_ptr<Pawn> Pawn::black_pawn_ = nullptr;
 
 #endif

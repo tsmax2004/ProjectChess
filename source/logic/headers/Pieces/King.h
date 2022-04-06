@@ -6,30 +6,45 @@
 
 class King : public Piece {
  protected:
-  King(COLOR color);
+  explicit King(COLOR color);
 
-  static King* white_king_;
-  static King* black_king_;
+  [[nodiscard]] bool CheckCastle(int from_row_,
+                                 int from_col_,
+                                 int to_row_,
+                                 int to_col_,
+                                 const Position& position_) const;
+
+  [[nodiscard]] bool CheckBetweenSquaresAreNotUnderAttack(int from_row_,
+                                                          int from_col_,
+                                                          int to_row_,
+                                                          int to_col_,
+                                                          const Position& position_) const;
+
+  [[nodiscard]] static bool CheckSimpleMove(int from_row_,
+                                            int from_col_,
+                                            int to_row_,
+                                            int to_col_,
+                                            const Position& position_);
+
+  static std::shared_ptr<King> white_king_;
+  static std::shared_ptr<King> black_king_;
 
  public:
   King(const King&) = delete;
   void operator=(const King&) = delete;
 
-  static King* get_piece(COLOR color);
+  static std::shared_ptr<King> GetPiece(COLOR color);
 
-  const Move* define_move(int from_row_,
-                          int from_col_,
-                          int to_row_,
-                          int to_col_,
-                          const Position& position_) const override;
+  [[nodiscard]] std::shared_ptr<Move> DefineMove(int from_row_,
+                                                 int from_col_,
+                                                 int to_row_,
+                                                 int to_col_,
+                                                 const Position& position_) const override;
 
-  PIECE_NAME get_piece_name() const override;
-  COLOR get_color() const override;
-
-  COLOR color_;
+  [[nodiscard]] PIECE_NAME GetPieceName() const override;
 };
 
-inline King* King::white_king_ = nullptr;
-inline King* King::black_king_ = nullptr;
+inline std::shared_ptr<King> King::white_king_ = nullptr;
+inline std::shared_ptr<King> King::black_king_ = nullptr;
 
 #endif
