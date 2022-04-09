@@ -7,6 +7,7 @@ class Action {
   private:
     std::string type_;
   public:
+    Action();
     void virtual GetAction(Game*);
 };
 
