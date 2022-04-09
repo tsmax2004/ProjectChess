@@ -28,7 +28,7 @@
 #include "action/Action.h"
 #include "action/actions types/CancelMove.h"
 #include "action/actions types/MakeMove.h"
-#include "action/actions types/OfferDraw.h"
+#include "action/actions types/MakeDrow.h"
 #include "action/actions types/Surrender.h"
 
 #endif //CHESSPROJECT_SOURCE_INTERFACE_LOGIC_INCLUDE_LOGIC_H_
