@@ -5,6 +5,10 @@
 #ifndef CHESSPROJECT_SOURCE_INTERFACE_LOGIC_INCLUDE_LOGIC_H_
 #define CHESSPROJECT_SOURCE_INTERFACE_LOGIC_INCLUDE_LOGIC_H_
 
+#include <iostream>
+#include "../logic/headers/Position.h"
+
+//wrappers' includes
 #include "Head.h"
 #include "wrappers/PieceWrapper.h"
 #include "wrappers/PositionWrapper.h"
