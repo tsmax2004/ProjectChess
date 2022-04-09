@@ -1,5 +1,3 @@
-//
-// Created by Георгий Кузнецов on 09.04.2022.
-//
-
 #include "PieceWrapper.h"
+
+PieceWrapper::PieceWrapper(std::shared_ptr<Piece> piece) : piece_(piece) {};

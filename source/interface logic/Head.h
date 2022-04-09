@@ -1,7 +1,3 @@
-//
-// Created by Георгий Кузнецов on 09.04.2022.
-//
-
 #ifndef CHESSPROJECT_SOURCE_INTERFACE_LOGIC_HEAD_H_
 #define CHESSPROJECT_SOURCE_INTERFACE_LOGIC_HEAD_H_
 
