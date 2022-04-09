@@ -5,7 +5,9 @@
 #ifndef CHESSPROJECT_SOURCE_INTERFACE_INTERFACE_GAMEWINDOW_H_
 #define CHESSPROJECT_SOURCE_INTERFACE_INTERFACE_GAMEWINDOW_H_
 
-class GameWindow {
+#include "../../include interface logic.h"
+
+class GameWindow : public Window{
 
 };
 

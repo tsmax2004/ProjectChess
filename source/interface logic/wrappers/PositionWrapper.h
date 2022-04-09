@@ -6,7 +6,7 @@
 class PositionWrapper {
   private:
     std::shared_ptr<Position> position_;
-  private:
+  public:
     PositionWrapper(std::shared_ptr<Position>);
     POSITION_TYPE GetPositionType();
     std::shared_ptr<PieceWrapper> at(int, int);

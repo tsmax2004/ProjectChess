@@ -5,7 +5,9 @@
 #ifndef CHESSPROJECT_SOURCE_INTERFACE_INTERFACE_MENUWINDOW_H_
 #define CHESSPROJECT_SOURCE_INTERFACE_INTERFACE_MENUWINDOW_H_
 
-class MenuWindow {
+#include "../../include interface logic.h"
+
+class MenuWindow : public Window{
 
 };
 
