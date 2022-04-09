@@ -3,3 +3,7 @@
 //
 
 #include "Window.h"
+
+Window::Window() = default;
+
+Window::~Window() =  default;

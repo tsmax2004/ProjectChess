@@ -8,6 +8,7 @@
 #include "../../include interface logic.h"
 
 class MenuWindow : public Window{
+ public:
 
 };
 
