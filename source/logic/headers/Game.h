@@ -12,15 +12,17 @@ class Game {
   std::shared_ptr<Position> position_;
   std::vector<std::shared_ptr<Position>> position_history_;
 
+  [[nodiscard]] bool CheckForRepeating() const;
+
  public:
   Game();
   void StartNewGame();
-
-  void GameCycle();
-
-  [[nodiscard]] bool CheckForRepeating() const;
-
-  void PrintBoard() const;
+  bool MakeMove(int, int, int, int);
+  bool CancelMove();
+  [[nodiscard]] const std::vector<std::vector<std::shared_ptr<Piece>>>& WhatBoard() const;
+  [[nodiscard]] POSITION_TYPE WhatPositionType() const;
+  [[nodiscard]] COLOR WhatColor() const;
+  bool SetPosition(const std::vector<std::vector<std::shared_ptr<Piece>>>&, COLOR);
 };
 
 #endif

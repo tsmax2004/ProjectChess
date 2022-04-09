@@ -1,7 +1,5 @@
 #include "headers/Game.h"
-#include <iostream>
 #include <memory>
-#include <string>
 
 Game::Game() : position_(nullptr),
                position_history_() {}
@@ -9,70 +7,51 @@ Game::Game() : position_(nullptr),
 void Game::StartNewGame() {
   position_ = std::make_shared<Position>();
   position_->SetStartPosition();
-  GameCycle();
-  std::string ans;
-  while ((ans != "y") && (ans != "n")) {
-    std::cout << "Do you want play again? (y/n): ";
-    std::cin >> ans;
-  }
-  if (ans == "y") { StartNewGame(); }
-  if (ans == "n") { std::cout << "Thank you for the game!"; }
+  position_history_.push_back(position_);
 }
 
-void Game::GameCycle() {
-  while (true) {
-    PrintBoard();
-    std::cout << "Print move: ";
-    char from_col_ch, to_col_ch;
-    int from_row, to_row, from_col, to_col;
-    std::cin >> from_col_ch >> from_row >> to_col_ch >> to_row;
-    from_col = from_col_ch - 'a';
-    --from_row;
-    to_col = to_col_ch - 'a';
-    --to_row;
+bool Game::MakeMove(int from_row, int from_col, int to_row, int to_col) {
+  auto move = position_->at(from_row, from_col)->DefineMove(from_row, from_col, to_row, to_col, *position_);
+  if (!move->IsValid()) { return false; }
 
-    try {
-      auto move = position_->at(from_row, from_col)->DefineMove(from_row, from_col, to_row, to_col, *position_);
-      if (!move->IsValid()) {
-        std::cout << "Incorrect move\n";
-        continue;
-      }
+  auto new_position = std::make_shared<Position>(*position_);
+  move->MakeMove(from_row, from_col, to_row, to_col, *new_position);
+  new_position->DefinePositionType();
+  if (new_position->position_type_ == POSITION_TYPE::INVALID) { return false; }
 
-      auto new_position = std::make_shared<Position>(*position_);
-      move->MakeMove(from_row, from_col, to_row, to_col, *new_position);
-      new_position->DefinePositionType();
-      if (new_position->position_type_ == POSITION_TYPE::INVALID) {
-        std::cout << "Incorrect move\n";
-        continue;
-      }
+  position_ = new_position;
+  position_history_.push_back(position_);
+  return true;
+}
 
-      position_history_.push_back(position_);
-      position_ = new_position;
+bool Game::CancelMove() {
+  if (position_history_.size() <= 1) { return false; }
+  position_ = position_history_[position_history_.size() - 1];
+  position_history_.pop_back();
+  return true;
+}
 
-      if (position_->position_type_ == POSITION_TYPE::CHECK) {
-        PrintBoard();
-        std::cout << "CHECK!\n";
-      }
-      if (position_->position_type_ == POSITION_TYPE::CHECKMATE) {
-        PrintBoard();
-        std::cout << "CHECKMATE!\n";
-        break;
-      }
-      if (position_->position_type_ == POSITION_TYPE::DRAW) {
-        PrintBoard();
-        std::cout << "DRAW!\n";
-        break;
-      }
-      if (CheckForRepeating()) {
-        PrintBoard();
-        std::cout << "DRAW by repeating moves!\n";
-        break;
-      }
-    } catch (std::out_of_range&) {
-      std::cout << "Incorrect coordinates\n";
-      continue;
-    }
-  }
+const std::vector<std::vector<std::shared_ptr<Piece>>>& Game::WhatBoard() const {
+  return position_->board_;
+}
+
+POSITION_TYPE Game::WhatPositionType() const {
+  return position_->position_type_;
+}
+
+COLOR Game::WhatColor() const {
+  return position_->move_color_;
+}
+
+bool Game::SetPosition(const std::vector<std::vector<std::shared_ptr<Piece>>>& board, COLOR color) {
+  auto new_position = std::make_shared<Position>();
+  new_position->SetPosition(board, color);
+  new_position->DefinePositionType();
+  if (new_position->position_type_ == POSITION_TYPE::NOT_DEFINED) { return false; }
+  position_ = new_position;
+  position_history_.clear();
+  position_history_.push_back(position_);
+  return true;
 }
 
 bool Game::CheckForRepeating() const {
@@ -86,8 +65,8 @@ bool Game::CheckForRepeating() const {
       if (is_equal) {
         for (int col = 0; col < first_position->board_[row].size(); ++col) {
           if (first_position->at(row, col)->GetPieceName() != second_position->at(row, col)->GetPieceName() ||
-              (first_position->at(row, col)->GetColor() != second_position->at(row, col)->GetColor()
-                  && first_position->at(row, col)->GetPieceName() != PIECE_NAME::EMPTY)) {
+          (first_position->at(row, col)->GetColor() != second_position->at(row, col)->GetColor()
+          && first_position->at(row, col)->GetPieceName() != PIECE_NAME::EMPTY)) {
             is_equal = false;
             break;
           }
@@ -98,31 +77,4 @@ bool Game::CheckForRepeating() const {
   }
   if (pos_count >= 2) { return true; }
   return false;
-}
-
-void Game::PrintBoard() const {
-  std::cout << "\n\n";
-  for (int row = 8; row >= 1; --row) {
-    std::cout << "      ";
-    for (int col = 0; col < 8; ++col) { std::cout << "---- "; }
-
-    std::cout << "\n  " << row << "  ";
-    for (int col = 0; col < 8; ++col) {
-      std::cout << "| ";
-      auto piece = position_->at(row - 1, col);
-      if (piece->GetPieceName() == PIECE_NAME::EMPTY) {
-        std::cout << "  ";
-      } else {
-        std::cout << char(piece->GetColor()) << char(piece->GetPieceName());
-      }
-      std::cout << " ";
-    }
-
-    std::cout << "|\n";
-  }
-
-  std::cout << "      ";
-  for (int col = 0; col < 8; ++col) { std::cout << "---- "; }
-
-  std::cout << "\n       a    b    c    d    e    f    g    h\n\n";
 }

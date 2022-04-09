@@ -63,6 +63,7 @@ bool Pawn::CheckMoveOnOneSquare(int from_row_,
 }
 
 bool Pawn::CheckEnPassant(int from_row_, int from_col_, int to_row_, int to_col_, const Position& position_) const {
+  if (position_.last_move_.empty()) { return false; }
   if (std::abs(from_row_ - to_row_) != 1 || std::abs(from_col_ - to_col_) != 1) { return false; }
   if (color_ == COLOR::WHITE && from_row_ != position_.cnt_rows - 4) { return false; }
   if (color_ == COLOR::BLACK && from_row_ != 3) { return false; }
