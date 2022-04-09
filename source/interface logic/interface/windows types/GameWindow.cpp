@@ -13,12 +13,12 @@ std::shared_ptr<Action> GameWindow::GetAction() {
     if (input == "surrender") {
       std::shared_ptr<Surrender> surrender;
       surrender = surrender->GetInstance();
-      return std::static_pointer_cast<Action>(surrender->GetInstance());
+      return std::static_pointer_cast<Action>(surrender);
     }
     else if (input == "draw") {
       std::shared_ptr<MakeDraw> draw;
       draw = draw->GetInstance();
-      return std::static_pointer_cast<Action>(draw->GetInstance());
+      return std::static_pointer_cast<Action>(draw);
     }
   }
 }
