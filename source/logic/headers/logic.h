@@ -1,11 +1,17 @@
-
-#ifndef LOGIC_H_
-#define LOGIC_H_
-
-#include "Enums.h"
-#include "pieces.h"
-#include "moves.h"
-#include "Position.h"
+//
+// Created by evgen on 09.04.2022.
+//
 #include "Game.h"
 
-#endif
+class Logic {
+  protected:
+    Game Game;
+  public:
+    Logic();
+    void MakeMove(int, int, int, int);
+    void StartNewGame();
+    void CancelMove();
+    std::shared_ptr<Position> GetBoard();
+    void Surrender();
+    bool OfferDraw();
+};
