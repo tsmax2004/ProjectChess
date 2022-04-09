@@ -2,7 +2,8 @@
 #include <memory>
 
 Game::Game() : position_(nullptr),
-               position_history_() {}
+               position_history_(),
+               error_(ERROR_TYPE::EMPTY){}
 
 void Game::StartNewGame() {
   position_ = std::make_shared<Position>();
@@ -12,7 +13,10 @@ void Game::StartNewGame() {
 
 bool Game::MakeMove(int from_row, int from_col, int to_row, int to_col) {
   auto move = position_->at(from_row, from_col)->DefineMove(from_row, from_col, to_row, to_col, *position_);
-  if (!move->IsValid()) { return false; }
+  if (!move->IsValid()) {
+      error_ = ERROR_TYPE::INCORRECT_MOVE;
+      return false;
+  }
 
   auto new_position = std::make_shared<Position>(*position_);
   move->MakeMove(from_row, from_col, to_row, to_col, *new_position);
@@ -25,7 +29,10 @@ bool Game::MakeMove(int from_row, int from_col, int to_row, int to_col) {
 }
 
 bool Game::CancelMove() {
-  if (position_history_.size() <= 1) { return false; }
+  if (position_history_.size() <= 1) {
+      error_ = ERROR_TYPE::CANCEL_MOVE;
+      return false;
+  }
   position_ = position_history_[position_history_.size() - 1];
   position_history_.pop_back();
   return true;

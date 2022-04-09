@@ -22,4 +22,11 @@ enum class PIECE_NAME : char {
   KING
 };
 
+enum class ERROR_TYPE : char {
+    EMPTY,
+    CANCEL_MOVE,
+    INCORRECT_MOVE,
+    REJECT_DRAW
+};
+
 #endif

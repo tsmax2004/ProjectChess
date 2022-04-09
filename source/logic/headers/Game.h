@@ -11,6 +11,7 @@ class Game {
  protected:
   std::shared_ptr<Position> position_;
   std::vector<std::shared_ptr<Position>> position_history_;
+  ERROR_TYPE error_;
 
   [[nodiscard]] bool CheckForRepeating() const;
 
