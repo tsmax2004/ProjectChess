@@ -7,6 +7,8 @@ class PieceWrapper {
     std::shared_ptr<Piece> piece_;
   public:
     PieceWrapper(std::shared_ptr<Piece>);
+    PIECE_NAME GetPieceName();
+    COLOR GetPieceColor();
 };
 
 #endif //CHESSPROJECT_SOURCE_INTERFACE_LOGIC_WRAPPERS_PIECEWRAPPER_H_
