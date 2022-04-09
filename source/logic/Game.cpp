@@ -78,3 +78,7 @@ bool Game::CheckForRepeating() const {
   if (pos_count >= 2) { return true; }
   return false;
 }
+
+std::shared_ptr<Position> Game::GetPosition() {
+    return position_;
+}

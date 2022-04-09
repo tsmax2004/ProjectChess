@@ -23,6 +23,7 @@ class Game {
   [[nodiscard]] POSITION_TYPE WhatPositionType() const;
   [[nodiscard]] COLOR WhatColor() const;
   bool SetPosition(const std::vector<std::vector<std::shared_ptr<Piece>>>&, COLOR);
+  std::shared_ptr<Position> GetPosition();
 };
 
 #endif
