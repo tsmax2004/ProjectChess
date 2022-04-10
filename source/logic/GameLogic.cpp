@@ -2,7 +2,7 @@
 #include <memory>
 
 GameLogic::GameLogic() : position_(nullptr),
-               position_history_() {}
+               position_history_() { StartNewGame();}
 
 void GameLogic::StartNewGame() {
   position_ = std::make_shared<Position>();

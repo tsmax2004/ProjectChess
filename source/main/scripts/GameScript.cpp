@@ -13,28 +13,25 @@ std::shared_ptr<GameScript> GameScript::Get() {
 }
 
 std::shared_ptr<Script> GameScript::Run() {
-  game_logic_.StartNewGame();
-
-  while (true) {
-    interface_.UpdateBoard(ConvertBoard(game_logic_.WhatBoard()));
-    auto action = interface_.GetAction();
-    if (action.action_type == GAME_ACTION_TYPE::MAKE_MOVE) {
-      if (!game_logic_.MakeMove(action.row_from, action.col_from, action.row_to, action.col_to)) {
-        interface_.InformIncorrectMove();
-      } else {
-        auto position_type = game_logic_.WhatPositionType();
-        if (position_type == POSITION_TYPE::CHECK) { interface_.InformCheck(); }
-        if (position_type == POSITION_TYPE::DRAW) { interface_.InformDraw(); return MenuScript::Get(); }
-        if (position_type == POSITION_TYPE::CHECKMATE) { interface_.InformCheckmate(); return MenuScript::Get(); }
-      }
-    }
-    if (action.action_type == GAME_ACTION_TYPE::CANCEL_MOVE) {
-      game_logic_.CancelMove();
-    }
-    if (action.action_type == GAME_ACTION_TYPE::EXIT_TO_MENU) {
-      return MenuScript::Get();
+  interface_.UpdateBoard(ConvertBoard(game_logic_.WhatBoard()));
+  auto action = interface_.GetAction();
+  if (action.action_type == GAME_ACTION_TYPE::MAKE_MOVE) {
+    if (!game_logic_.MakeMove(action.row_from, action.col_from, action.row_to, action.col_to)) {
+      interface_.InformIncorrectMove();
+    } else {
+      auto position_type = game_logic_.WhatPositionType();
+      if (position_type == POSITION_TYPE::CHECK) { interface_.InformCheck(); }
+      if (position_type == POSITION_TYPE::DRAW) { interface_.InformDraw(); return MenuScript::Get(); }
+      if (position_type == POSITION_TYPE::CHECKMATE) { interface_.InformCheckmate(); return MenuScript::Get(); }
     }
   }
+  if (action.action_type == GAME_ACTION_TYPE::CANCEL_MOVE) {
+    game_logic_.CancelMove();
+  }
+  if (action.action_type == GAME_ACTION_TYPE::EXIT_TO_MENU) {
+    return MenuScript::Get();
+  }
+  return GameScript::Get();
 }
 
 std::vector<std::vector<InterfacePiece>> GameScript::ConvertBoard(const std::vector<std::vector<std::shared_ptr<Piece>>>& board) {
