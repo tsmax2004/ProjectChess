@@ -6,11 +6,16 @@
 #define CHESSPROJECT_SOURCE_INTERFACE_INTERFACE_MENUWINDOW_H_
 
 #include "Window.h"
-#include "MenuWindow.h"
 
 class MenuWindow : public Window{
+ private:
+  static std::shared_ptr<MenuWindow> instance_;
+  MenuWindow();
  public:
-
+  static std::shared_ptr<MenuWindow> GetInstance();
+  void Draw(std::shared_ptr<PositionWrapper>) override;
+  std::shared_ptr<Action> GetAction() override;
 };
 
+inline std::shared_ptr<MenuWindow> MenuWindow::instance_ = nullptr;
 #endif

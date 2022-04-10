@@ -5,7 +5,7 @@
 #include "headers/Interface.h"
 
 Interface::Interface() {
-  window_ = new MenuWindow();
+  window_ = MenuWindow::GetInstance();
   position_wrapper_ = nullptr;
 }
 
@@ -26,20 +26,13 @@ std::shared_ptr<Action> Interface::GetWindowAction() {
 }*/
 
 void Interface::SetGame() {
-  window_ -> ~Window();
-  window_ = new GameWindow();
+  window_ = GameWindow::GetInstance();
 }
 
 void Interface::SetMenu() {
-  window_ -> ~Window();
-  window_ = new MenuWindow();
+  window_ = MenuWindow::GetInstance();
 }
 
 void Interface::UpdateBoard(std::shared_ptr<Position> new_pos_) {
   position_wrapper_ -> UpdatePosition(new_pos_);
-}
-
-Interface::~Interface() {
-  window_ -> ~Window();
-  position_wrapper_ -> ~PositionWrapper();
 }

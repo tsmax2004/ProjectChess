@@ -13,6 +13,6 @@ std::shared_ptr<CancelMove> CancelMove::GetInstance() {
   return instance_;
 }
 
-void CancelMove::GetAction(std::shared_ptr<Game> logic_) {
+void CancelMove::GetAction(const std::shared_ptr<Game>& logic_) {
   logic_ -> CancelMove();
 }

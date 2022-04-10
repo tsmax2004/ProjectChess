@@ -15,7 +15,7 @@ class MakeMove {
   MakeMove(int, int, int, int);
  public:
   static std::shared_ptr<MakeMove> GetInstance(int, int, int, int);
-  void GetAction(std::shared_ptr<Game>);
+  static void GetAction(const std::shared_ptr<Game>&);
 };
 
 inline std::shared_ptr<MakeMove> MakeMove::instance_ = nullptr;

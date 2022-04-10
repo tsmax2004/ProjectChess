@@ -18,6 +18,6 @@ std::shared_ptr<MakeMove> MakeMove::GetInstance(int from_y_, int from_x_, int to
   return instance_;
 }
 
-void MakeMove::GetAction(std::shared_ptr<Game> logic_) {
+void MakeMove::GetAction(const std::shared_ptr<Game>& logic_) {
   logic_ -> MakeMove(from_square_.first, from_square_.second, to_square_.first, to_square_.second);
 }

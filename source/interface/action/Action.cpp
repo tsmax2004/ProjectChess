@@ -3,4 +3,3 @@
 //
 
 #include "../headers/actions/Action.h"
-Action::Action() = default;

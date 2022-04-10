@@ -12,6 +12,6 @@ std::shared_ptr<Surrender> Surrender::GetInstance() {
   return instance_;
 }
 
-void Surrender::GetAction(std::shared_ptr<Game> logic_) {
+void Surrender::GetAction(const std::shared_ptr<Game>& logic_) {
   logic_ -> Surrender();
 }

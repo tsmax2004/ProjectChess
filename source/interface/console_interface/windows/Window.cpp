@@ -4,6 +4,6 @@
 
 #include "../headers/windows/Window.h"
 
-Window::Window() = default;
-
-Window::~Window() =  default;
+//Window::Window() = default;
+//
+//Window::~Window() =  default;

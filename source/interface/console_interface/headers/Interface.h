@@ -19,7 +19,6 @@ class Interface {
   void SetGame();
   void UpdateBoard(std::shared_ptr<Position>);
   std::shared_ptr<PositionWrapper> GetPositionWrapper();
-  ~Interface();
  private:
   std::shared_ptr<Window> window_;
   std::shared_ptr<PositionWrapper> position_wrapper_;

@@ -10,7 +10,7 @@ class Surrender {
   Surrender();
  public:
   static std::shared_ptr<Surrender> GetInstance();
-  void GetAction(std::shared_ptr<Game>);
+  static void GetAction(const std::shared_ptr<Game>&);
 };
 
 inline std::shared_ptr<Surrender> Surrender::instance_ = nullptr;

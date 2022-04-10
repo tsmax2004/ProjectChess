@@ -9,11 +9,10 @@
 #include "../../../headers/wrappers/wrappers.h"
 
 class Window {
+ private:
  public:
-  Window();
   virtual void Draw(std::shared_ptr<PositionWrapper>) = 0;
   virtual std::shared_ptr<Action> GetAction() = 0;
-  ~Window();
 };
 
 #endif

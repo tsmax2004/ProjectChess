@@ -15,7 +15,7 @@ std::shared_ptr<Action> GameWindow::GetAction() {
     if (input == "surrender") {
       std::shared_ptr<Surrender> surrender;
       surrender = surrender->GetInstance();
-      return std::static_pointer_cast<Action>(surrender);
+      return std::reinterpret_pointer_cast<Action>(surrender);
     }
     /*else if (input == "draw") {
       std::shared_ptr<OfferDraw> draw;
@@ -23,6 +23,7 @@ std::shared_ptr<Action> GameWindow::GetAction() {
       return std::static_pointer_cast<Action>(draw);
     }*/
   }
+  return nullptr;
 }
 
 std::shared_ptr<GameWindow> GameWindow::GetInstance() {
@@ -32,7 +33,7 @@ std::shared_ptr<GameWindow> GameWindow::GetInstance() {
   return instance_;
 }
 
-void GameWindow::Draw(PositionWrapper* position_wrapper) {
+void GameWindow::Draw(std::shared_ptr<PositionWrapper> position_wrapper) {
     std::cout << "\n\n";
     for (int row = 8; row >= 1; --row) {
       std::cout << "      ";
