@@ -2,7 +2,9 @@
 #ifndef CHESSPROJECT_SOURCE_MAIN_HEADERS_SCRIPTS_SCRIPTS_H_
 #define CHESSPROJECT_SOURCE_MAIN_HEADERS_SCRIPTS_SCRIPTS_H_
 
-#include "Game.h"
-#include "Menu.h"
+#include "Script.h"
+#include "GameScript.h"
+#include "MenuScript.h"
+#include "ExitScript.h"
 
 #endif //CHESSPROJECT_SOURCE_MAIN_HEADERS_SCRIPTS_SCRIPTS_H_

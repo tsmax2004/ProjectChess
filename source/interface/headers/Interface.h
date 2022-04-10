@@ -13,6 +13,8 @@ class Interface {
   MenuWindow GetMenuInterface();
 
  private:
+  GameWindow game_window_;
+  MenuWindow menu_window_;
 };
 
 #endif
