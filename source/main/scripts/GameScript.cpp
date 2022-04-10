@@ -23,9 +23,5 @@ std::shared_ptr<Script> GameScript::Run() {
   if (action.action_type == GAME_ACTION_TYPE::EXIT_TO_MENU) {
     return MenuScript::Get();
   }
-  if (action.action_type == GAME_ACTION_TYPE::PLAY_AGAIN) {
-    game_logic_ = GameLogic();
-    return GameScript::Get();
-  }
   return GameScript::Get();
 }
