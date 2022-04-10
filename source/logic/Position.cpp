@@ -91,6 +91,7 @@ bool Position::SquareIsUnderAttack(int row, int col, COLOR attack_color) const {
 
 void Position::DefinePositionType() {
   position_type_ = POSITION_TYPE::COMMON;
+  if (Check(move_color_ )) { position_type_ = POSITION_TYPE::INVALID; return; }
   if (Check(move_color_ == COLOR::WHITE ? COLOR::BLACK : COLOR::WHITE)) {
     position_type_ = POSITION_TYPE::CHECK;
     if (Checkmate(move_color_ == COLOR::WHITE ? COLOR::BLACK : COLOR::WHITE)) {
