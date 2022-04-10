@@ -7,4 +7,4 @@
 #include "MenuScript.h"
 #include "ExitScript.h"
 
-#endif //CHESSPROJECT_SOURCE_MAIN_HEADERS_SCRIPTS_SCRIPTS_H_
+#endif

@@ -38,6 +38,7 @@ GameAction GameWindow::GetAction() {
     row_to = to[1] - '1';
     return GameAction(GAME_ACTION_TYPE::MAKE_MOVE, row_from, col_from, row_to, col_to);
   }
+  return GameAction(GAME_ACTION_TYPE::EXIT_TO_MENU);
 }
 
 bool GameWindow::CheckInputCoordinate(std::string inp) {
@@ -62,10 +63,14 @@ void GameWindow::InformCheck() {
 void GameWindow::InformCheckmate() {
   std::cout << "Checkmate!\n";
   std::this_thread::sleep_for(std::chrono::seconds(2));
+  std::cout << "Thank you for game!\n";
+  std::this_thread::sleep_for(std::chrono::seconds(2));
 }
 
 void GameWindow::InformDraw() {
   std::cout << "Draw!\n";
+  std::this_thread::sleep_for(std::chrono::seconds(2));
+  std::cout << "Thank you for game!\n";
   std::this_thread::sleep_for(std::chrono::seconds(2));
 }
 

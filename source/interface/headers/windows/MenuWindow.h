@@ -8,7 +8,7 @@ enum class MENU_ACTION_TYPE {
 };
 
 struct MenuAction {
-  explicit MenuAction(MENU_ACTION_TYPE menu_action_type) : action_type(menu_action_type){}
+  explicit MenuAction(MENU_ACTION_TYPE menu_action_type) : action_type(menu_action_type) {}
   MENU_ACTION_TYPE action_type;
 };
 
@@ -16,10 +16,9 @@ class MenuWindow {
  public:
   MenuWindow();
   void DrawMenuWindow();
-  void CleanWindow();
   MenuAction GetAction();
  private:
-
+  void CleanWindow();
 };
 
 #endif

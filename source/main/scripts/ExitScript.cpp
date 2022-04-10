@@ -10,7 +10,6 @@ std::shared_ptr<ExitScript> ExitScript::Get() {
   return instance_;
 }
 
-
 std::shared_ptr<Script> ExitScript::Run() {
   return nullptr;
 }

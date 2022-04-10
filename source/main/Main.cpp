@@ -1,6 +1,6 @@
 #include "headers/Main.h"
 
-Main::Main(): interface_() {
+Main::Main() : interface_() {
   InitializeScripts();
   Run();
 }

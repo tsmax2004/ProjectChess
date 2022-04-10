@@ -2,7 +2,7 @@
 #ifndef CHESSPROJECT_SOURCE_MAIN_HEADERS_SCRIPTS_MENUSCRIPT_H_
 #define CHESSPROJECT_SOURCE_MAIN_HEADERS_SCRIPTS_MENUSCRIPT_H_
 
-#include "scripts.h"
+#include "Script.h"
 #include "../../../interface/headers/windows/MenuWindow.h"
 
 #include <memory>

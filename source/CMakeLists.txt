@@ -10,10 +10,6 @@ target_include_directories(test PUBLIC ${PROJECT_SOURCE_DIR}/logic/headers)
 target_include_directories(test PUBLIC ${PROJECT_SOURCE_DIR}/main/headers)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/logic)
-target_link_libraries(test PUBLIC Logic)
-
 add_subdirectory(${PROJECT_SOURCE_DIR}/interface)
-target_link_libraries(test PUBLIC Interface)
-
 add_subdirectory(${PROJECT_SOURCE_DIR}/main)
-target_link_libraries(test PUBLIC Main)
+target_link_libraries(test PUBLIC Logic Interface Main)

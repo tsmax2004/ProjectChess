@@ -24,6 +24,7 @@ MenuAction MenuWindow::GetAction() {
   if (response == "E") {
     return MenuAction(MENU_ACTION_TYPE::EXIT);
   }
+  return MenuAction(MENU_ACTION_TYPE::EXIT);
 }
 
 void MenuWindow::CleanWindow() {

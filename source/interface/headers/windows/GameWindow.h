@@ -2,7 +2,6 @@
 #ifndef CHESSPROJECT_SOURCE_INTERFACE_HEADERS_WINDOWS_GAMEWINDOW_H_
 #define CHESSPROJECT_SOURCE_INTERFACE_HEADERS_WINDOWS_GAMEWINDOW_H_
 
-
 #include <vector>
 #include <iostream>
 #include <string>
@@ -14,8 +13,8 @@ enum class GAME_ACTION_TYPE {
 };
 
 struct GameAction {
-  GameAction(GAME_ACTION_TYPE action_type): action_type(action_type) {}
-  GameAction(GAME_ACTION_TYPE action_type, int row_from, int col_from, int row_to, int col_to):
+  explicit GameAction(GAME_ACTION_TYPE action_type) : action_type(action_type) {}
+  GameAction(GAME_ACTION_TYPE action_type, int row_from, int col_from, int row_to, int col_to) :
       action_type(action_type), row_from(row_from), col_from(col_from), row_to(row_to), col_to(col_to) {}
 
   GAME_ACTION_TYPE action_type;
@@ -24,12 +23,12 @@ struct GameAction {
 
 enum class INTERFACE_PIECE_NAME : char {
   EMPTY,
-  PAWN   = 'p',
+  PAWN = 'p',
   KNIGHT = 'k',
   BISHOP = 'b',
-  ROOK   = 'r',
-  QUEEN  = 'q',
-  KING   = 'K'
+  ROOK = 'r',
+  QUEEN = 'q',
+  KING = 'K'
 };
 
 enum class INTERFACE_COLOR { WHITE = 'W', BLACK = 'B' };
@@ -60,6 +59,5 @@ class GameWindow {
 
   std::vector<std::vector<InterfacePiece>> board;
 };
-
 
 #endif

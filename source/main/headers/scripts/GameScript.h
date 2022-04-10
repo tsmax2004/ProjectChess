@@ -2,7 +2,7 @@
 #ifndef CHESSPROJECT_SOURCE_MAIN_HEADERS_SCRIPTS_GAMESCRIPT_H_
 #define CHESSPROJECT_SOURCE_MAIN_HEADERS_SCRIPTS_GAMESCRIPT_H_
 
-#include "scripts.h"
+#include "Script.h"
 #include "../../../logic/headers/logic.h"
 #include "../../../interface/headers/windows/GameWindow.h"
 
