@@ -13,6 +13,7 @@ std::shared_ptr<GameScript> GameScript::Get() {
 }
 
 std::shared_ptr<Script> GameScript::Run() {
+  interface_.DrawGameWindow();
   game_logic_.StartNewGame();
 
   while (true) {

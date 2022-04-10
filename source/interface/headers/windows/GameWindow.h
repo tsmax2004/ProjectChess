@@ -54,6 +54,7 @@ class GameWindow {
   void InformDraw();
 
  private:
+  void CleanWindow();
   void PrintBoard();
   bool CheckInputCoordinate(std::string);
 

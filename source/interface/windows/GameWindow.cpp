@@ -1,4 +1,6 @@
 #include "../headers/windows/GameWindow.h"
+#include <chrono>
+#include <thread>
 
 GameWindow::GameWindow() = default;
 void GameWindow::UpdateBoard(const std::vector<std::vector<InterfacePiece>>& new_board) {
@@ -10,7 +12,7 @@ void GameWindow::DrawGameWindow() {
 }
 
 GameAction GameWindow::GetAction() {
-  std::cout << '\n';
+  CleanWindow();
   PrintBoard();
   std::string response;
   while ((response != "M") && (response != "C") && (response != "E")) {
@@ -24,7 +26,7 @@ GameAction GameWindow::GetAction() {
   } else if (response == "M") {
     std::string from, to;
     while (!CheckInputCoordinate(from) || !CheckInputCoordinate(to)) {
-      std::cout << "Input move in standard chess fromat (e.g. e2 e4): ";
+      std::cout << "Input move in standard chess format (e.g. e2 e4): ";
       std::cin >> from >> to;
     }
     int row_from, col_from, row_to, col_to;
@@ -47,18 +49,22 @@ bool GameWindow::CheckInputCoordinate(std::string inp) {
 
 void GameWindow::InformIncorrectMove() {
   std::cout << "Move is incorrect!\n";
+  std::this_thread::sleep_for(std::chrono::seconds(2));
 }
 
 void GameWindow::InformCheck() {
   std::cout << "Check!\n";
+  std::this_thread::sleep_for(std::chrono::seconds(2));
 }
 
 void GameWindow::InformCheckmate() {
   std::cout << "Checkmate!\n";
+  std::this_thread::sleep_for(std::chrono::seconds(2));
 }
 
 void GameWindow::InformDraw() {
   std::cout << "Draw!\n";
+  std::this_thread::sleep_for(std::chrono::seconds(2));
 }
 
 void GameWindow::PrintBoard() {
@@ -86,4 +92,8 @@ void GameWindow::PrintBoard() {
   for (int col = 0; col < 8; ++col) { std::cout << "---- "; }
 
   std::cout << "\n       a    b    c    d    e    f    g    h\n\n";
+}
+
+void GameWindow::CleanWindow() {
+  std::cout << "\x1B[2J\x1B[H";
 }
