@@ -2,10 +2,13 @@
 #ifndef CHESSPROJECT_SOURCE_INTERFACE_HEADERS_WINDOWS_GAMEWINDOW_H_
 #define CHESSPROJECT_SOURCE_INTERFACE_HEADERS_WINDOWS_GAMEWINDOW_H_
 
+#include <vector>
+#include <iostream>
+#include <string>
+
 enum class GAME_ACTION_TYPE {
   MAKE_MOVE,
   CANCEL_MOVE,
-  PLAY_AGAIN,
   EXIT_TO_MENU
 };
 
@@ -39,7 +42,7 @@ class GameWindow {
  public:
   GameWindow();
 
-  void UpdateBoard(std::vector<std::vector<InterfacePiece>>);
+  void UpdateBoard(const std::vector<std::vector<InterfacePiece>>&);
   void DrawGameWindow();
 
   GameAction GetAction();
@@ -49,9 +52,10 @@ class GameWindow {
   void InformCheckmate();
   void InformDraw();
 
-  GameAction AskForPlayAgain();
-
  private:
+  void PrintBoard();
+  bool CheckInputCoordinate(std::string);
+
   std::vector<std::vector<InterfacePiece>> board;
 };
 
