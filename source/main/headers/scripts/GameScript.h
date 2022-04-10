@@ -22,6 +22,8 @@ class GameScript: public Script {
   explicit GameScript(GameWindow);
   GameLogic game_logic_;
   GameWindow interface_;
+
+  std::shared_ptr<Script> to_return;  // flag - to break cycle
 };
 
 inline std::shared_ptr<GameScript> GameScript::instance_ = nullptr;
