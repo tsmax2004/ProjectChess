@@ -14,8 +14,9 @@ MenuAction MenuWindow::GetAction() {
   std::cout << '\n';
   std::string response;
   while ((response != "N") && (response != "E")) {
-    std::cout << "Options: (N)ew Game, (E)xitGame: ";
+    std::cout << "Options: (N)ewGame, (E)xitGame: ";
     std::cin >> response;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   }
   if (response == "N") {
     return MenuAction(MENU_ACTION_TYPE::NEW_GAME);

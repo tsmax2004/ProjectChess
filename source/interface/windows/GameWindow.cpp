@@ -18,6 +18,7 @@ GameAction GameWindow::GetAction() {
   while ((response != "M") && (response != "C") && (response != "E")) {
     std::cout << "Options: (M)akeMove, (C)ancelMove, (E)xitToMenu: ";
     std::cin >> response;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   }
   if (response == "C") {
     return GameAction(GAME_ACTION_TYPE::CANCEL_MOVE);
@@ -28,6 +29,7 @@ GameAction GameWindow::GetAction() {
     while (!CheckInputCoordinate(from) || !CheckInputCoordinate(to)) {
       std::cout << "Input move in standard chess format (e.g. e2 e4): ";
       std::cin >> from >> to;
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
     int row_from, col_from, row_to, col_to;
     col_from = from[0] - 'a';
