@@ -12,8 +12,8 @@ set(INTERFACE_LIB console_interface/Interface.cpp
         console_interface/windows/GameWindow.cpp
         console_interface/windows/MenuWindow.cpp)
 
-set(WRAPPERS_LIB  wrappers/PieceWrapper.cpp
-                  wrappers/PositionWrapper.cpp)
+#set(WRAPPERS_LIB  wrappers/PieceWrapper.cpp
+#                  wrappers/PositionWrapper.cpp)
 
 set(HEAD_LIB      Head.cpp)
 

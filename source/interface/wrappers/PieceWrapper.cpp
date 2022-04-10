@@ -2,7 +2,9 @@
 
 #include <utility>
 
-PieceWrapper::PieceWrapper(std::shared_ptr<Piece> piece) : piece_(std::move(piece)) {};
+PieceWrapper::PieceWrapper(std::shared_ptr<Piece> piece) {
+  piece_ = std::move(piece);
+}
 
 PIECE_NAME PieceWrapper::GetPieceName() {
   return piece_->GetPieceName();

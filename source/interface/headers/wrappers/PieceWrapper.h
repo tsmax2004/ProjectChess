@@ -4,11 +4,11 @@
 
 class PieceWrapper {
   private:
-    std::shared_ptr<Piece> piece_;
+    static std::shared_ptr<Piece> piece_;
   public:
-    PieceWrapper(std::shared_ptr<Piece>);
-    PIECE_NAME GetPieceName();
-    COLOR GetPieceColor();
+    explicit PieceWrapper(std::shared_ptr<Piece>);
+    static PIECE_NAME GetPieceName();
+    static COLOR GetPieceColor();
 };
 
 #endif
