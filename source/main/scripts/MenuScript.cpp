@@ -11,5 +11,15 @@ std::shared_ptr<MenuScript> MenuScript::Get() {
 }
 
 std::shared_ptr<Script> MenuScript::Run() {
-  return GameScript::Get();
+  interface_.DrawMenuWindow();
+
+  while (true) {
+    auto action = interface_.GetAction();
+    if (action.action_type == MENU_ACTION_TYPE::NEW_GAME) {
+      return GameScript::Get();
+    }
+    if (action.action_type == MENU_ACTION_TYPE::EXIT) {
+      return ExitScript::Get();
+    }
+  }
 }
