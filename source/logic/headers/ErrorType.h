@@ -10,4 +10,4 @@ enum class ErrorTypes: int{
   INVALID_MOVE,
   REJECT_MOVE
 };
-#endif //CHESSPROJECT_SOURCE_LOGIC_HEADERS_ERRORTYPE_H_
+#endif

@@ -1,0 +1,8 @@
+
+#ifndef CHESSPROJECT_SOURCE_INTERFACE_HEADERS_WRAPPERS_WRAPPERS_H_
+#define CHESSPROJECT_SOURCE_INTERFACE_HEADERS_WRAPPERS_WRAPPERS_H_
+
+#include "PieceWrapper.h"
+#include "PositionWrapper.h"
+
+#endif
