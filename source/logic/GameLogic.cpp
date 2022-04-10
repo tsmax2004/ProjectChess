@@ -26,7 +26,7 @@ bool GameLogic::MakeMove(int from_row, int from_col, int to_row, int to_col) {
 
 bool GameLogic::CancelMove() {
   if (position_history_.size() <= 1) { return false; }
-  position_ = position_history_[position_history_.size() - 1];
+  position_ = position_history_[position_history_.size() - 2];
   position_history_.pop_back();
   return true;
 }

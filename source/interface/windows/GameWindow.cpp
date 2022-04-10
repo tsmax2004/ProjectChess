@@ -74,7 +74,7 @@ void GameWindow::PrintBoard() {
       if (piece.piece_name == INTERFACE_PIECE_NAME::EMPTY) {
         std::cout << "  ";
       } else {
-        std::cout << char(piece.color) << char(piece.color);
+        std::cout << char(piece.color) << char(piece.piece_name);
       }
       std::cout << " ";
     }

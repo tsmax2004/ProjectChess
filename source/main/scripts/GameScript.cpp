@@ -13,15 +13,63 @@ std::shared_ptr<GameScript> GameScript::Get() {
 }
 
 std::shared_ptr<Script> GameScript::Run() {
-  auto action = interface_.GetAction();
-  if (action.action_type == GAME_ACTION_TYPE::MAKE_MOVE) {
-    game_logic_.MakeMove(action.row_from, action.col_from, action.row_to, action.col_to);
+  game_logic_.StartNewGame();
+
+  while (true) {
+    interface_.UpdateBoard(ConvertBoard(game_logic_.WhatBoard()));
+    auto action = interface_.GetAction();
+    if (action.action_type == GAME_ACTION_TYPE::MAKE_MOVE) {
+      if (!game_logic_.MakeMove(action.row_from, action.col_from, action.row_to, action.col_to)) {
+        interface_.InformIncorrectMove();
+      } else {
+        auto position_type = game_logic_.WhatPositionType();
+        if (position_type == POSITION_TYPE::CHECK) { interface_.InformCheck(); }
+        if (position_type == POSITION_TYPE::DRAW) { interface_.InformDraw(); return MenuScript::Get(); }
+        if (position_type == POSITION_TYPE::CHECKMATE) { interface_.InformCheckmate(); return MenuScript::Get(); }
+      }
+    }
+    if (action.action_type == GAME_ACTION_TYPE::CANCEL_MOVE) {
+      game_logic_.CancelMove();
+    }
+    if (action.action_type == GAME_ACTION_TYPE::EXIT_TO_MENU) {
+      return MenuScript::Get();
+    }
   }
-  if (action.action_type == GAME_ACTION_TYPE::CANCEL_MOVE) {
-    game_logic_.CancelMove();
+}
+
+std::vector<std::vector<InterfacePiece>> GameScript::ConvertBoard(const std::vector<std::vector<std::shared_ptr<Piece>>>& board) {
+  std::vector<std::vector<InterfacePiece>> converted_board(8, std::vector<InterfacePiece>(8));
+  for (int row = 0; row < 8; ++row) {
+    for (int col = 0; col < 8; ++col) {
+      auto color = board[row][col]->GetColor();
+      auto piece_name = board[row][col]->GetPieceName();
+      INTERFACE_COLOR interface_color = (color == COLOR::WHITE ? INTERFACE_COLOR::WHITE : INTERFACE_COLOR::BLACK);
+      INTERFACE_PIECE_NAME interface_piece_name;
+      switch (piece_name) {
+        case PIECE_NAME::EMPTY:
+          interface_piece_name = INTERFACE_PIECE_NAME::EMPTY;
+          break;
+        case PIECE_NAME::PAWN:
+          interface_piece_name = INTERFACE_PIECE_NAME::PAWN;
+          break;
+        case PIECE_NAME::BISHOP:
+          interface_piece_name = INTERFACE_PIECE_NAME::BISHOP;
+          break;
+        case PIECE_NAME::KNIGHT:
+          interface_piece_name = INTERFACE_PIECE_NAME::KNIGHT;
+          break;
+        case PIECE_NAME::ROOK:
+          interface_piece_name = INTERFACE_PIECE_NAME::ROOK;
+          break;
+        case PIECE_NAME::QUEEN:
+          interface_piece_name = INTERFACE_PIECE_NAME::QUEEN;
+          break;
+        case PIECE_NAME::KING:
+          interface_piece_name = INTERFACE_PIECE_NAME::KING;
+          break;
+      }
+      converted_board[row][col] = {interface_piece_name, interface_color};
+    }
   }
-  if (action.action_type == GAME_ACTION_TYPE::EXIT_TO_MENU) {
-    return MenuScript::Get();
-  }
-  return GameScript::Get();
+  return converted_board;
 }

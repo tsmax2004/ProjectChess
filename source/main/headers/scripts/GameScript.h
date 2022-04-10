@@ -18,6 +18,8 @@ class GameScript: public Script {
  private:
   static std::shared_ptr<GameScript> instance_;
 
+  std::vector<std::vector<InterfacePiece>> ConvertBoard(const std::vector<std::vector<std::shared_ptr<Piece>>>& board);
+
   explicit GameScript(GameWindow);
   GameLogic game_logic_;
   GameWindow interface_;
