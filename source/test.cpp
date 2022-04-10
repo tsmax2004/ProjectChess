@@ -1,6 +1,7 @@
 #include "logic.h"
+#include "Main.h"
 
 int main() {
-  Game game;
+  GameLogic game;
   game.StartNewGame();
 }
