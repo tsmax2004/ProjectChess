@@ -15,7 +15,6 @@ class GameScript: public Script {
 
   std::shared_ptr<Script> Run() override;
 
-
  private:
   static std::shared_ptr<GameScript> instance_;
 
