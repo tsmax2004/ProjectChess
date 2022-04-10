@@ -20,7 +20,7 @@ class Game {
   void StartNewGame();
   bool MakeMove(int, int, int, int);
   bool CancelMove();
-  bool MakeDraw();
+  bool OfferDraw();
   void Surrender();
   [[nodiscard]] const std::vector<std::vector<std::shared_ptr<Piece>>>& WhatBoard() const;
   [[nodiscard]] POSITION_TYPE WhatPositionType() const;

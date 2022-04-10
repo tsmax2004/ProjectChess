@@ -1,0 +1,6 @@
+//
+// Created by Георгий Кузнецов on 09.04.2022.
+//
+
+#include "../headers/actions/Action.h"
+Action::Action() = default;
