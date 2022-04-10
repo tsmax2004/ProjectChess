@@ -13,7 +13,7 @@ class Interface {
  public:
   Interface();
   void DrawWindow();
-  Action* GetWindowAction();
+  std::shared_ptr<Action> GetWindowAction();
   void Rehearse();
   void SetMenu();
   void SetGame();
@@ -21,7 +21,7 @@ class Interface {
   PositionWrapper* GetPositionWrapper();
   ~Interface();
  private:
-  Window* window_;
+  std::shared_ptr<Window> window_;
   PositionWrapper* position_wrapper_;
 };
 

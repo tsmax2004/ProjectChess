@@ -13,11 +13,11 @@ void Interface::DrawWindow() {
   window_ -> Draw(position_wrapper_);
 }
 
-PositionWrapper* Interface::GetPositionWrapper() {
+std::shared_ptr<PositionWrapper> Interface::GetPositionWrapper() {
   return  position_wrapper_;
 }
 
-Action* Interface::GetWindowAction() {
+std::shared_ptr<Action> Interface::GetWindowAction() {
   return window_ -> GetAction();
 }
 
