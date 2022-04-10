@@ -11,8 +11,8 @@
 class Window {
  public:
   Window();
-  virtual void Draw(PositionWrapper*) = 0;
-  virtual Action* GetAction() = 0;
+  virtual void Draw(std::shared_ptr<PositionWrapper>) = 0;
+  virtual std::shared_ptr<Action> GetAction() = 0;
   ~Window();
 };
 

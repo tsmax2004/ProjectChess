@@ -18,11 +18,11 @@ class Interface {
   void SetMenu();
   void SetGame();
   void UpdateBoard(std::shared_ptr<Position>);
-  PositionWrapper* GetPositionWrapper();
+  std::shared_ptr<PositionWrapper> GetPositionWrapper();
   ~Interface();
  private:
   std::shared_ptr<Window> window_;
-  PositionWrapper* position_wrapper_;
+  std::shared_ptr<PositionWrapper> position_wrapper_;
 };
 
 #endif
