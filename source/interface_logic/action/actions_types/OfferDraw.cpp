@@ -2,7 +2,7 @@
 // Created by Георгий Кузнецов on 09.04.2022.
 //
 
-#include "MakeDrow.h"
+#include "OfferDraw.h"
 OfferDraw::OfferDraw() = default;
 
 std::shared_ptr<OfferDraw> OfferDraw::GetInstance() {

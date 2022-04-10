@@ -5,7 +5,7 @@
 #ifndef CHESSPROJECT_SOURCE_INTERFACE_LOGIC_INTERFACE_INTERFACE_H_
 #define CHESSPROJECT_SOURCE_INTERFACE_LOGIC_INTERFACE_INTERFACE_H_
 
-#include "../include interface logic.h"
+#include "../include_interface_logic.h"
 
 class Interface {
  public:

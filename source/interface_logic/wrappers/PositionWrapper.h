@@ -1,6 +1,6 @@
 #ifndef CHESSPROJECT_SOURCE_INTERFACE_LOGIC_WRAPPERS_POSITIONWRAPPER_H_
 #define CHESSPROJECT_SOURCE_INTERFACE_LOGIC_WRAPPERS_POSITIONWRAPPER_H_
-#include "../include interface logic.h"
+#include "../include_interface_logic.h"
 #include "Position.h"
 
 class PositionWrapper {
