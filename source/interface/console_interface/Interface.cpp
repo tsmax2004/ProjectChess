@@ -21,9 +21,9 @@ Action* Interface::GetWindowAction() {
   return window_ -> GetAction();
 }
 
-void Interface::Rehearse() {
+/*void Interface::Rehearse() {
   window_ -> Rehearse();
-}
+}*/
 
 void Interface::SetGame() {
   window_ -> ~Window();

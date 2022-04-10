@@ -2,7 +2,9 @@
 // Created by Георгий Кузнецов on 09.04.2022.
 //
 
+#include <iostream>
 #include "../headers/windows/GameWindow.h"
+
 GameWindow::GameWindow() = default;
 
 std::shared_ptr<Action> GameWindow::GetAction() {
@@ -15,11 +17,11 @@ std::shared_ptr<Action> GameWindow::GetAction() {
       surrender = surrender->GetInstance();
       return std::static_pointer_cast<Action>(surrender);
     }
-    else if (input == "draw") {
+    /*else if (input == "draw") {
       std::shared_ptr<OfferDraw> draw;
       draw = draw->GetInstance();
       return std::static_pointer_cast<Action>(draw);
-    }
+    }*/
   }
 }
 
