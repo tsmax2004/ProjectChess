@@ -1,16 +1,16 @@
-#include "headers/Game.h"
+#include "headers/GameLogic.h"
 #include <memory>
 
-Game::Game() : position_(nullptr),
+GameLogic::GameLogic() : position_(nullptr),
                position_history_() {}
 
-void Game::StartNewGame() {
+void GameLogic::StartNewGame() {
   position_ = std::make_shared<Position>();
   position_->SetStartPosition();
   position_history_.push_back(position_);
 }
 
-bool Game::MakeMove(int from_row, int from_col, int to_row, int to_col) {
+bool GameLogic::MakeMove(int from_row, int from_col, int to_row, int to_col) {
   auto move = position_->at(from_row, from_col)->DefineMove(from_row, from_col, to_row, to_col, *position_);
   if (!move->IsValid()) { return false; }
 
@@ -24,26 +24,26 @@ bool Game::MakeMove(int from_row, int from_col, int to_row, int to_col) {
   return true;
 }
 
-bool Game::CancelMove() {
+bool GameLogic::CancelMove() {
   if (position_history_.size() <= 1) { return false; }
-  position_ = position_history_[position_history_.size() - 1];
+  position_ = position_history_[position_history_.size() - 2];
   position_history_.pop_back();
   return true;
 }
 
-const std::vector<std::vector<std::shared_ptr<Piece>>>& Game::WhatBoard() const {
+const std::vector<std::vector<std::shared_ptr<Piece>>>& GameLogic::WhatBoard() const {
   return position_->board_;
 }
 
-POSITION_TYPE Game::WhatPositionType() const {
+POSITION_TYPE GameLogic::WhatPositionType() const {
   return position_->position_type_;
 }
 
-COLOR Game::WhatColor() const {
+COLOR GameLogic::WhatColor() const {
   return position_->move_color_;
 }
 
-bool Game::SetPosition(const std::vector<std::vector<std::shared_ptr<Piece>>>& board, COLOR color) {
+bool GameLogic::SetPosition(const std::vector<std::vector<std::shared_ptr<Piece>>>& board, COLOR color) {
   auto new_position = std::make_shared<Position>();
   new_position->SetPosition(board, color);
   new_position->DefinePositionType();
@@ -54,7 +54,7 @@ bool Game::SetPosition(const std::vector<std::vector<std::shared_ptr<Piece>>>& b
   return true;
 }
 
-bool Game::CheckForRepeating() const {
+bool GameLogic::CheckForRepeating() const {
   size_t cnt_of_moves = position_history_.size();
   int pos_count = 0;
   auto first_position = position_history_[cnt_of_moves - 1];

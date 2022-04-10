@@ -11,7 +11,7 @@ set(PIECES_LIB pieces/Piece.cpp
                pieces/Queen.cpp
                pieces/Rook.cpp)
 
-set(SOURCE_LIB Position.cpp Game.cpp)
+set(SOURCE_LIB Position.cpp GameLogic.cpp)
 
 set(MOVES_LIB moves/InvalidMove.cpp moves/SimpleMove.cpp moves/Castle.cpp moves/EnPassant.cpp moves/Promotion.cpp)
 

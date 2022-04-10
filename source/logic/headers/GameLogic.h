@@ -7,7 +7,7 @@
 #include <vector>
 #include <memory>
 
-class Game {
+class GameLogic {
  protected:
   std::shared_ptr<Position> position_;
   std::vector<std::shared_ptr<Position>> position_history_;
@@ -15,7 +15,7 @@ class Game {
   [[nodiscard]] bool CheckForRepeating() const;
 
  public:
-  Game();
+  GameLogic();
   void StartNewGame();
   bool MakeMove(int, int, int, int);
   bool CancelMove();
