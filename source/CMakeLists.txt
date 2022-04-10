@@ -18,3 +18,6 @@ target_link_libraries(test PUBLIC Interface)
 add_subdirectory(${PROJECT_SOURCE_DIR}/main)
 target_link_libraries(test PUBLIC Main)
 
+add_subdirectory(${PROJECT_SOURCE_DIR}/actionlink)
+target_link_libraries(test PUBLIC Actions)
+
