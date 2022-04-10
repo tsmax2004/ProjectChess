@@ -8,12 +8,10 @@
 class Main {
  public:
   Main();
-  void RunMenu();
-  void RunGame();
+  void Run();
 
  private:
-  Game game_script;
-  Menu menu_script;
+  void InitializeScripts();
 
   Interface interface_;
 };
