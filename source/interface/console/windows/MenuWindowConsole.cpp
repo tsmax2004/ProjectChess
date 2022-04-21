@@ -1,15 +1,11 @@
-#include "../headers/windows/MenuWindow.h"
+#include "../../headers/console/windows/MenuWindowConsole.h"
 #include <iostream>
-#include <chrono>
-#include <thread>
 
-MenuWindow::MenuWindow() = default;
-
-void MenuWindow::DrawMenuWindow() {
+void MenuWindowConsole::DrawMenuWindow() {
   std::cout << "\nWelcome to ChessGame!\n";
 }
 
-MenuAction MenuWindow::GetAction() {
+MenuAction MenuWindowConsole::GetAction() {
   CleanWindow();
   std::cout << '\n';
   std::string response;
@@ -27,6 +23,6 @@ MenuAction MenuWindow::GetAction() {
   return MenuAction(MENU_ACTION_TYPE::EXIT);
 }
 
-void MenuWindow::CleanWindow() {
+void MenuWindowConsole::CleanWindow() {
   std::cout << "\x1B[2J\x1B[H";
 }

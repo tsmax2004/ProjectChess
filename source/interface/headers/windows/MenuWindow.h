@@ -14,11 +14,8 @@ struct MenuAction {
 
 class MenuWindow {
  public:
-  MenuWindow();
-  void DrawMenuWindow();
-  MenuAction GetAction();
- private:
-  void CleanWindow();
+  virtual void DrawMenuWindow() = 0;
+  virtual MenuAction GetAction() = 0;
 };
 
 #endif

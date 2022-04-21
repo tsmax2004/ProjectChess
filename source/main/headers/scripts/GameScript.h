@@ -11,7 +11,7 @@
 class GameScript: public Script {
  public:
   static std::shared_ptr<GameScript> Get();
-  static void Initialize(GameWindow);
+  static void Initialize(std::shared_ptr<GameWindow>);
 
   std::shared_ptr<Script> Run() override;
 
@@ -20,11 +20,9 @@ class GameScript: public Script {
 
   std::vector<std::vector<InterfacePiece>> ConvertBoard(const std::vector<std::vector<std::shared_ptr<Piece>>>& board);
 
-  explicit GameScript(GameWindow);
+  explicit GameScript(std::shared_ptr<GameWindow>);
   GameLogic game_logic_;
-  GameWindow interface_;
-
-//  std::shared_ptr<Script> to_return;  // flag - to break cycle
+  std::shared_ptr<GameWindow> interface_;
 };
 
 inline std::shared_ptr<GameScript> GameScript::instance_ = nullptr;

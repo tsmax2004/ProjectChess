@@ -2,4 +2,5 @@
 
 int main() {
   Main main;
+  main.Run();
 }
