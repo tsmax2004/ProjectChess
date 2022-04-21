@@ -2,7 +2,6 @@
 
 Main::Main() : interface_() {
   InitializeScripts();
-  Run();
 }
 
 void Main::Run() {

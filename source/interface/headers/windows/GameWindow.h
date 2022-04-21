@@ -40,23 +40,17 @@ struct InterfacePiece {
 
 class GameWindow {
  public:
-  GameWindow();
-
   void UpdateBoard(const std::vector<std::vector<InterfacePiece>>&);
-  void DrawGameWindow();
+  virtual void DrawGameWindow() = 0;
 
-  GameAction GetAction();
+  virtual GameAction GetAction() = 0;
 
-  void InformIncorrectMove();
-  void InformCheck();
-  void InformCheckmate();
-  void InformDraw();
+  virtual void InformIncorrectMove() = 0;
+  virtual void InformCheck() = 0;
+  virtual void InformCheckmate() = 0;
+  virtual void InformDraw() = 0;
 
- private:
-  void CleanWindow();
-  void PrintBoard();
-  bool CheckInputCoordinate(std::string);
-
+ protected:
   std::vector<std::vector<InterfacePiece>> board;
 };
 

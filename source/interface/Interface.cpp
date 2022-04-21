@@ -1,11 +1,17 @@
 #include "headers/Interface.h"
+#include "../configs.h"
 
-Interface::Interface(): game_window_(), menu_window_() {}
+Interface::Interface() {
+  if (INTERFACE == "CONSOLE") {
+    game_window_ = std::make_shared<GameWindowConsole>();
+    menu_window_ = std::make_shared<MenuWindowConsole>();
+  }
+}
 
-GameWindow Interface::GetGameInterface() {
+std::shared_ptr<GameWindow> Interface::GetGameInterface() {
   return game_window_;
 }
 
-MenuWindow Interface::GetMenuInterface() {
+std::shared_ptr<MenuWindow> Interface::GetMenuInterface() {
   return menu_window_;
 }

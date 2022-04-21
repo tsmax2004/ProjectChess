@@ -10,15 +10,15 @@
 class MenuScript: public Script {
  public:
   static std::shared_ptr<MenuScript> Get();
-  static void Initialize(MenuWindow);
+  static void Initialize(std::shared_ptr<MenuWindow>);
 
   std::shared_ptr<Script> Run() override;
 
  private:
   static std::shared_ptr<MenuScript> instance_;
 
-  explicit MenuScript(MenuWindow);
-  MenuWindow interface_;
+  explicit MenuScript(std::shared_ptr<MenuWindow>);
+  std::shared_ptr<MenuWindow> interface_;
 };
 
 inline std::shared_ptr<MenuScript> MenuScript::instance_ = nullptr;
