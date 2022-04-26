@@ -1,5 +1,7 @@
 #include "../../headers/console/windows/MenuWindowConsole.h"
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 void MenuWindowConsole::DrawMenuWindow() {
   std::cout << "\nWelcome to ChessGame!\n";
