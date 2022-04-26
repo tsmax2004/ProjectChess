@@ -15,7 +15,7 @@ class Position {
   Position(const Position&);
 
   void SetStartPosition();
-  void SetBoard(std::ifstream&);
+  void SetPosition(const std::vector<std::vector<std::shared_ptr<Piece>>>& new_board, COLOR color);
 
   [[nodiscard]] std::shared_ptr<Piece> at(int row_, int col_) const;
 

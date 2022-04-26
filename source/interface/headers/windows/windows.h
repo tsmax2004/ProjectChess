@@ -1,0 +1,8 @@
+
+#ifndef CHESSPROJECT_SOURCE_INTERFACE_HEADERS_WINDOWS_WINDOWS_H_
+#define CHESSPROJECT_SOURCE_INTERFACE_HEADERS_WINDOWS_WINDOWS_H_
+
+#include "GameWindow.h"
+#include "MenuWindow.h"
+
+#endif

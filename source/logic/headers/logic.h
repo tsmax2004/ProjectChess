@@ -6,6 +6,6 @@
 #include "pieces.h"
 #include "moves.h"
 #include "Position.h"
-#include "Game.h"
+#include "GameLogic.h"
 
 #endif
