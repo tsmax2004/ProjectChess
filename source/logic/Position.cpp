@@ -4,6 +4,7 @@
 #include <memory>
 #include "headers/logic.h"
 #include "headers/Position.h"
+#include "../configs.h"
 
 Position::Position() : board_(),
                        move_color_(COLOR::WHITE),
@@ -12,61 +13,6 @@ Position::Position() : board_(),
                        last_move_() {}
 
 Position::Position(const Position&) = default;
-
-void Position::SetStartPosition() {
-  std::ifstream inp("logic/configs/start_position.txt");
-  auto start_board =
-      std::vector<std::vector<std::shared_ptr<Piece>>>(8, std::vector<std::shared_ptr<Piece>>(8, nullptr));
-  for (int row = cnt_rows - 1; row >= 0; --row) {
-    for (int col = 0; col < cnt_cols; ++col) {
-      char color_char, piece_char;
-      inp >> color_char >> piece_char;
-      COLOR color = (color_char == 'W' ? COLOR::WHITE : COLOR::BLACK);
-      std::shared_ptr<Piece> piece = Empty::GetPiece();
-      switch (piece_char) {
-        case 'p':piece = Pawn::GetPiece(color);
-          break;
-        case 'b':piece = Bishop::GetPiece(color);
-          break;
-        case 'k':piece = Knight::GetPiece(color);
-          break;
-        case 'r':piece = Rook::GetPiece(color);
-          break;
-        case 'q':piece = Queen::GetPiece(color);
-          break;
-        case 'K':piece = King::GetPiece(color);
-          break;
-        default:break;
-      }
-      start_board[row][col] = piece;
-    }
-  }
-  SetPosition(start_board, COLOR::WHITE);
-  position_type_ = POSITION_TYPE::COMMON;
-}
-
-void Position::SetPosition(const std::vector<std::vector<std::shared_ptr<Piece>>>& new_board, COLOR color) {
-  board_ = new_board;
-  move_color_ = color;
-  if (at(0, 4)->GetPieceName() == PIECE_NAME::KING && at(0, 4)->GetColor() == COLOR::WHITE) {
-    info_for_castle_[0] = true;
-  }
-  if (at(0, 0)->GetPieceName() == PIECE_NAME::ROOK && at(0, 0)->GetColor() == COLOR::WHITE) {
-    info_for_castle_[1] = true;
-  }
-  if (at(0, 7)->GetPieceName() == PIECE_NAME::ROOK && at(0, 7)->GetColor() == COLOR::WHITE) {
-    info_for_castle_[2] = true;
-  }
-  if (at(7, 4)->GetPieceName() == PIECE_NAME::KING && at(7, 4)->GetColor() == COLOR::BLACK) {
-    info_for_castle_[3] = true;
-  }
-  if (at(7, 0)->GetPieceName() == PIECE_NAME::ROOK && at(7, 0)->GetColor() == COLOR::BLACK) {
-    info_for_castle_[4] = true;
-  }
-  if (at(7, 7)->GetPieceName() == PIECE_NAME::ROOK && at(7, 7)->GetColor() == COLOR::BLACK) {
-    info_for_castle_[5] = true;
-  }
-}
 
 std::shared_ptr<Piece> Position::at(int row, int col) const {
   if ((row < 0) || (row >= 8) || (col < 0) || (col >= 8)) {
@@ -192,4 +138,130 @@ std::vector<int> Position::FindKing(COLOR attack_color) const {
     }
   }
   return {0, 0};
+}
+
+
+void Position::SetPosition(const std::vector<std::vector<std::shared_ptr<Piece>>>& new_board, COLOR color) {
+  board_ = new_board;
+  move_color_ = color;
+  if (at(0, 4)->GetPieceName() == PIECE_NAME::KING && at(0, 4)->GetColor() == COLOR::WHITE) {
+    info_for_castle_[0] = true;
+  }
+  if (at(0, 0)->GetPieceName() == PIECE_NAME::ROOK && at(0, 0)->GetColor() == COLOR::WHITE) {
+    info_for_castle_[1] = true;
+  }
+  if (at(0, 7)->GetPieceName() == PIECE_NAME::ROOK && at(0, 7)->GetColor() == COLOR::WHITE) {
+    info_for_castle_[2] = true;
+  }
+  if (at(7, 4)->GetPieceName() == PIECE_NAME::KING && at(7, 4)->GetColor() == COLOR::BLACK) {
+    info_for_castle_[3] = true;
+  }
+  if (at(7, 0)->GetPieceName() == PIECE_NAME::ROOK && at(7, 0)->GetColor() == COLOR::BLACK) {
+    info_for_castle_[4] = true;
+  }
+  if (at(7, 7)->GetPieceName() == PIECE_NAME::ROOK && at(7, 7)->GetColor() == COLOR::BLACK) {
+    info_for_castle_[5] = true;
+  }
+}
+
+void Position::SetStartPosition() {
+  switch (GAME_MODE) {
+    case GAME_MODE_TYPE::CLASSICAL:
+      SetClassicalStartPosition();
+      break;
+    case GAME_MODE_TYPE::FISHER:
+      SetFisherStartPosition();
+      break;
+    case GAME_MODE_TYPE::CRAZY:
+      SetCrazyStartPosition();
+      break;
+  }
+}
+
+void Position::SetClassicalStartPosition() {
+  std::ifstream inp("logic/configs/start_position.txt");
+  auto start_board =
+      std::vector<std::vector<std::shared_ptr<Piece>>>(8, std::vector<std::shared_ptr<Piece>>(8, nullptr));
+  for (int row = cnt_rows - 1; row >= 0; --row) {
+    for (int col = 0; col < cnt_cols; ++col) {
+      char color_char, piece_char;
+      inp >> color_char >> piece_char;
+      COLOR color = (color_char == 'W' ? COLOR::WHITE : COLOR::BLACK);
+      std::shared_ptr<Piece> piece = Empty::GetPiece();
+      switch (piece_char) {
+        case 'p':piece = Pawn::GetPiece(color);
+          break;
+        case 'b':piece = Bishop::GetPiece(color);
+          break;
+        case 'k':piece = Knight::GetPiece(color);
+          break;
+        case 'r':piece = Rook::GetPiece(color);
+          break;
+        case 'q':piece = Queen::GetPiece(color);
+          break;
+        case 'K':piece = King::GetPiece(color);
+          break;
+        default:break;
+      }
+      start_board[row][col] = piece;
+    }
+  }
+  SetPosition(start_board, COLOR::WHITE);
+  position_type_ = POSITION_TYPE::COMMON;
+}
+
+void Position::SetFisherStartPosition() {
+  srand(time(0));
+  std::set<int> positions = {0, 1, 2, 3, 4, 5, 6, 7};
+
+  int bishop1_pos = rand() % 4 * 2;
+  positions.erase(positions.find(bishop1_pos));
+  int bishop2_pos = rand() % 4 * 2 + 1;
+  positions.erase(positions.find(bishop2_pos));
+  int knight1_pos = PopRandomPosition(positions);
+  int knight2_pos = PopRandomPosition(positions);
+  int queen_pos = PopRandomPosition(positions);
+  int rook1_pos = *positions.begin();
+  positions.erase(positions.begin());
+  int king_pos = *positions.begin();
+  positions.erase(positions.begin());
+  int rook2_pos = *positions.begin();
+  positions.erase(positions.begin());
+
+  board_ = std::vector<std::vector<std::shared_ptr<Piece>>>(8, std::vector<std::shared_ptr<Piece>>(8, nullptr));
+  for (int col = 0; col < 8; ++col) {
+    for (int row = 2; row < 6; ++row) {
+      board_[row][col] = Empty::GetPiece();
+    }
+    board_[1][col] = Pawn::GetPiece(COLOR::WHITE);
+    board_[6][col] = Pawn::GetPiece(COLOR::BLACK);
+  }
+
+  for (auto row: {0, 7}) {
+    COLOR color = (row == 0 ? COLOR::WHITE : COLOR::BLACK);
+    board_[row][bishop1_pos] = Bishop::GetPiece(color);
+    board_[row][bishop2_pos] = Bishop::GetPiece(color);
+    board_[row][knight1_pos] = Knight::GetPiece(color);
+    board_[row][knight2_pos] = Knight::GetPiece(color);
+    board_[row][rook1_pos] = Rook::GetPiece(color);
+    board_[row][rook2_pos] = Rook::GetPiece(color);
+    board_[row][queen_pos] = Queen::GetPiece(color);
+    board_[row][king_pos] = King::GetPiece(color);
+  }
+
+  move_color_ = COLOR::WHITE;
+  position_type_ = POSITION_TYPE::COMMON;
+}
+
+void Position::SetCrazyStartPosition() {
+
+}
+
+int Position::PopRandomPosition(std::set<int>& positions) {
+  int ind = rand() % positions.size();
+  auto it = positions.begin();
+  for (int i = 0; i < ind; ++i) { ++it; }
+  int pos = *it;
+  positions.erase(it);
+  return pos;
 }

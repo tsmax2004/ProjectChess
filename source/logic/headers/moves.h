@@ -2,11 +2,11 @@
 #ifndef MOVES_H_
 #define MOVES_H_
 
-#include "Moves/Move.h"
-#include "Moves/InvalidMove.h"
-#include "Moves/SimpleMove.h"
-#include "Moves/EnPassant.h"
-#include "Moves/Promotion.h"
-#include "Moves/Castle.h"
+#include "ClassicalMoves/Move.h"
+#include "ClassicalMoves/InvalidMove.h"
+#include "ClassicalMoves/SimpleMove.h"
+#include "ClassicalMoves/EnPassant.h"
+#include "ClassicalMoves/Promotion.h"
+#include "ClassicalMoves/Castle.h"
 
 #endif

@@ -5,6 +5,7 @@
 #include <vector>
 #include <memory>
 #include <fstream>
+#include <set>
 #include "pieces.h"
 #include "Enums.h"
 
@@ -40,6 +41,11 @@ class Position {
   [[nodiscard]] bool Draw() const;
   [[nodiscard]] bool Stalemate() const;
   [[nodiscard]] std::vector<int> FindKing(COLOR attack_color) const;
+
+  void SetClassicalStartPosition();
+  void SetFisherStartPosition();
+  void SetCrazyStartPosition();
+  int PopRandomPosition(std::set<int>& positions);
 };
 
 #endif
