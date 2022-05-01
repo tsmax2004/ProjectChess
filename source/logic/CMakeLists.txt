@@ -13,6 +13,6 @@ set(PIECES_LIB pieces/Piece.cpp
 
 set(SOURCE_LIB Position.cpp GameLogic.cpp)
 
-set(MOVES_LIB moves/InvalidMove.cpp moves/SimpleMove.cpp moves/Castle.cpp moves/EnPassant.cpp moves/Promotion.cpp)
+set(MOVES_LIB moves/InvalidMove.cpp moves/SimpleMove.cpp moves/Castle.cpp moves/EnPassant.cpp moves/Promotion.cpp moves/Explode.cpp)
 
 add_library(Logic SHARED ${SOURCE_LIB} ${PIECES_LIB} ${MOVES_LIB})

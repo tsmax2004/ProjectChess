@@ -15,7 +15,7 @@ Position::Position() : board_(),
 Position::Position(const Position&) = default;
 
 std::shared_ptr<Piece> Position::at(int row, int col) const {
-  if ((row < 0) || (row >= 8) || (col < 0) || (col >= 8)) {
+  if ((row < 0) || (row >= cnt_rows) || (col < 0) || (col >= cnt_cols)) {
     throw std::out_of_range("invalid coordinates input");
   }
   return board_[row][col];
@@ -37,7 +37,10 @@ bool Position::SquareIsUnderAttack(int row, int col, COLOR attack_color) const {
 
 void Position::DefinePositionType() {
   position_type_ = POSITION_TYPE::COMMON;
-  if (Check(move_color_ )) { position_type_ = POSITION_TYPE::INVALID; return; }
+  if (Check(move_color_)) {
+    position_type_ = POSITION_TYPE::INVALID;
+    return;
+  }
   if (Check(move_color_ == COLOR::WHITE ? COLOR::BLACK : COLOR::WHITE)) {
     position_type_ = POSITION_TYPE::CHECK;
     if (Checkmate(move_color_ == COLOR::WHITE ? COLOR::BLACK : COLOR::WHITE)) {
@@ -140,7 +143,6 @@ std::vector<int> Position::FindKing(COLOR attack_color) const {
   return {0, 0};
 }
 
-
 void Position::SetPosition(const std::vector<std::vector<std::shared_ptr<Piece>>>& new_board, COLOR color) {
   board_ = new_board;
   move_color_ = color;
@@ -166,14 +168,11 @@ void Position::SetPosition(const std::vector<std::vector<std::shared_ptr<Piece>>
 
 void Position::SetStartPosition() {
   switch (GAME_MODE) {
-    case GAME_MODE_TYPE::CLASSICAL:
-      SetClassicalStartPosition();
+    case GAME_MODE_TYPE::CLASSICAL:SetClassicalStartPosition();
       break;
-    case GAME_MODE_TYPE::FISHER:
-      SetFisherStartPosition();
+    case GAME_MODE_TYPE::FISHER:SetFisherStartPosition();
       break;
-    case GAME_MODE_TYPE::CRAZY:
-      SetCrazyStartPosition();
+    case GAME_MODE_TYPE::CRAZY:SetCrazyStartPosition();
       break;
   }
 }
@@ -237,7 +236,7 @@ void Position::SetFisherStartPosition() {
     board_[6][col] = Pawn::GetPiece(COLOR::BLACK);
   }
 
-  for (auto row: {0, 7}) {
+  for (auto row : {0, 7}) {
     COLOR color = (row == 0 ? COLOR::WHITE : COLOR::BLACK);
     board_[row][bishop1_pos] = Bishop::GetPiece(color);
     board_[row][bishop2_pos] = Bishop::GetPiece(color);
@@ -254,7 +253,35 @@ void Position::SetFisherStartPosition() {
 }
 
 void Position::SetCrazyStartPosition() {
-
+  std::ifstream inp("logic/configs/start_position.txt");
+  auto start_board =
+      std::vector<std::vector<std::shared_ptr<Piece>>>(8, std::vector<std::shared_ptr<Piece>>(8, nullptr));
+  for (int row = cnt_rows - 1; row >= 0; --row) {
+    for (int col = 0; col < cnt_cols; ++col) {
+      char color_char, piece_char;
+      inp >> color_char >> piece_char;
+      COLOR color = (color_char == 'W' ? COLOR::WHITE : COLOR::BLACK);
+      std::shared_ptr<Piece> piece = Empty::GetPiece();
+      switch (piece_char) {
+        case 'p':piece = Pawn::GetPiece(color);
+          break;
+        case 'b':piece = Bishop::GetPiece(color);
+          break;
+        case 'k':piece = Knight::GetPiece(color);
+          break;
+        case 'r':piece = Rook::GetPiece(color);
+          break;
+        case 'q':piece = Queen::GetPiece(color);
+          break;
+        case 'K':piece = King::GetPiece(color);
+          break;
+        default:break;
+      }
+      start_board[row][col] = piece;
+    }
+  }
+  SetPosition(start_board, COLOR::WHITE);
+  position_type_ = POSITION_TYPE::COMMON;
 }
 
 int Position::PopRandomPosition(std::set<int>& positions) {

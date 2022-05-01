@@ -8,5 +8,6 @@
 #include "ClassicalMoves/EnPassant.h"
 #include "ClassicalMoves/Promotion.h"
 #include "ClassicalMoves/Castle.h"
+#include "CrazyMoves/Explode.h"
 
 #endif
