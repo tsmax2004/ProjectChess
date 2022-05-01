@@ -39,7 +39,7 @@ void AtomicSimpleMove::MakeMove(int from_row, int from_col, int to_row, int to_c
     for (int i = to_row - 1; i <= to_row + 1; ++i) {
       for (int j = to_col - 1; j <= to_col + 1; ++j) {
         if ((i >= 0) && (j >= 0) && (i < position.cnt_rows) && (j < position.cnt_cols)){
-          if (position.at(i, j)->GetPieceName() != PIECE_NAME::PAWN)
+          if (position.at(i, j)->GetPieceName() != PIECE_NAME::PAWN || i == to_row && j == to_col)
             position.board_[i][j] = Empty::GetPiece();
         }
       }
