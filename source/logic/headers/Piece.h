@@ -2,7 +2,7 @@
 #ifndef PIECE_H_
 #define PIECE_H_
 
-#include "../Enums.h"
+#include "Enums.h"
 #include <memory>
 
 class Move;

@@ -28,7 +28,7 @@ std::string MenuWindowConsole::GetGameMode() {
   std::string mode;
   switch (GAME_MODE) {
     case GAME_MODE_TYPE::CLASSICAL:
-      mode = "Classical chess";
+      mode = "ClassicalMoves chess";
       break;
     case GAME_MODE_TYPE::FISHER:
       mode = "Fisher's chess";
@@ -46,7 +46,7 @@ MenuAction MenuWindowConsole::ChangeMode() {
   std::string response;
   while ((response != "1") && (response != "2") && (response != "3")) {
     std::cout << "Choose game mode:\n";
-    std::cout << "1) Classical\n";
+    std::cout << "1) ClassicalMoves\n";
     std::cout << "2) Fisher's chess\n";
     std::cout << "3) Crazy chess\n";
     std::cout << " > ";

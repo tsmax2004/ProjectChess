@@ -14,14 +14,6 @@ void GameLogic::StartNewGame() {
 
 bool GameLogic::MakeMove(int from_row, int from_col, int to_row, int to_col) {
   auto move = position_->at(from_row, from_col)->DefineMove(from_row, from_col, to_row, to_col, *position_);
-  switch (GAME_MODE) {
-    case GAME_MODE_TYPE::CRAZY:
-      move = ExplodeMove::GetMove(move);
-    case GAME_MODE_TYPE::FISHER:
-      break;
-    case GAME_MODE_TYPE::CLASSICAL:
-      break;
-  }
   if (!move->IsValid()) { return false; }
 
   auto new_position = std::make_shared<Position>(*position_);

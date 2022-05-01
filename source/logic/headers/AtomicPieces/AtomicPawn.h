@@ -1,12 +1,15 @@
+//
+// Created by Георгий Кузнецов on 01.05.2022.
+//
 
-#ifndef PAWN_H_
-#define PAWN_H_
+#ifndef CHESSPROJECT_SOURCE_LOGIC_HEADERS_ATOMICPIECES_ATOMICPAWN_H_
+#define CHESSPROJECT_SOURCE_LOGIC_HEADERS_ATOMICPIECES_ATOMICPAWN_H_
 
 #include "../Piece.h"
 
-class Pawn : public Piece {
+class AtomicPawn : public Piece {
  protected:
-  explicit Pawn(COLOR color_);
+  explicit AtomicPawn(COLOR color_);
 
   [[nodiscard]] bool CheckMoveOnTwoSquares(int from_row_,
                                            int from_col_,
@@ -32,14 +35,14 @@ class Pawn : public Piece {
                                            int to_col_,
                                            const Position& position_);
 
-  static std::shared_ptr<Pawn> white_pawn_;
-  static std::shared_ptr<Pawn> black_pawn_;
+  static std::shared_ptr<AtomicPawn> white_pawn_;
+  static std::shared_ptr<AtomicPawn> black_pawn_;
 
  public:
-  Pawn(const Pawn&) = delete;
-  void operator=(const Pawn&) = delete;
+  AtomicPawn(const AtomicPawn&) = delete;
+  void operator=(const AtomicPawn&) = delete;
 
-  static std::shared_ptr<Pawn> GetPiece(COLOR color);
+  static std::shared_ptr<AtomicPawn> GetPiece(COLOR color);
 
   [[nodiscard]] std::shared_ptr<Move> DefineMove(int from_row,
                                                  int from_col,
@@ -50,7 +53,8 @@ class Pawn : public Piece {
   [[nodiscard]] PIECE_NAME GetPieceName() const override;
 };
 
-inline std::shared_ptr<Pawn> Pawn::white_pawn_ = nullptr;
-inline std::shared_ptr<Pawn> Pawn::black_pawn_ = nullptr;
+inline std::shared_ptr<AtomicPawn> AtomicPawn::white_pawn_ = nullptr;
+inline std::shared_ptr<AtomicPawn> AtomicPawn::black_pawn_ = nullptr;
 
-#endif
+
+#endif //CHESSPROJECT_SOURCE_LOGIC_HEADERS_ATOMICPIECES_ATOMICPAWN_H_

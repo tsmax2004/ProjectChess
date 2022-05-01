@@ -2,7 +2,7 @@
 // Created by evgen on 10.03.2022.
 //
 
-#include "../headers/logic.h"
+#include "../../headers/logic.h"
 #include <cstdlib>
 
 Pawn::Pawn(COLOR color_) : Piece(color_) {}

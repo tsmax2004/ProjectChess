@@ -2,7 +2,7 @@
 #ifndef SIMPLEMOVE_H_
 #define SIMPLEMOVE_H_
 
-#include "Move.h"
+#include "../Move.h"
 #include <memory>
 
 class SimpleMove : public Move {

@@ -2,7 +2,7 @@
 // Created by Георгий Кузнецов on 12.03.2022.
 //
 
-#include "../headers/logic.h"
+#include "../../headers/logic.h"
 
 Promotion::Promotion() = default;
 

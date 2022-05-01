@@ -5,7 +5,6 @@
 #include "headers/logic.h"
 #include "headers/Position.h"
 #include "../configs.h"
-
 Position::Position() : board_(),
                        move_color_(COLOR::WHITE),
                        position_type_(POSITION_TYPE::NOT_DEFINED),
@@ -142,7 +141,6 @@ std::vector<int> Position::FindKing(COLOR attack_color) const {
   }
   return {0, 0};
 }
-
 void Position::SetPosition(const std::vector<std::vector<std::shared_ptr<Piece>>>& new_board, COLOR color) {
   board_ = new_board;
   move_color_ = color;
@@ -263,17 +261,17 @@ void Position::SetCrazyStartPosition() {
       COLOR color = (color_char == 'W' ? COLOR::WHITE : COLOR::BLACK);
       std::shared_ptr<Piece> piece = Empty::GetPiece();
       switch (piece_char) {
-        case 'p':piece = Pawn::GetPiece(color);
+        case 'p':piece = AtomicPawn::GetPiece(color);
           break;
-        case 'b':piece = Bishop::GetPiece(color);
+        case 'b':piece = AtomicBishop::GetPiece(color);
           break;
-        case 'k':piece = Knight::GetPiece(color);
+        case 'k':piece = AtomicKnight::GetPiece(color);
           break;
-        case 'r':piece = Rook::GetPiece(color);
+        case 'r':piece = AtomicRook::GetPiece(color);
           break;
-        case 'q':piece = Queen::GetPiece(color);
+        case 'q':piece = AtomicQueen::GetPiece(color);
           break;
-        case 'K':piece = King::GetPiece(color);
+        case 'K':piece = AtomicKing::GetPiece(color);
           break;
         default:break;
       }

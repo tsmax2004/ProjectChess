@@ -2,7 +2,7 @@
 #ifndef KNIGHT_H_
 #define KNIGHT_H_
 
-#include "Piece.h"
+#include "../Piece.h"
 
 class Knight : public Piece {
  protected:

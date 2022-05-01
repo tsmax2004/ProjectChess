@@ -1,0 +1,13 @@
+//
+// Created by Георгий Кузнецов on 01.05.2022.
+//
+
+#ifndef CHESSPROJECT_SOURCE_LOGIC_HEADERS_CLASSICALMOVES_CLASSIC_MOVES_H_
+#define CHESSPROJECT_SOURCE_LOGIC_HEADERS_CLASSICALMOVES_CLASSIC_MOVES_H_
+
+#include "SimpleMove.h"
+#include "EnPassant.h"
+#include "Promotion.h"
+#include "Castle.h"
+
+#endif //CHESSPROJECT_SOURCE_LOGIC_HEADERS_CLASSICALMOVES_CLASSIC_MOVES_H_

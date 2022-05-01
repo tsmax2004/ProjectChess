@@ -1,41 +1,41 @@
 //
-// Created by evgen on 10.03.2022.
+// Created by Георгий Кузнецов on 01.05.2022.
 //
 
-#include "../headers/logic.h"
+#include "../../headers/logic.h"
 #include <cstdlib>
 
-King::King(COLOR color_) : Piece(color_) {}
+AtomicKing::AtomicKing(COLOR color_) : Piece(color_) {}
 
-std::shared_ptr<King> King::GetPiece(COLOR color) {
+std::shared_ptr<AtomicKing> AtomicKing::GetPiece(COLOR color) {
   if (color == COLOR::WHITE) {
     if (white_king_ == nullptr) {
-      white_king_ = std::shared_ptr<King>(new King(COLOR::WHITE));
+      white_king_ = std::shared_ptr<AtomicKing>(new AtomicKing(COLOR::WHITE));
     }
     return white_king_;
   }
   if (color == COLOR::BLACK) {
     if (black_king_ == nullptr) {
-      black_king_ = std::shared_ptr<King>(new King(COLOR::BLACK));
+      black_king_ = std::shared_ptr<AtomicKing>(new AtomicKing(COLOR::BLACK));
     }
     return black_king_;
   }
   return nullptr;
 }
 
-std::shared_ptr<Move> King::DefineMove(int from_row_,
+std::shared_ptr<Move> AtomicKing::DefineMove(int from_row_,
                                        int from_col_,
                                        int to_row_,
                                        int to_col_,
                                        const Position& position_) const {
   if (!CheckMoveColor(position_)) { return InvalidMove::GetMove(); }
   if (!CheckAttackSquareIsNotFriend(to_row_, to_col_, position_)) { return InvalidMove::GetMove(); }
-  if (CheckCastle(from_row_, from_col_, to_row_, to_col_, position_)) { return Castle::GetMove(); }
-  if (CheckSimpleMove(from_row_, from_col_, to_row_, to_col_, position_)) { return SimpleMove::GetMove(); }
+  if (CheckCastle(from_row_, from_col_, to_row_, to_col_, position_)) { return AtomicCastle::GetMove(); }
+  if (CheckSimpleMove(from_row_, from_col_, to_row_, to_col_, position_)) { return AtomicSimpleMove::GetMove(); }
   return InvalidMove::GetMove();
 }
 
-bool King::CheckCastle(int from_row_, int from_col_, int to_row_, int to_col_, const Position& position_) const {
+bool AtomicKing::CheckCastle(int from_row_, int from_col_, int to_row_, int to_col_, const Position& position_) const {
   if (position_.position_type_ != POSITION_TYPE::COMMON) { return false; }
   if (!position_.info_for_castle_[color_ == COLOR::WHITE ? 0 : 3]) { return false; }
   if (from_row_ != to_row_) { return false; }
@@ -53,7 +53,7 @@ bool King::CheckCastle(int from_row_, int from_col_, int to_row_, int to_col_, c
   return true;
 }
 
-bool King::CheckBetweenSquaresAreNotUnderAttack(int from_row_,
+bool AtomicKing::CheckBetweenSquaresAreNotUnderAttack(int from_row_,
                                                 int from_col_,
                                                 int to_row_,
                                                 int to_col_,
@@ -71,13 +71,13 @@ bool King::CheckBetweenSquaresAreNotUnderAttack(int from_row_,
   return true;
 }
 
-bool King::CheckSimpleMove(int from_row_, int from_col_, int to_row_, int to_col_, const Position& position_) {
+bool AtomicKing::CheckSimpleMove(int from_row_, int from_col_, int to_row_, int to_col_, const Position& position_) {
   if (std::abs(to_row_ - from_row_) >= 2 || std::abs(to_col_ - from_col_) >= 2) { return false; }
   if ((to_row_ == from_row_) && (to_col_ == from_col_)) { return false; }
   return true;
 }
 
-PIECE_NAME King::GetPieceName() const {
+PIECE_NAME AtomicKing::GetPieceName() const {
   return PIECE_NAME::KING;
 }
 

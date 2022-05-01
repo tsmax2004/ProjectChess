@@ -2,7 +2,7 @@
 #ifndef PROMOTION_H_
 #define PROMOTION_H_
 
-#include "Move.h"
+#include "../Move.h"
 #include <memory>
 
 class Promotion : public Move {

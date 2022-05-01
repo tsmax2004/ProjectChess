@@ -1,12 +1,15 @@
+//
+// Created by Георгий Кузнецов on 01.05.2022.
+//
 
-#ifndef King_H_
-#define King_H_
+#ifndef CHESSPROJECT_SOURCE_LOGIC_HEADERS_ATOMICPIECES_ATOMICKING_H_
+#define CHESSPROJECT_SOURCE_LOGIC_HEADERS_ATOMICPIECES_ATOMICKING_H_
 
 #include "../Piece.h"
 
-class King : public Piece {
+class AtomicKing : public Piece {
  protected:
-  explicit King(COLOR color);
+  explicit AtomicKing(COLOR color);
 
   [[nodiscard]] bool CheckCastle(int from_row_,
                                  int from_col_,
@@ -26,14 +29,14 @@ class King : public Piece {
                                             int to_col_,
                                             const Position& position_);
 
-  static std::shared_ptr<King> white_king_;
-  static std::shared_ptr<King> black_king_;
+  static std::shared_ptr<AtomicKing> white_king_;
+  static std::shared_ptr<AtomicKing> black_king_;
 
  public:
-  King(const King&) = delete;
-  void operator=(const King&) = delete;
+  AtomicKing(const AtomicKing&) = delete;
+  void operator=(const AtomicKing&) = delete;
 
-  static std::shared_ptr<King> GetPiece(COLOR color);
+  static std::shared_ptr<AtomicKing> GetPiece(COLOR color);
 
   [[nodiscard]] std::shared_ptr<Move> DefineMove(int from_row_,
                                                  int from_col_,
@@ -44,7 +47,7 @@ class King : public Piece {
   [[nodiscard]] PIECE_NAME GetPieceName() const override;
 };
 
-inline std::shared_ptr<King> King::white_king_ = nullptr;
-inline std::shared_ptr<King> King::black_king_ = nullptr;
+inline std::shared_ptr<AtomicKing> AtomicKing::white_king_ = nullptr;
+inline std::shared_ptr<AtomicKing> AtomicKing::black_king_ = nullptr;
 
-#endif
+#endif //CHESSPROJECT_SOURCE_LOGIC_HEADERS_ATOMICPIECES_ATOMICKING_H_

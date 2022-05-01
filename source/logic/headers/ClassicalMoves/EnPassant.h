@@ -2,7 +2,7 @@
 #ifndef INPASSING_H_
 #define INPASSING_H_
 
-#include "Move.h"
+#include "../Move.h"
 #include <memory>
 
 class EnPassant : public Move {

@@ -2,7 +2,7 @@
 #ifndef QUEEN_H_
 #define QUEEN_H_
 
-#include "Piece.h"
+#include "../Piece.h"
 
 class Queen : public Piece {
  protected:

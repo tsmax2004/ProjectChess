@@ -8,7 +8,6 @@
 #include <set>
 #include "pieces.h"
 #include "Enums.h"
-
 class Position {
  public:
   Position();
@@ -19,7 +18,6 @@ class Position {
   void SetPosition(const std::vector<std::vector<std::shared_ptr<Piece>>>& new_board, COLOR color);
 
   [[nodiscard]] std::shared_ptr<Piece> at(int row_, int col_) const;
-
   std::vector<std::vector<std::shared_ptr<Piece>>> board_;
   COLOR move_color_;
   POSITION_TYPE position_type_ = POSITION_TYPE::NOT_DEFINED;

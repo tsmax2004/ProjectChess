@@ -2,7 +2,7 @@
 // Created by Георгий Кузнецов on 10.03.2022.
 //
 
-#include "../headers/logic.h"
+#include "../../headers/logic.h"
 #include <cstdlib>
 
 Knight::Knight(COLOR color_) : Piece(color_) {}
