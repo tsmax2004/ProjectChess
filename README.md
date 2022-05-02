@@ -1,8 +1,7 @@
 # Project Chess
 
 ### How to run project
-<li> In directory "source" run script "build.sh"</li>
-<li> Executable file "test" will be stored there in the same directory</li>
+<li> Run script "run.sh"</li>
 
 #### At the 1st stage of the project development:
 
@@ -25,8 +24,6 @@
 <li> Add Fischer's chess (Chess960). Rules: https://www.chess.com/terms/chess960</li>
 <li> Add simplified version of Atomic chess. Rules: https://www.chess.com/terms/atomic-chess </li>
 
-<br/>
-For checking our progress you can run "test" and play a game. <br/>
 
 <br/>
 Authors: Tsoy Maksim, Georgy Kuznetsov, Evgeny Sklyarenko (Б05-121)
