@@ -170,7 +170,7 @@ void Position::SetStartPosition() {
       break;
     case GAME_MODE_TYPE::FISHER:SetFisherStartPosition();
       break;
-    case GAME_MODE_TYPE::CRAZY:SetCrazyStartPosition();
+    case GAME_MODE_TYPE::ATOMIC:SetAtomicStartPosition();
       break;
   }
 }
@@ -234,7 +234,7 @@ void Position::SetFisherStartPosition() {
     board_[6][col] = Pawn::GetPiece(COLOR::BLACK);
   }
 
-  for (auto row : {0, 7}) {
+  for (auto row: {0, 7}) {
     COLOR color = (row == 0 ? COLOR::WHITE : COLOR::BLACK);
     board_[row][bishop1_pos] = Bishop::GetPiece(color);
     board_[row][bishop2_pos] = Bishop::GetPiece(color);
@@ -250,7 +250,7 @@ void Position::SetFisherStartPosition() {
   position_type_ = POSITION_TYPE::COMMON;
 }
 
-void Position::SetCrazyStartPosition() {
+void Position::SetAtomicStartPosition() {
   std::ifstream inp("logic/configs/start_position.txt");
   auto start_board =
       std::vector<std::vector<std::shared_ptr<Piece>>>(8, std::vector<std::shared_ptr<Piece>>(8, nullptr));

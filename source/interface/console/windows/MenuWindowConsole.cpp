@@ -33,8 +33,8 @@ std::string MenuWindowConsole::GetGameMode() {
     case GAME_MODE_TYPE::FISHER:
       mode = "Fisher's chess";
       break;
-    case GAME_MODE_TYPE::CRAZY:
-      mode = "CrAzY chess";
+    case GAME_MODE_TYPE::ATOMIC:
+      mode = "Atomic chess";
       break;
   }
   return mode;
@@ -48,7 +48,7 @@ MenuAction MenuWindowConsole::ChangeMode() {
     std::cout << "Choose game mode:\n";
     std::cout << "1) ClassicalMoves\n";
     std::cout << "2) Fisher's chess\n";
-    std::cout << "3) Crazy chess\n";
+    std::cout << "3) Atomic chess\n";
     std::cout << " > ";
     std::cin >> response;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -56,7 +56,7 @@ MenuAction MenuWindowConsole::ChangeMode() {
 
   if (response == "1") { return MenuAction(MENU_ACTION_TYPE::CHANGE_MODE, GAME_MODE_TYPE::CLASSICAL); }
   if (response == "2") { return MenuAction(MENU_ACTION_TYPE::CHANGE_MODE, GAME_MODE_TYPE::FISHER); }
-  if (response == "3") { return MenuAction(MENU_ACTION_TYPE::CHANGE_MODE, GAME_MODE_TYPE::CRAZY); }
+  if (response == "3") { return MenuAction(MENU_ACTION_TYPE::CHANGE_MODE, GAME_MODE_TYPE::ATOMIC); }
 
   return MenuAction(MENU_ACTION_TYPE::CHANGE_MODE, GAME_MODE_TYPE::CLASSICAL);
 }

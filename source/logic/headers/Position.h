@@ -42,7 +42,7 @@ class Position {
 
   void SetClassicalStartPosition();
   void SetFisherStartPosition();
-  void SetCrazyStartPosition();
+  void SetAtomicStartPosition();
   int PopRandomPosition(std::set<int>& positions);
 };
 
