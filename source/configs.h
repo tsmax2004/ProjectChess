@@ -9,7 +9,7 @@ enum class INTERFACE_TYPE {
 
 enum class GAME_MODE_TYPE {
   CLASSICAL,
-  FISHER,
+  FISCHER,
   ATOMIC
 };
 

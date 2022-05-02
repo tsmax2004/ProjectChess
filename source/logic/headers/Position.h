@@ -41,7 +41,7 @@ class Position {
   [[nodiscard]] std::vector<int> FindKing(COLOR attack_color) const;
 
   void SetClassicalStartPosition();
-  void SetFisherStartPosition();
+  void SetFischerStartPosition();
   void SetAtomicStartPosition();
   int PopRandomPosition(std::set<int>& positions);
 };

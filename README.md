@@ -19,6 +19,12 @@
 <li> Implemented two scripts of interaction: Menu and Game </li>
 <li> Implemented based console interface </li>
 
+#### At the 3rd stageof the project development:
+
+<li> Now you can choose one of three chess mode in menu</li>
+<li> Add Fischer's chess (Chess960). Rules: https://www.chess.com/terms/chess960</li>
+<li> Add simplified version of Atomic chess. Rules: https://www.chess.com/terms/atomic-chess </li>
+
 <br/>
 For checking our progress you can run "test" and play a game. <br/>
 

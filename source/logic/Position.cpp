@@ -168,7 +168,7 @@ void Position::SetStartPosition() {
   switch (GAME_MODE) {
     case GAME_MODE_TYPE::CLASSICAL:SetClassicalStartPosition();
       break;
-    case GAME_MODE_TYPE::FISHER:SetFisherStartPosition();
+    case GAME_MODE_TYPE::FISCHER:SetFischerStartPosition();
       break;
     case GAME_MODE_TYPE::ATOMIC:SetAtomicStartPosition();
       break;
@@ -207,7 +207,7 @@ void Position::SetClassicalStartPosition() {
   position_type_ = POSITION_TYPE::COMMON;
 }
 
-void Position::SetFisherStartPosition() {
+void Position::SetFischerStartPosition() {
   srand(time(0));
   std::set<int> positions = {0, 1, 2, 3, 4, 5, 6, 7};
 
