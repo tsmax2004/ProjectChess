@@ -2,8 +2,8 @@
 
 start_path=$(pwd)
 project_dir=$(dirname $0)
-mkdir $project_dir/build
-cd $project_dir/build
+mkdir $project_dir/source/build
+cd $project_dir/source/build
 cmake ..
 make
 cd ..
