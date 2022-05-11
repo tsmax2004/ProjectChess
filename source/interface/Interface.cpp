@@ -2,7 +2,7 @@
 #include "../configs.h"
 
 Interface::Interface() {
-  if (INTERFACE == "CONSOLE") {
+  if (INTERFACE == INTERFACE_TYPE::CONSOLE) {
     game_window_ = std::make_shared<GameWindowConsole>();
     menu_window_ = std::make_shared<MenuWindowConsole>();
   }

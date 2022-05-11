@@ -2,13 +2,9 @@
 #ifndef PIECES_H_
 #define PIECES_H_
 
-#include "Pieces/Piece.h"
-#include "Pieces/Empty.h"
-#include "Pieces/Pawn.h"
-#include "Pieces/Knight.h"
-#include "Pieces/Bishop.h"
-#include "Pieces/Rook.h"
-#include "Pieces/Queen.h"
-#include "Pieces/King.h"
+#include "Piece.h"
+#include "Empty.h"
+#include "AtomicPieces/atomic_pieces.h"
+#include "ClassicalPieces/classical_pieces.h"
 
 #endif

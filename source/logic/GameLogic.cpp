@@ -1,5 +1,7 @@
 #include "headers/GameLogic.h"
 #include <memory>
+#include "../configs.h"
+
 
 GameLogic::GameLogic() : position_(nullptr),
                position_history_() {}

@@ -5,9 +5,9 @@
 #include <vector>
 #include <memory>
 #include <fstream>
+#include <set>
 #include "pieces.h"
 #include "Enums.h"
-
 class Position {
  public:
   Position();
@@ -18,7 +18,6 @@ class Position {
   void SetPosition(const std::vector<std::vector<std::shared_ptr<Piece>>>& new_board, COLOR color);
 
   [[nodiscard]] std::shared_ptr<Piece> at(int row_, int col_) const;
-
   std::vector<std::vector<std::shared_ptr<Piece>>> board_;
   COLOR move_color_;
   POSITION_TYPE position_type_ = POSITION_TYPE::NOT_DEFINED;
@@ -40,6 +39,11 @@ class Position {
   [[nodiscard]] bool Draw() const;
   [[nodiscard]] bool Stalemate() const;
   [[nodiscard]] std::vector<int> FindKing(COLOR attack_color) const;
+
+  void SetClassicalStartPosition();
+  void SetFischerStartPosition();
+  void SetAtomicStartPosition();
+  int PopRandomPosition(std::set<int>& positions);
 };
 
 #endif
